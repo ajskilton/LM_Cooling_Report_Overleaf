@@ -145,9 +145,9 @@ title is kept; its label was removed, as nothing else referred to it) and
 explains why magnetics need cooling, the second gives the IPT example (moved
 from the former Power Electronics section), the third reviews how magnetics are
 cooled, the fourth the losses that leakage fields cause in nearby cooling
-hardware, and the fifth draws the general point (your ``because magnetic
-components must be present'' sentence, which now carries the Morroni citation
-for magnetics being required in most PECs). The eddy-current loss in
+hardware, and the fifth draws the general point (your ``because magnetic devices must
+be present in a converter'' sentence, hedged to ``most converters'' to match
+what Morroni supports, and now carrying that citation). The eddy-current loss in
 conductive cooling hardware near magnetics, previously stated four times, is
 now stated once (fourth paragraph), and the sentence that a cooling system
 which does not cool the magnetics must still tolerate their leakage fields
@@ -335,9 +335,9 @@ swings, which passive phase-change methods cannot
 loop best meets the requirements'': at this point the argument has only
 established that a single-phase forced-\emph{liquid} loop is best; liquid metal
 is introduced as the answer to water's conductivity limit in the following
-sentences. Restore the original if the stronger claim is intended. The
-sentence now opens the proposal rather than standing as its own paragraph.}
-A coolant with substantially higher thermal conductivity would raise the heat
+sentences. Restore the original if the stronger claim is intended. The former
+Summary paragraph is now the Proposed Solution; this sentence still opens it.}
+A coolant with substantially higher thermal conductivity than water would raise the heat
 transfer coefficient at a given channel size, and the search for such coolants
 motivates research into liquid metals~\cite{hodes_potential_2014}. Such a
 coolant would ease the trade-off between considerations~(i) and~(iv) while
@@ -345,8 +345,7 @@ keeping the flow-rate control of a single-phase loop. Liquid metal cooling is
 therefore proposed here as a potential solution, which \cref{sec:liquid-metal}
 evaluates. Its open question follows from \cref{sec:cooling-magnetics}: a
 conductive coolant in the leakage field of a magnetic component will itself
-incur losses, which, to the author's knowledge, have not yet been quantified
-for a coolant used to cool such a component (\cref{sec:research-gap}).
+incur losses, which \cref{sec:research-gap} identifies as unquantified.
 
 % ---------------------------------------------------------------------
 \section{Liquid Metal as a Coolant}
@@ -503,7 +502,8 @@ with only~\cite{fan_ultra-efficient_2026} providing a comparison with an equival
 system.
 \edited{The uncited ``Most comparisons between water and Galinstan cooling are
 made at the chip scale, in mini- or micro-channels'' was cut: the same point is
-made at the end of \cref{sec:liquid-metal} and is the first research gap.}
+made in the paragraph before \cref{sec:em-pumping} and is the first research
+gap.}
 \issue{0.55/1.8$\times$ are Kwon's numbers but are cited to Hodes, who gives
 0.45/2.2$\times$ (and \cref{tab:galinstan-properties} uses 0.45/2.2$\times$).
 Make the number and the citation agree.}
@@ -648,10 +648,12 @@ that result here.}
 \edited{Trimmed only. The two opening sentences (water cooling is bounded by
 water's thermal conductivity; Galinstan's higher conductivity can improve heat
 transfer, both cited to Hodes \emph{et al.}) repeated
-\cref{sec:cooling-strategies,sec:liquid-metal} and were cut. The two closing sentences of the second gap (most converters
-contain magnetics; a cooling system that does not cool them must still tolerate
-their leakage fields) are now made in \cref{sec:cooling-magnetics} and are
-likewise replaced by a back-reference.}
+\cref{sec:cooling-strategies,sec:liquid-metal} and were cut. The two closing
+sentences of the second gap (most converters contain magnetics; a cooling
+system that does not cool them must still tolerate their leakage fields) are
+now made in \cref{sec:cooling-magnetics} and are replaced by a back-reference.
+In the first gap, ``which use different metals at much higher temperatures''
+was cut, as \cref{sec:liquid-metal} already says so.}
 
 This study aims to address two gaps identified in the literature.
 
@@ -659,8 +661,8 @@ The first is the lack of comparisons between water and liquid metal at the scale
 of a converter's cooling loop. Existing comparisons are made for micro- and
 mini-channel heat
 sinks~\cite{hodes_potential_2014,zhang_water-based_2015,zhang_experimental_2019,an_liquid_2024},
-or lie at the scale of nuclear reactors, which use different metals at much
-higher temperatures~\cite{rowinski_small_2015}. This study aims to quantify the
+or lie at the scale of nuclear reactors~\cite{rowinski_small_2015}. This study
+aims to quantify the
 trade-offs of the Galinstan system (as designed
 in~\cite{kwon_project_2025,loh_project_2025}) relative to a comparable water-cooling
 system.
@@ -671,8 +673,8 @@ such as a power-dense inductor, or quantified the eddy-current losses induced in
 the coolant by its leakage field. Eddy-current losses have been assessed in AC
 conduction pumps~\cite{fan_ultra-efficient_2026}, and an inductor has been used to drive a
 pump~\cite{fan_ultra-efficient_2026,fan_liquid_2021}, but not to cool the inductor itself
-directly. As argued in \cref{sec:cooling-magnetics}, this matters even where
-the coolant does not cool the magnetics.
+directly. As argued in \cref{sec:cooling-magnetics}, the coolant's loss in a
+leakage field matters even where the coolant does not cool the magnetics.
 
 This project addresses both gaps using the existing Galinstan loop of
 Loh~\cite{loh_project_2025} and Kwon~\cite{kwon_project_2025}. The loop comprises a
