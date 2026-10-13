@@ -33,7 +33,7 @@ present tense and completed design work in the past tense. ``Part 4'' and
 
 To provide a baseline for comparison, a water cooling system was designed to
 replicate the Galinstan apparatus previously constructed by the 2025 Part~IV
-Project Group \#51~\cite{kwon2025project,loh2025project}. Both cooling systems
+Project Group \#51~\cite{kwon_project_nodate,loh_project_nodate}. Both cooling systems
 are tested using an identical experimental procedure, so that differences in
 measured performance can be attributed primarily to the coolant and pumping
 method rather than to the test apparatus.
@@ -72,7 +72,7 @@ heat removal rate and pump power consumption.
     Temperature
       & Thermistors around the loop and, at steady state, thermocouples at
         selected locations.
-      & Data-acquisition system adapted from~\cite{kwon2025project,loh2025project};
+      & Data-acquisition system adapted from~\cite{kwon_project_nodate,loh_project_nodate};
         thermal camera where available. \\
     \midrule
     Pump power
@@ -187,7 +187,7 @@ description reordered so the method follows the aim.}
 
 In high-power-density automotive converters, magnetics are typically cooled from
 both the top and the bottom, as close as possible to the
-windings~\cite{krismer2010accurate,biela2007cooling}. Such cooling systems are
+windings~\cite{krismer_accurate_2010,biela_cooling_2007}. Such cooling systems are
 therefore exposed to leakage fields from the magnetic components, and these
 fields could cause local heating in Galinstan, reducing the overall performance
 of a liquid metal system.
@@ -232,16 +232,17 @@ developed before the numerical simulations. This initial model assumed a
 two-part construction of TDK N85 ferrite ELP-type cores. It swept the air-gap
 length (\SIrange{0.5}{1.5}{\milli\metre}) and the number of turns (8--12),
 identifying designs whose loss exceeds the core's datasheet natural-convection
-loss limit of \SI{17.88}{\watt}~\cite{biela2007cooling}, so that active cooling
+loss limit of \SI{17.88}{\watt}~\cite{noauthor_notitle_2005}, so that active cooling
 is required, while keeping the peak flux density below about
 \SI{300}{\milli\tesla}.
 \edited{``identifying designs that exceed the datasheet's acceptable loss
 limit'' read as an error; it has been interpreted as deliberately selecting
 designs that need active cooling, which is consistent with the final core loss
 of \SI{30.81}{\watt} in \cref{tab:inductor-model}. Check this interpretation.}
-\issue{The \SI{17.88}{\watt} datasheet limit is cited to Biela and Kolar, which
-is a conference paper, not the core datasheet. Add the TDK ELP/N85 datasheet (or
-the Magnetics Inc.\ datasheet for the core actually used) to the bibliography.}
+\edited{The \SI{17.88}{\watt} datasheet limit was cited to Biela and Kolar, a
+conference paper; it is now cited to the Magnetics Inc.\ 0R49938EC specification
+sheet in the Zotero library. Confirm that the limit is taken from this sheet
+rather than from the TDK ELP/N85 datasheet assumed in the analytical model.}
 
 An ANSYS model was then constructed and run as a two-parameter sweep over
 air-gap length and number of turns. It was later found that the available cores
@@ -356,7 +357,7 @@ demonstrate Galinstan cooling of a power-dense inductor and to assess the
 leakage-field interaction rather than to produce the best-performing system.
 Future designs should improve on this by cooling both the top and bottom cores,
 or by using asymmetric core designs with an integrated heat-transfer path, such
-as the inductor of Gao \emph{et al.}~\cite{gao2022modeling}.
+as the inductor of Gao \emph{et al.}~\cite{gao_modeling_2022}.
 
 \subsection{Capacitor Tuning}
 \label{sec:capacitor-tuning}
@@ -433,8 +434,8 @@ are compared.
 \subsection{Thermal Network}
 \label{sec:thermal-network}
 
-Following the analyses of Kwon~\cite{kwon2025project} and
-Loh~\cite{loh2025project}, the input heat $\Qin$ divides at the resistor node
+Following the analyses of Kwon~\cite{kwon_project_nodate} and
+Loh~\cite{loh_project_nodate}, the input heat $\Qin$ divides at the resistor node
 $T_{\mathrm{M}}$ (\cref{fig:thermal-network}): part is lost to ambient through
 $\Rmisc$, and the rest, $\Qplate$, passes through the package resistance $\Rpack$
 (resistor and interface) to a fictitious isothermal plate node $T_{\mathrm{P}}$,
@@ -459,7 +460,7 @@ and then through the cold-plate resistance $\Rcp$ to the coolant inlet:
 
 For this analysis, the plate is considered isothermal at $T_{\mathrm{P}}$, so
 coolant entering at $\Tin$ approaches the plate temperature exponentially. An
-energy balance on a tube element of perimeter $P$ gives~\cite{bergman2017fundamentals}
+energy balance on a tube element of perimeter $P$ gives~\cite{bergman_fundamentals_2017}
 \begin{equation}
   \frac{T_{\mathrm{P}} - T_{\mathrm{f}}(x)}{T_{\mathrm{P}} - \Tin}
     = \exp\!\left(-\frac{hPx}{\mdot\,\cp}\right).
@@ -470,7 +471,7 @@ transfer units, $\NTU = hA/(\mdot\,\cp)$: the ratio of the wall-to-coolant
 convective conductance to the heat-capacity rate of the coolant. Each transfer
 unit reduces the remaining plate-to-coolant temperature difference by a factor
 of $e$, so the coolant absorbs about \SI{63}{\percent} of the maximum possible
-heat after one transfer unit~\cite{bergman2017fundamentals}. Defining the
+heat after one transfer unit~\cite{bergman_fundamentals_2017}. Defining the
 effectiveness $\varepsilon$ as this fraction gives
 \begin{equation}
   \Qplate = \varepsilon\,\mdot\,\cp\,(T_{\mathrm{P}} - \Tin), \qquad
@@ -549,13 +550,13 @@ test gives $72/34.9 \approx \SI{2.1}{\celsius}$, marginally above ``below
 
 The heat transfer coefficient $h$ is estimated using the Shah and London mean
 Nusselt number for an isothermal wall in the thermal entry
-region~\cite{shah1978laminar}. The entry-region correlation is restarted for each
+region~\cite{shah_laminar_1978}. The entry-region correlation is restarted for each
 \SI{152}{\milli\metre} pass, on the assumption that the U-bends mix the flow.
-Gnielinski's correlation~\cite{bergman2017fundamentals} is used for water at
+Gnielinski's correlation~\cite{bergman_fundamentals_2017} is used for water at
 $\mathrm{Re} \geq 4000$, with no estimate made for $2300 < \mathrm{Re} < 4000$.
 The NTU analysis uses these correlations for both coolants. For the turbulent
 water tests, however, the temperature predictions use the ATS-TCP-1001 datasheet
-value of $\Rcp$~\cite{ats2021tcp}, fitted as
+value of $\Rcp$~\cite{advanced_thermal_solutions_inc_tubed_2021}, fitted as
 $\Rcp = 0.0274\,\Vdot^{-0.415}$~\si{\kelvin\per\watt} ($\Vdot$ in
 \si{\litre\per\minute}); \SI{1.8}{\litre\per\minute} lies just below the lowest
 datasheet point of \SI{1.89}{\litre\per\minute}. The Galinstan and laminar water
@@ -580,11 +581,11 @@ removed. Unit (K/W) added to the $\Rcp$ fit. All values in
     \midrule
     Tube bore / heated length per pass & \SI{8}{\milli\metre} / \SI{152}{\milli\metre}
       & \SI{8}{\milli\metre} / \SI{152}{\milli\metre}
-      & 4 passes, $A = \SI{0.0153}{\metre\squared}$~\cite{ats2021tcp} \\
+      & 4 passes, $A = \SI{0.0153}{\metre\squared}$~\cite{advanced_thermal_solutions_inc_tubed_2021} \\
     $\rho$ (\si{\kilogram\per\metre\cubed}) / $\cp$ (\si{\joule\per\kilogram\per\kelvin})
-      & 6370 / 366 & 1000 / 4182 & \cite{kwon2025project} \\
+      & 6370 / 366 & 1000 / 4182 & \cite{kwon_project_nodate} \\
     $k$ (\si{\watt\per\metre\per\kelvin}) / $\mu$ (\si{\milli\pascal\second})
-      & 16.5 / 2.4 & 0.60 / 1.0 & \cite{kwon2025project} \\
+      & 16.5 / 2.4 & 0.60 / 1.0 & \cite{kwon_project_nodate} \\
     \bottomrule
   \end{tabularx}
 \end{table}
