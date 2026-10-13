@@ -33,7 +33,7 @@ present tense and completed design work in the past tense. ``Part 4'' and
 
 To provide a baseline for comparison, a water cooling system was designed to
 replicate the Galinstan apparatus previously constructed by the 2025 Part~IV
-Project Group \#51~\cite{kwon_project_nodate,loh_project_nodate}. Both cooling systems
+Project Group \#51~\cite{kwon_project_2025,loh_project_2025}. Both cooling systems
 are tested using an identical experimental procedure, so that differences in
 measured performance can be attributed primarily to the coolant and pumping
 method rather than to the test apparatus.
@@ -72,7 +72,7 @@ heat removal rate and pump power consumption.
     Temperature
       & Thermistors around the loop and, at steady state, thermocouples at
         selected locations.
-      & Data-acquisition system adapted from~\cite{kwon_project_nodate,loh_project_nodate};
+      & Data-acquisition system adapted from~\cite{kwon_project_2025,loh_project_2025};
         thermal camera where available. \\
     \midrule
     Pump power
@@ -232,7 +232,7 @@ developed before the numerical simulations. This initial model assumed a
 two-part construction of TDK N85 ferrite ELP-type cores. It swept the air-gap
 length (\SIrange{0.5}{1.5}{\milli\metre}) and the number of turns (8--12),
 identifying designs whose loss exceeds the core's datasheet natural-convection
-loss limit of \SI{17.88}{\watt}~\cite{noauthor_notitle_2005}, so that active cooling
+loss limit of \SI{17.88}{\watt}~\cite{magnetics_inc_specification_2005}, so that active cooling
 is required, while keeping the peak flux density below about
 \SI{300}{\milli\tesla}.
 \edited{``identifying designs that exceed the datasheet's acceptable loss
@@ -253,6 +253,9 @@ operate at \SI{65}{\celsius}, the target steady-state operating temperature for
 the experiments. With the material defined, a parameter sweep (8--12 turns,
 \SIrange{0.5}{1.2}{\milli\metre} air gap) was performed to extract the
 inductance and core loss.
+\issue{Cite the source of the Material~R properties here (the Magnetics Inc.\
+R-material page, \url{https://www.mag-inc.com/products/ferrite-cores/r-material})
+once it has been added to Zotero.}
 
 To finalise the design, the flux density in the core (\cref{fig:flux-density})
 was checked and deemed acceptable, within the linear region of operation. The
@@ -434,8 +437,8 @@ are compared.
 \subsection{Thermal Network}
 \label{sec:thermal-network}
 
-Following the analyses of Kwon~\cite{kwon_project_nodate} and
-Loh~\cite{loh_project_nodate}, the input heat $\Qin$ divides at the resistor node
+Following the analyses of Kwon~\cite{kwon_project_2025} and
+Loh~\cite{loh_project_2025}, the input heat $\Qin$ divides at the resistor node
 $T_{\mathrm{M}}$ (\cref{fig:thermal-network}): part is lost to ambient through
 $\Rmisc$, and the rest, $\Qplate$, passes through the package resistance $\Rpack$
 (resistor and interface) to a fictitious isothermal plate node $T_{\mathrm{P}}$,
@@ -583,9 +586,9 @@ removed. Unit (K/W) added to the $\Rcp$ fit. All values in
       & \SI{8}{\milli\metre} / \SI{152}{\milli\metre}
       & 4 passes, $A = \SI{0.0153}{\metre\squared}$~\cite{advanced_thermal_solutions_inc_tubed_2021} \\
     $\rho$ (\si{\kilogram\per\metre\cubed}) / $\cp$ (\si{\joule\per\kilogram\per\kelvin})
-      & 6370 / 366 & 1000 / 4182 & \cite{kwon_project_nodate} \\
+      & 6370 / 366 & 1000 / 4182 & \cite{kwon_project_2025} \\
     $k$ (\si{\watt\per\metre\per\kelvin}) / $\mu$ (\si{\milli\pascal\second})
-      & 16.5 / 2.4 & 0.60 / 1.0 & \cite{kwon_project_nodate} \\
+      & 16.5 / 2.4 & 0.60 / 1.0 & \cite{kwon_project_2025} \\
     \bottomrule
   \end{tabularx}
 \end{table}

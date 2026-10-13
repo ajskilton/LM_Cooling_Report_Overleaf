@@ -179,7 +179,9 @@
 \usepackage[backend=biber,style=ieee,
             doi=true,url=true,isbn=false,dashed=false,maxnames=6,minnames=1]{biblatex}
 \addbibresource{zotero_references.bib}
-\AtEveryBibitem{\clearfield{issn}}
+\AtEveryBibitem{\clearfield{issn}%
+  % an access date means nothing without a URL (e.g. Zotero items with no link)
+  \iffieldundef{url}{\clearfield{urlyear}\clearfield{urlmonth}\clearfield{urlday}}{}}
 % zotero_references.bib is the Zotero export; tidy its fields here rather than
 % editing the file, so the fixes survive a refresh from Zotero. Drop language
 % tags, ISBNs and the "ISSN: ..." notes Zotero writes, and give items that have

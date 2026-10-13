@@ -30,7 +30,7 @@ trimmed to ``research questions'' for now.}
 \label{sec:motivation}
 
 The continued electrification of the global economy is driving a sustained
-increase in electricity demand~\cite{noauthor_electricity_2025}. Advances in power
+increase in electricity demand~\cite{international_energy_agency_electricity_2025}. Advances in power
 electronics are enabling this shift, underpinning the electrification of
 transport~\cite{bosshard_multi-objective_2016} and energy systems~\cite{steimer_enabled_2010}.
 Across all applications of PECs, there is a consistent trend toward higher power
@@ -39,26 +39,26 @@ and aerospace applications, hard weight and space
 limits~\cite{steimer_enabled_2010,biela_cooling_2007}.
 
 The trend toward higher power density has been present in the industry for
-decades and is projected to continue~\cite{morroni_understanding_nodate}.
+decades and is projected to continue~\cite{morroni_understanding_2023}.
 Historically, this progress has largely been enabled by fundamental improvements
 in power-conversion efficiency, which allow the solution size of converters to
-shrink~\cite{morroni_understanding_nodate}. Higher switching frequencies allow
+shrink~\cite{morroni_understanding_2023}. Higher switching frequencies allow
 passive components to shrink; however, switching losses grow with switching
-frequency~\cite{morroni_understanding_nodate}. Converter losses and thermal
+frequency~\cite{morroni_understanding_2023}. Converter losses and thermal
 management therefore limit further increases in frequency and, with them, power
-density~\cite{morroni_understanding_nodate}.
+density~\cite{morroni_understanding_2023}.
 
 To achieve higher power density, component volume must be reduced. However,
 reduced volume also reduces the surface area available for heat dissipation:
 heat flux rises, and the thermal resistance of the package
-worsens~\cite{morroni_understanding_nodate}. Consequently, new cooling methods that
+worsens~\cite{morroni_understanding_2023}. Consequently, new cooling methods that
 can transfer more heat per unit area are required to reduce the size of PECs
 further~\cite{biela_cooling_2007}. Thermal management therefore becomes
 progressively more challenging for high-power-density PECs, and this is the
 problem that the cooling approaches reviewed in this chapter attempt to address.
 The difficulty of scaling magnetic components, in particular, often restricts
 the achievable power
-density~\cite{biela_cooling_2007,morroni_understanding_nodate,sullivan_size_2016}.
+density~\cite{biela_cooling_2007,morroni_understanding_2023,sullivan_size_2016}.
 
 % ---------------------------------------------------------------------
 \section{Power Electronics}
@@ -67,16 +67,16 @@ density~\cite{biela_cooling_2007,morroni_understanding_nodate,sullivan_size_2016
 PECs process energy by switching semiconductor devices at high frequency, and
 rely on passive components, chiefly inductors, transformers and capacitors, to
 store and release energy in each switching cycle and to filter the resulting
-waveforms~\cite{morroni_understanding_nodate}. Magnetic components (transformers and
+waveforms~\cite{morroni_understanding_2023}. Magnetic components (transformers and
 inductors) are often the largest passive devices and limit the achievable size
-of the converter~\cite{biela_cooling_2007,morroni_understanding_nodate,sullivan_size_2016}.
+of the converter~\cite{biela_cooling_2007,morroni_understanding_2023,sullivan_size_2016}.
 
 Because less energy must be stored per switching cycle as frequency rises,
 higher switching frequencies permit smaller
-inductors~\cite{morroni_understanding_nodate}. Wide-bandgap devices enable higher
+inductors~\cite{morroni_understanding_2023}. Wide-bandgap devices enable higher
 switching frequencies and, therefore, smaller magnetics~\cite{gao_modeling_2022}.
 Even so, inductors, transformers and heat sinks account for the largest portion
-of a power solution's size~\cite{biela_cooling_2007,morroni_understanding_nodate}.
+of a power solution's size~\cite{biela_cooling_2007,morroni_understanding_2023}.
 Moreover, raising the frequency increases winding and core
 losses~\cite{ouyang_overview_2014}. As a result, the design of highly power-dense
 magnetics requires additional consideration of material selection and thermal
@@ -153,7 +153,7 @@ requirements are listed in \cref{sec:trends}.}
 \label{sec:cooling-presence-magnetics}
 
 Inductors and other magnetic components are required in most
-PECs~\cite{morroni_understanding_nodate}, so a cooling method for
+PECs~\cite{morroni_understanding_2023}, so a cooling method for
 high-power-density converters must remain effective in their presence. Their
 thermal design is also becoming harder as converter design
 evolves~\cite{gao_modeling_2022}. Higher switching frequencies at higher power
@@ -347,7 +347,7 @@ Galinstan is electrically conductive, more than six times denser and 2.4 times
 as viscous as water, and has roughly one-fourteenth of its specific heat
 capacity. In a previous Part~IV project, Kwon used \GaInSn{68.5}{21.5}{10} with a
 density of \SI{6370}{\kilogram\per\metre\cubed} and a specific heat capacity of
-\SI{360}{\joule\per\kilogram\per\kelvin}~\cite{kwon_project_nodate}, which gives
+\SI{360}{\joule\per\kilogram\per\kelvin}~\cite{kwon_project_2025}, which gives
 about 0.55 of water's volumetric heat capacity. Many of these properties depend
 on the alloy~\cite{hodes_potential_2014}. Galinstan is therefore heavier, harder to
 pump and requires higher flow rates.
@@ -366,7 +366,7 @@ of \SI{100}{\kilogram} or more~\cite{hodes_potential_2014}. This is significant
 given the very low cost and wide availability of water. However, when cost is
 considered at the system level, water and Galinstan systems are comparable
 because of the significant expense of water pumps~\cite{fan_ultra-efficient_2026}.
-Kwon~\cite{kwon_project_nodate} concluded that the high up-front cost of liquid metal
+Kwon~\cite{kwon_project_2025} concluded that the high up-front cost of liquid metal
 may limit it to specialised applications where efficiency, compactness and
 reliability justify the expense.
 \edited{``when cost is considered as a system water, and Galinstan is
@@ -412,7 +412,7 @@ systems can be scaled up to the channel sizes and temperatures more typical of
 PECs. For example, EV-charging PECs have power classes on the order of tens of
 kilowatts for light-duty vehicles and are being standardised up to
 \SI{1}{\mega\watt} for heavy-duty
-vehicles~\cite{lawton_power_2024,liu_thermal_2025,e-mobility_mcs1200_nodate}. Large liquid
+vehicles~\cite{lawton_power_2024,liu_thermal_2025,abb_e-mobility_mcs1200_nodate}. Large liquid
 metal systems have been realised for nuclear reactors~\cite{rowinski_small_2015},
 but these use different metals, operate at much higher temperatures and are much
 larger than PEC applications, although some work has addressed power electronic
@@ -464,7 +464,7 @@ The electrical conductivity of Galinstan allows it to be driven by
 electromagnetic (EM) pumps with no moving parts. These pumps are silent,
 vibration-free and compact~\cite{hodes_potential_2014}. The EM pump built in a
 previous Part~IV project is a permanent-magnet DC conduction
-pump~\cite{kwon_project_nodate,loh_project_nodate}, although pumps can also be based on
+pump~\cite{kwon_project_2025,loh_project_2025}, although pumps can also be based on
 electromagnetic induction~\cite{an_liquid_2024}. In a conduction pump, a current
 passed through the conductive fluid, perpendicular to a magnetic field, produces
 a Lorentz force. The driving force, and therefore the flow rate, can be
@@ -528,7 +528,7 @@ avoided~\cite{hodes_potential_2014}. Gallium oxide can damage the respiratory
 system at high airborne concentrations, but only minimal amounts are released
 from a closed liquid metal loop~\cite{an_liquid_2024}. Prior prototypes managed
 risks, including skin contact and spillage, using nitrile gloves, eye protection
-and containment trays~\cite{kwon_project_nodate,loh_project_nodate}.
+and containment trays~\cite{kwon_project_2025,loh_project_2025}.
 
 \subsubsection*{Corrosion and Chemical Compatibility}
 
@@ -560,7 +560,7 @@ circuitry is a direct short, and the electronics must be de-energised before
 clean-up~\cite{hodes_potential_2014}. The loop also galvanically connects every
 wetted metal part, so a cooling system design must consider how the EM pump is
 energised, as the pump supply can also energise any metallic radiator and cold
-plate~\cite{kwon_project_nodate}.
+plate~\cite{kwon_project_2025}.
 
 AC fields from nearby magnetics induce eddy currents in the conductive
 coolant~\cite{an_liquid_2024}. The skin depth in Galinstan,
@@ -598,7 +598,7 @@ sinks~\cite{hodes_potential_2014,zhang_water-based_2015,zhang_experimental_2019,
 or lie at the scale of nuclear reactors, which use different metals at much
 higher temperatures~\cite{rowinski_small_2015}. This study aims to quantify the
 trade-offs of the Galinstan system (as designed
-in~\cite{kwon_project_nodate,loh_project_nodate}) relative to a comparable water-cooling
+in~\cite{kwon_project_2025,loh_project_2025}) relative to a comparable water-cooling
 system.
 
 The second is the cooling of magnetic components with Galinstan. To the author's
@@ -613,18 +613,18 @@ directly cool the magnetics is close to them and must therefore tolerate their
 leakage fields.
 
 This project addresses both gaps using the existing Galinstan loop of
-Loh~\cite{loh_project_nodate} and Kwon~\cite{kwon_project_nodate}. The loop comprises a
+Loh~\cite{loh_project_2025} and Kwon~\cite{kwon_project_2025}. The loop comprises a
 permanent-magnet MHD pump, perfluoroalkoxy (PFA) tubing, a cold plate and a
 fan-cooled radiator, and can remove up to a \SI{72}{\watt} resistive
-load~\cite{kwon_project_nodate,loh_project_nodate}. The loop was not tested against water
+load~\cite{kwon_project_2025,loh_project_2025}. The loop was not tested against water
 in the same apparatus, and its experiments did not consider magnetics:
-Loh~\cite{loh_project_nodate} focused on switching devices because Galinstan was
-unlikely to interfere with them, unlike magnetics, and Kwon~\cite{kwon_project_nodate}
+Loh~\cite{loh_project_2025} focused on switching devices because Galinstan was
+unlikely to interfere with them, unlike magnetics, and Kwon~\cite{kwon_project_2025}
 excluded direct integration and testing with magnetics because of time
 limitations and uncertainty about electromagnetic interference. Both recommended
 comparison with water cooling, and Kwon also recommended testing higher heat
 loads and investigating the interaction with inductive pad
-fields~\cite{kwon_project_nodate,loh_project_nodate}.
+fields~\cite{kwon_project_2025,loh_project_2025}.
 \edited{``This project was not tested against water'' referred to the previous
 project's loop, not this project; reworded to ``The loop was not tested
 \dots''.}
