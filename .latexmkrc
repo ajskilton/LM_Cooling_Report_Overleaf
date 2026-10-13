@@ -1,0 +1,7 @@
+# latexmk rules for this report: biber (automatic) + nomencl nomenclature
+add_cus_dep('nlo', 'nls', 0, 'makenlo2nls');
+sub makenlo2nls {
+    system("makeindex \"$_[0].nlo\" -s nomencl.ist -o \"$_[0].nls\"");
+}
+push @generated_exts, 'nlo', 'nls';
+$pdf_mode = 1;

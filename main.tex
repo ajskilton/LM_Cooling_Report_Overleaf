@@ -1,0 +1,287 @@
+% =====================================================================
+%  Part IV Project #51 -- Final Report
+%  Liquid metal (Galinstan) cooling for high-power-density power
+%  electronic converters
+%
+%  Front matter (title page, abstract, signed statement of contribution,
+%  table of contents, acknowledgements, glossary, abbreviations,
+%  nomenclature) follows the 2026 ECSE Part IV Final Report template.
+%
+%  Body layout modelled on P. A. J. Lawton, "Power Class Interoperability for
+%  Slow/Fast IPT Charging of Electric Fleet Vehicles", PhD thesis,
+%  University of Auckland, 2024:
+%    * A4, two-sided book layout, 11 pt Computer Modern text
+%    * chapter headings: bold number above a bold title, flush left
+%    * running heads in bold over a rule (chapter on even, section on odd pages)
+%    * "Figure x.y:" captions below figures, "Table x.y:" captions above tables
+%    * "Fig." / "Table" / "(x.y)" cross-references
+%    * IEEE numeric references with DOIs (biblatex-ieee)
+%
+%  Build:  pdflatex main -> biber main
+%          -> makeindex main.nlo -s nomencl.ist -o main.nls
+%          -> pdflatex main -> pdflatex main
+%          (or: latexmk -pdf main, using the supplied .latexmkrc; Overleaf
+%          handles biber and the nomenclature automatically)
+%
+%  REVIEW MODE: the review comments are written into the chapter files as
+%  \issue{...} (needs your decision) and \edited{...} (substantive change made
+%  in the conversion). They are hidden by default. To show them as coloured
+%  boxes, with a list of all notes after the contents, either change
+%  \reviewfalse to \reviewtrue below, or build with
+%          pdflatex "\def\REVIEW{}\input{main}"
+% =====================================================================
+\documentclass[11pt,a4paper,twoside,openany]{book}
+
+\newif\ifreview
+\reviewfalse
+\ifdefined\REVIEW \reviewtrue \fi
+
+% ---------------------------------------------------------------------
+%  Fonts, language and page geometry
+% ---------------------------------------------------------------------
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}                 % Computer Modern in T1 (as in Lawton)
+\usepackage[british]{babel}          % NZ/UK spelling and hyphenation
+\usepackage{microtype}
+\usepackage[a4paper,top=30mm,bottom=30mm,inner=28mm,outer=28mm,
+            headheight=14pt,headsep=9mm,footskip=14mm]{geometry}
+\usepackage{setspace}
+\setstretch{1.3}
+\setlength{\emergencystretch}{1.5em}
+
+% Display faces used for the title page and chapter openers
+\newcommand{\chapnumfont}{\fontfamily{ppl}\fontseries{b}\selectfont}  % Palatino bold
+\newcommand{\titlefont}{\fontfamily{bch}\fontseries{b}\selectfont}    % Charter bold
+
+% ---------------------------------------------------------------------
+%  Maths, units, tables, figures
+% ---------------------------------------------------------------------
+\usepackage{amsmath,amssymb}
+\usepackage{siunitx}
+\sisetup{
+  per-mode            = symbol,
+  inter-unit-product  = \ensuremath{\cdot},
+  range-phrase        = --,
+  range-units         = single,
+  list-final-separator= {, and },
+  product-units       = single,
+}
+\usepackage{graphicx}
+\graphicspath{{figures/}}
+\usepackage{booktabs,tabularx,array,multirow,makecell,longtable}
+\renewcommand{\arraystretch}{1.15}
+\newcolumntype{L}{>{\raggedright\arraybackslash}X}
+\newcolumntype{C}{>{\centering\arraybackslash}X}
+\usepackage{xcolor}
+\definecolor{uoablue}{RGB}{0,70,127}
+\usepackage{enumitem}
+\setlist{itemsep=0pt,topsep=4pt}
+\usepackage[labelsep=colon,skip=6pt]{caption}
+\captionsetup[table]{position=top}
+\usepackage{float}
+\usepackage{pdfpages}                % signed statement of contribution
+\usepackage{nomencl}                 % nomenclature (ECSE template)
+\makenomenclature
+\usepackage[titles]{tocloft}         % TOC/LOF/LOT entries as in the ECSE template
+
+% ---------------------------------------------------------------------
+%  Headings
+% ---------------------------------------------------------------------
+\usepackage{titlesec}
+% Chapter heading: bold Computer Modern, flush left, number on its own line
+% above the title (as in the reference heading supplied).
+\newcommand{\bodychapterformat}{%
+  \titleformat{\chapter}[display]
+    {\normalfont\Huge\bfseries\raggedright}
+    {\thechapter}
+    {20pt}
+    {\Huge\linespread{1.15}\selectfont}%
+  \titleformat{name=\chapter,numberless}[display]
+    {\normalfont\Huge\bfseries\raggedright}
+    {}
+    {0pt}
+    {\Huge\linespread{1.15}\selectfont}%
+  \titlespacing*{\chapter}{0pt}{20pt}{40pt}}
+\bodychapterformat
+\titleformat{\section}{\normalfont\Large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalfont\large\bfseries}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}{\normalfont\normalsize\bfseries}{\thesubsubsection}{1em}{}
+\titlespacing*{\section}{0pt}{3.0ex plus 1ex minus .2ex}{1.6ex plus .2ex}
+\titlespacing*{\subsection}{0pt}{2.6ex plus 1ex minus .2ex}{1.2ex plus .2ex}
+\titlespacing*{\subsubsection}{0pt}{2.0ex plus .8ex minus .2ex}{0.6ex plus .2ex}
+\setcounter{secnumdepth}{2}
+\setcounter{tocdepth}{2}
+
+% Front-matter headings follow the ECSE template (14 pt bold, flush left);
+% \bodyheadings restores the body chapter heading for the main matter.
+\newcommand{\frontheadings}{%
+  \titleformat{name=\chapter,numberless}[block]
+    {\normalfont\fontsize{14}{17}\selectfont\bfseries}{}{0pt}{}%
+  \titlespacing*{\chapter}{0pt}{0pt}{12pt}}
+\newcommand{\bodyheadings}{\bodychapterformat}
+
+% ---------------------------------------------------------------------
+%  ECSE template settings for the front matter
+% ---------------------------------------------------------------------
+\newcommand\HRule{\noindent\rule{\linewidth}{2pt}}   % title-page rules
+\addto\captionsbritish{\renewcommand{\contentsname}{Table of Contents}}
+% "Figure"/"Table" prefixes in the lists of figures and tables
+\renewcommand{\cftfigpresnum}{Figure~}
+\renewcommand{\cfttabpresnum}{Table~}
+\setlength{\cftfignumwidth}{5.2em}
+\setlength{\cfttabnumwidth}{5.2em}
+% Nomenclature: "Symbols" / "Greek Symbols" groups with a unit column
+\renewcommand{\nomname}{Nomenclature}
+\def\nompreamble{\addcontentsline{toc}{chapter}{\nomname}\markboth{\nomname}{\nomname}}
+\renewcommand{\nomgroup}[1]{%
+  \ifthenelse{\equal{#1}{A}}{\item[\textbf{Symbols}]}{%
+  \ifthenelse{\equal{#1}{G}}{\item[\textbf{Greek Symbols}]}{}}}
+\newcommand{\nomunit}[1]{\renewcommand{\nomentryend}{\hspace*{\fill}#1}}
+\setlength{\nomlabelwidth}{2.6cm}
+\usepackage{ifthen}
+
+% ---------------------------------------------------------------------
+%  Running heads (Lawton: bold, ruled; page number outside;
+%  chapter title on even pages, section on odd pages)
+% ---------------------------------------------------------------------
+\usepackage{fancyhdr}
+\renewcommand{\chaptermark}[1]{\markboth{#1}{#1}}
+\renewcommand{\sectionmark}[1]{\markright{\thesection\ \ #1}}
+\fancypagestyle{lawton}{%
+  \fancyhf{}%
+  \fancyhead[LE]{\bfseries\thepage}%
+  \fancyhead[RE]{\bfseries\nouppercase{\leftmark}}%
+  \fancyhead[LO]{\bfseries\nouppercase{\rightmark}}%
+  \fancyhead[RO]{\bfseries\thepage}%
+  \renewcommand{\headrulewidth}{0.4pt}}
+\pagestyle{lawton}
+\newcommand{\bodyplainstyle}{%
+  \fancypagestyle{plain}{%
+    \fancyhf{}%
+    \fancyfoot[C]{\bfseries\thepage}%
+    \renewcommand{\headrulewidth}{0pt}}}
+% ECSE template: no header, small centred page number
+\fancypagestyle{front}{%
+  \fancyhf{}%
+  \fancyfoot[C]{\footnotesize\thepage}%
+  \renewcommand{\headrulewidth}{0pt}}
+\newcommand{\frontplainstyle}{%
+  \fancypagestyle{plain}{%
+    \fancyhf{}%
+    \fancyfoot[C]{\footnotesize\thepage}%
+    \renewcommand{\headrulewidth}{0pt}}}
+
+% ---------------------------------------------------------------------
+%  References (IEEE, with ISSN/DOI as in Lawton)
+% ---------------------------------------------------------------------
+\usepackage{csquotes}
+\usepackage[backend=biber,style=ieee,
+            doi=true,url=true,isbn=false,dashed=false,maxnames=6,minnames=1]{biblatex}
+\addbibresource{references.bib}
+\AtEveryBibitem{\clearfield{issn}}
+
+% ---------------------------------------------------------------------
+%  Cross-referencing
+% ---------------------------------------------------------------------
+\usepackage[hidelinks,bookmarksnumbered]{hyperref}
+\usepackage[nameinlink]{cleveref}
+\crefname{chapter}{Chapter}{Chapters}
+\crefname{section}{Section}{Sections}
+\crefname{subsection}{Section}{Sections}
+\crefname{figure}{Fig.}{Figs.}
+\Crefname{figure}{Figure}{Figures}
+\crefname{table}{Table}{Tables}
+\crefname{equation}{}{}
+\crefformat{equation}{(#2#1#3)}
+\crefrangeformat{equation}{(#3#1#4)--(#5#2#6)}
+\crefmultiformat{equation}{(#2#1#3)}{ and~(#2#1#3)}{, (#2#1#3)}{ and~(#2#1#3)}
+
+% ---------------------------------------------------------------------
+%  Review notes
+% ---------------------------------------------------------------------
+\ifreview
+  \usepackage[colorinlistoftodos,textsize=small]{todonotes}
+    \newcommand{\issue}[1]{\par\todo[inline,color=orange!20,bordercolor=orange!70!black,
+      linecolor=orange!70!black,caption={\textsc{Issue}: #1}]{\textbf{Issue:} #1}}
+  \newcommand{\edited}[1]{\par\todo[inline,color=cyan!12,bordercolor=cyan!50!black,
+      linecolor=cyan!50!black,caption={\textsc{Edited}: #1}]{\textbf{Edited:} #1}}
+\else
+  \newcommand{\issue}[1]{\ignorespaces}
+  \newcommand{\edited}[1]{\ignorespaces}
+\fi
+
+% ---------------------------------------------------------------------
+%  Convenience macros
+% ---------------------------------------------------------------------
+\newcommand{\Vdot}{\dot{V}}
+\newcommand{\mdot}{\dot{m}}
+\newcommand{\cp}{c_{\mathrm{p}}}
+\newcommand{\NTU}{\mathrm{NTU}}
+\newcommand{\Rcp}{R_{\mathrm{cp}}}
+\newcommand{\Rpack}{R_{\mathrm{pack}}}
+\newcommand{\Rmisc}{R_{\mathrm{misc}}}
+\newcommand{\Qin}{Q_{\mathrm{in}}}
+\newcommand{\Qplate}{Q_{\mathrm{plate}}}
+\newcommand{\Tin}{T_{\mathrm{in}}}
+\newcommand{\Tout}{T_{\mathrm{out}}}
+\newcommand{\Galinstan}{Galinstan}
+\newcommand{\GaInSn}[3]{Ga\textsubscript{#1}In\textsubscript{#2}Sn\textsubscript{#3}}
+
+% ---------------------------------------------------------------------
+%  Report details (edit here)
+% ---------------------------------------------------------------------
+\newcommand{\reporttitle}{Liquid Metal Cooling for High-Power-Density Power Electronic Converters}
+\newcommand{\reportauthor}{Alex Skilton}
+\newcommand{\reporttype}{Final Report}
+\newcommand{\reportdate}{\number\day\ \ifcase\month\or January\or February\or March\or April\or May\or June\or July\or August\or September\or October\or November\or December\fi\ \number\year}
+\newcommand{\reportpartner}{Shrirang Ekbote}
+\newcommand{\reportsupervisor}{Dr. Patrick Lawton and Prof. Grant Covic}
+
+\hypersetup{pdftitle={\reporttitle},pdfauthor={\reportauthor}}
+
+% =====================================================================
+\begin{document}
+
+\frontmatter
+\frontheadings
+\frontplainstyle
+\pagestyle{empty}
+\input{frontmatter/titlepage}
+
+\pagestyle{front}
+\input{frontmatter/abstract}
+
+% Signed Statement of Contribution (student + supervisor). Replace
+% frontmatter/Declaration.pdf with the signed copy.
+\includepdf[pagecommand=\thispagestyle{front}]{frontmatter/Declaration}
+
+\tableofcontents
+\listoffigures
+\listoftables
+\input{frontmatter/acknowledgements}
+\input{frontmatter/glossary}
+\input{frontmatter/abbreviations}
+\input{frontmatter/nomenclature}
+\printnomenclature
+\ifreview
+  \listoftodos[Review Notes]
+\fi
+
+\clearpage{\pagestyle{empty}\cleardoublepage}% blank verso (if any) without a page number
+\mainmatter
+\bodyheadings
+\bodyplainstyle
+\pagestyle{lawton}
+% Chapter 1 (Introduction) is not yet written; the Literature Review is
+% numbered as Chapter 2 so its section numbers match the draft. Once the
+% introduction exists, add \include{chapters/01_introduction} here and
+% delete the counter line.
+\setcounter{chapter}{1}
+\include{chapters/02_literature_review}
+\include{chapters/03_experimental_design}
+
+\backmatter
+\printbibliography[heading=bibintoc,title={References}]
+
+\end{document}

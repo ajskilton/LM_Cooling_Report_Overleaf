@@ -1,0 +1,622 @@
+% =====================================================================
+%  Chapter 3 -- Experimental Design   (source: Experimental_Design_v1.docx)
+% =====================================================================
+\chapter{Experimental Design}
+\label{ch:experimental}
+
+This chapter details the experiments used to evaluate magnetohydrodynamically
+pumped Galinstan as a thermal management method for PECs. The primary objective
+is to compare the thermal performance of the Galinstan cooling system with that
+of a similar water cooling system under equivalent operating conditions (RQ1).
+A secondary objective is to quantify the influence of high-frequency magnetic
+leakage fields on the thermal performance of the Galinstan coolant (RQ2).
+\Cref{sec:programme} describes the experimental programme,
+\cref{sec:inductor-design} the design of the inductor used in the second
+experiment, and \cref{sec:thermal-model} the analytical thermal model against
+which the measurements are compared.
+\edited{Structure: the draft had three top-level headings (Experimental Design,
+Inductor Design for Experimentation, Analytical Thermal Modelling), each one to
+two pages long. In a thesis layout each would become a separate chapter, so they
+are now Sections~\ref{sec:programme}--\ref{sec:thermal-model} of one chapter, and
+the previously unnumbered sub-headings are numbered. The last two sentences of
+this paragraph were added as a chapter roadmap to match \cref{ch:literature};
+the links to RQ1/RQ2 were also added.}
+\edited{Voice and tense made consistent across the chapter: first person
+(``our setup'', ``enabled us'', ``allows us'', ``we can analyse'') changed to
+impersonal phrasing, matching the literature review; procedures are in the
+present tense and completed design work in the past tense. ``Part 4'' and
+``Part IV'' are now both ``Part~IV''.}
+
+% ---------------------------------------------------------------------
+\section{Experimental Programme}
+\label{sec:programme}
+
+To provide a baseline for comparison, a water cooling system was designed to
+replicate the Galinstan apparatus previously constructed by the 2025 Part~IV
+Project Group \#51~\cite{kwon2025project,loh2025project}. Both cooling systems
+are tested using an identical experimental procedure, so that differences in
+measured performance can be attributed primarily to the coolant and pumping
+method rather than to the test apparatus.
+
+Galinstan is corrosive to many commonly used sensor materials, which restricts
+the range of compatible measurement devices. System performance is therefore
+evaluated using the measurements summarised in \cref{tab:measurements}. The
+principal performance metrics are coolant flow rate, component temperatures,
+heat removal rate and pump power consumption.
+
+\begin{table}[tbp]
+  \centering
+  \caption{Planned experimental measurements.}
+  \label{tab:measurements}
+  \small
+  \begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{2.7cm}
+      >{\raggedright\arraybackslash}p{4.1cm} L@{}}
+    \toprule
+    Quantity & Description & Method \\
+    \midrule
+    \multirow[t]{2}{=}{Heat load}
+      & Power dissipated by the resistors.
+      & Read from the power supply. \\
+      & Power dissipated in the inductor.
+      & Inductor current read from the current probe; core loss taken from the
+        model estimate at the measured current, and winding loss from the
+        LCR-measured AC resistance. \\
+    \midrule
+    \multirow[t]{2}{=}{Volumetric flow rate, $\Vdot$}
+      & Galinstan system.
+      & EMF $E$ read from the electromagnetic flow sensor;
+        $\Vdot = Eh/B$. \\
+      & Water system.
+      & Read directly from the flow sensor. \\
+    \midrule
+    Temperature
+      & Thermistors around the loop and, at steady state, thermocouples at
+        selected locations.
+      & Data-acquisition system adapted from~\cite{kwon2025project,loh2025project};
+        thermal camera where available. \\
+    \midrule
+    Pump power
+      & Electrical input power to the pump.
+      & Read from the power supply. \\
+    \midrule
+    System volume
+      & Volume occupied by the pump and the other system components.
+      & Physical measurement, supplemented by CAD dimensions where physical
+        measurement is impractical. \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+\edited{\Cref{tab:measurements}: the temperature row was garbled in the draft
+(thermocouples appeared in both columns, with a dangling ``at''); it has been
+re-split into ``what'' and ``how''. Column heading ``Data Name'' changed to
+``Quantity''; flow rate symbol $V$ changed to $\Vdot$ to match
+\cref{eq:flow-requirement}.}
+\issue{Define $h$ and $B$ in $\Vdot = Eh/B$; $h$ also clashes with the heat transfer coefficient in \cref{sec:thermal-model}, so consider another symbol (presumably the channel dimension
+parallel to the field and the flux density at the sensor electrodes), and give
+the sensor geometry or a reference to Kwon/Loh.}
+
+\subsection{Experiment 1: Baseline Thermal Comparison}
+\label{sec:exp1}
+
+Two experiments are conducted. The first establishes a baseline comparison of
+the thermal performance of the two cooling systems and is run on both systems
+using identical procedures. Heat is applied using two \SI{25}{\ohm} ARCOL
+resistors connected in series. The experiment is repeated at a series of flow
+rates so that a thermal resistance network can be established for each system;
+the initial flow rates are given in \cref{tab:flow-rates}.
+\edited{The draft referred to ``Table 1'' for the flow rates; the flow rates
+are in \cref{tab:flow-rates}.}
+\issue{The draft said ``two experiments are conducted on both cooling systems
+using identical test procedures'', but Experiment~2 (\cref{sec:exp2}) runs only
+on the Galinstan system. The text above now says that only Experiment~1 runs on
+both; correct this if the water system is also used in Experiment~2.}
+
+\begin{table}[tbp]
+  \centering
+  \caption{Planned experimental flow rates.}
+  \label{tab:flow-rates}
+  \begin{tabular}{@{}lcc@{}}
+    \toprule
+    Test & Water & Galinstan \\
+    \midrule
+    Full flow & \SI{58.3}{\milli\litre\per\second} & \SI{1.4}{\milli\litre\per\second} \\
+    Low flow  & \SI{29.2}{\milli\litre\per\second} & \SI{0.8}{\milli\litre\per\second} \\
+    No flow   & \SI{0}{\milli\litre\per\second}    & \SI{0}{\milli\litre\per\second} \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+\issue{\Cref{tab:flow-rates} and \cref{tab:tests} do not agree. Water
+\SI{58.3}{\milli\litre\per\second} is \SI{3.50}{\litre\per\minute} and
+\SI{29.2}{\milli\litre\per\second} is \SI{1.75}{\litre\per\minute}, but
+\cref{tab:tests} lists 3.6 and \SI{1.8}{\litre\per\minute}; Galinstan low flow is
+0.8 here and \SI{0.75}{\milli\litre\per\second} there. \Cref{tab:tests} also
+adds a Galinstan ``mid'' test and two low water flows (0.73 and
+\SI{0.5}{\litre\per\minute}) but has no ``no flow'' tests. The draft caption
+says ``planned'' while the text said these tests ``were completed''. Reconcile
+the two tables (one set of values, one unit: mL/s or L/min).}
+
+The no-flow tests assess how well the set-up prevents heat leakage to the
+environment and, therefore, how well each system captures the effect of changes
+in the cooling system. The low-flow and full-flow tests are used to assess the
+thermal models (\cref{sec:thermal-model}) across different flow rates. The
+validated model can then be used to evaluate operating conditions that are not
+achievable with the current apparatus (e.g.\ Galinstan at higher flow rates).
+
+At each flow rate, a heat load of \SI{72}{\watt} is applied to the cold plate
+until steady-state conditions are reached or the temperature exceeds
+\SI{70}{\celsius}, whichever occurs first. Steady state is defined as a
+temperature variation of less than \SI{0.5}{\celsius} over a period of
+\SI{30}{\minute}. At steady state, each of the measurements in
+\cref{tab:measurements} is taken. The thermal performance of each cooling system
+is evaluated by comparing the steady-state temperature rise across the heat
+source and the radiator. These measurements are used to compare the overall heat
+transfer performance of the two systems and to validate a thermal model against
+the low- and full-flow tests. In addition, the data are used to construct a
+thermal resistance network that identifies differences in the heat transfer
+mechanisms of the two systems, as detailed in \cref{sec:thermal-model}.
+\edited{The placeholder ``Section [XX.]'' now points to \cref{sec:thermal-model}
+(Analytical Thermal Modelling). ``70 C'' corrected to \SI{70}{\celsius}.}
+\issue{The procedure states \SI{72}{\watt} at every flow rate, but
+\cref{tab:tests} lists the Galinstan low-flow (\SI{9}{\ampere}) test at
+\SI{40}{\watt}. State the exception and the reason (presumably the
+\SI{70}{\celsius} limit).}
+
+\subsection{Experiment 2: Inductor Cooling}
+\label{sec:exp2}
+
+The second experiment demonstrates the ability of Galinstan to cool a
+power-dense inductor, designed as described in \cref{sec:inductor-design}. The
+procedure is identical to that of the baseline experiment, except that the
+inductor replaces the resistive heat source. The inductor is driven at its rated
+current to provide the heat load; its power loss at rated current is estimated
+with an ANSYS simulation model (\cref{sec:analytical-design}). The Galinstan is
+operated at maximum flow. The interaction between the magnetic leakage field and
+the electrically conductive coolant is then assessed: the eddy-current loss
+induced in the coolant is quantified by comparing LCR measurements taken on an
+empty cold plate and on the cold plate filled with Galinstan, and any change in
+flow is captured by the flow sensor.
+\edited{``as described in Section~2'' pointed to the literature review chapter;
+it now points to \cref{sec:inductor-design}. The imperative fragment
+``Heat-load the inductor; set the current to its rated maximum.'' was rewritten
+as a sentence, ``cool plate'' corrected to ``cold plate'', and the measurement
+description reordered so the method follows the aim.}
+
+% ---------------------------------------------------------------------
+\section{Inductor Design for Experimentation}
+\label{sec:inductor-design}
+
+In high-power-density automotive converters, magnetics are typically cooled from
+both the top and the bottom, as close as possible to the
+windings~\cite{krismer2010accurate,biela2007cooling}. Such cooling systems are
+therefore exposed to leakage fields from the magnetic components, and these
+fields could cause local heating in Galinstan, reducing the overall performance
+of a liquid metal system.
+
+An initial ANSYS simulation, in which the Galinstan was modelled as a stationary
+solid, found that Galinstan was 3.2 times as lossy as aluminium and almost 3.9
+times as lossy as copper. The same simulation showed that the eddy-current loss
+in the coolant could be reduced by adding copper or aluminium shielding, with
+\SI{1}{\milli\metre} of copper shielding reducing the total loss by over
+\SI{70}{\percent}.
+
+To evaluate the extent of this effect and possible mitigation strategies, a
+power-dense inductor was built for experimentation. The inductor, which requires
+active cooling, is placed on the Galinstan cold plate, and any degradation in the
+thermal performance of the Galinstan system in the presence of its leakage field
+is assessed from LCR and flow measurements. A planar geometry was selected for
+its better thermal performance than other geometries, such as pot cores. The
+final construction is shown in \cref{fig:inductor-photo}, and the design process
+is described in
+Sections~\ref{sec:analytical-design}--\ref{sec:capacitor-tuning}.
+\edited{The draft introduced the inductor twice in consecutive paragraphs
+(``\dots a power-dense inductor was realised for experimentation; the design
+process is detailed in Section~2.'' followed by ``A power-dense inductor was
+realised for use in experimentation \dots''). The two were merged, and the
+incorrect ``Section~2'' reference removed. ``Consequently'' before the shielding
+result was dropped because the shielding result does not follow from the
+loss ratios.}
+
+\begin{figure}[tbp]
+  \centering
+  \includegraphics[width=0.72\linewidth]{inductor_flux_density}
+  \caption{Magnetic flux density in the selected inductor design ($N = 8$,
+    $l_{\mathrm{g}} = \SI{0.7}{\milli\metre}$).}
+  \label{fig:flux-density}
+\end{figure}
+
+\subsection{Analytical Design}
+\label{sec:analytical-design}
+
+To reduce computation time and narrow the design space, an analytical model was
+developed before the numerical simulations. This initial model assumed a
+two-part construction of TDK N85 ferrite ELP-type cores. It swept the air-gap
+length (\SIrange{0.5}{1.5}{\milli\metre}) and the number of turns (8--12),
+identifying designs whose loss exceeds the core's datasheet natural-convection
+loss limit of \SI{17.88}{\watt}~\cite{biela2007cooling}, so that active cooling
+is required, while keeping the peak flux density below about
+\SI{300}{\milli\tesla}.
+\edited{``identifying designs that exceed the datasheet's acceptable loss
+limit'' read as an error; it has been interpreted as deliberately selecting
+designs that need active cooling, which is consistent with the final core loss
+of \SI{30.81}{\watt} in \cref{tab:inductor-model}. Check this interpretation.}
+\issue{The \SI{17.88}{\watt} datasheet limit is cited to Biela and Kolar, which
+is a conference paper, not the core datasheet. Add the TDK ELP/N85 datasheet (or
+the Magnetics Inc.\ datasheet for the core actually used) to the bibliography.}
+
+An ANSYS model was then constructed and run as a two-parameter sweep over
+air-gap length and number of turns. It was later found that the available cores
+were Magnetics Inc.\ Material~R rather than the assumed TDK N85. A custom
+material definition was therefore created by modifying the properties of TDK
+N95, which are similar to those of Material~R. The core material was assumed to
+operate at \SI{65}{\celsius}, the target steady-state operating temperature for
+the experiments. With the material defined, a parameter sweep (8--12 turns,
+\SIrange{0.5}{1.2}{\milli\metre} air gap) was performed to extract the
+inductance and core loss.
+
+To finalise the design, the flux density in the core (\cref{fig:flux-density})
+was checked and deemed acceptable, within the linear region of operation. The
+final design parameters are given in \cref{tab:inductor-design}, and the
+inductance and core loss of the chosen design are given in
+\cref{tab:inductor-model}.
+\edited{``The calculated are presented in Table 3'' (missing word) and the
+following sentence, which repeated it with a comma splice, were combined. Table
+numbering in the draft repeated Table~2 and Table~3.}
+\issue{The colour scale of \cref{fig:flux-density} shows a peak of about
+\SI{455}{\milli\tesla}, against the \SI{300}{\milli\tesla} design limit stated
+above and close to the saturation flux density of Material~R at
+\SI{65}{\celsius}. If the peak is a local corner value, say so and give the
+flux density in the bulk of the core; otherwise justify ``within the linear
+region''.}
+
+\begin{table}[tbp]
+  \centering
+  \caption{Final inductor design parameters.}
+  \label{tab:inductor-design}
+  \begin{tabular}{@{}lll@{}}
+    \toprule
+    Parameter & Value & Unit \\
+    \midrule
+    Core geometry  & Magnetics Inc.\ 0\,9938\,EC & -- \\
+    Core material  & Magnetics Inc.\ Material~R  & -- \\
+    Inductance     & 92.1 & \si{\micro\henry} \\
+    Air-gap length & 0.6  & \si{\milli\metre} \\
+    Turns          & 8    & -- \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+\issue{\Cref{tab:inductor-design} gives an air gap of \SI{0.6}{\milli\metre},
+but the caption of \cref{fig:flux-density} (from the draft) says
+$l_{\mathrm{g}} = \SI{0.7}{\milli\metre}$. It also lists \SI{92.1}{\micro\henry},
+which is the \emph{measured} inductance; the model value is
+\SI{92.5}{\micro\henry} (\cref{tab:inductor-model}). Use the design (model) value
+here, or label it as measured. Check the core part number: Magnetics part numbers
+take the form 0X49938EC, with the material letter in place of X.}
+
+\subsection{Model Validation}
+\label{sec:model-validation}
+
+Once the inductor had been built (\cref{fig:inductor-photo}), measurements were
+taken to design the LCC tuning required to drive the desired resonant current;
+these measurements also serve to validate the model. The model values at the
+rated current of \SI{12}{\ampere} rms are given in \cref{tab:inductor-model}.
+
+\begin{table}[tbp]
+  \centering
+  \caption{Inductor model values at the rated current of \SI{12}{\ampere} rms.}
+  \label{tab:inductor-model}
+  \begin{tabular}{@{}lll@{}}
+    \toprule
+    Parameter & Model & Unit \\
+    \midrule
+    Inductance & 92.5  & \si{\micro\henry} \\
+    Core loss  & 30.81 & \si{\watt} \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\begin{figure}[tbp]
+  \centering
+  \includegraphics[width=0.42\linewidth]{inductor_photo}
+  \caption{Constructed planar inductor.}
+  \label{fig:inductor-photo}
+\end{figure}
+
+The inductance was measured as \SI{92.1}{\micro\henry}, within \SI{1}{\percent}
+of the simulation model, although this measurement included the effect of long
+leads, which would be expected to increase it. The AC resistance
+$R_{\mathrm{ac}}$, which determines the winding loss, was measured with an LCR
+meter at low excitation as \SI{83}{\milli\ohm}, giving a winding loss of
+\SI{11.95}{\watt} at \SI{12}{\ampere} rms.
+\edited{Sentence fragment (``Once the inductor was built as shown in Figure~3.'')
+joined to the following sentence; ``83 mOhm'' and ``12 Arms'' set as
+\SI{83}{\milli\ohm} and \SI{12}{\ampere} rms.}
+\issue{The measured inductance (\SI{92.1}{\micro\henry}) is \emph{lower} than
+the model (\SI{92.5}{\micro\henry}) even though the leads should add inductance,
+so the model slightly overestimates $L$. Say this explicitly rather than leaving
+``which should have increased it'' hanging. Also state the frequency at which
+$R_{\mathrm{ac}}$ was measured (it should be the operating frequency).}
+
+For a heat transfer investigation in which temperatures are continuously
+monitored, some uncertainty in the loss estimate is acceptable. For later
+experiments, the total inductor loss is therefore taken as \SI{42.76}{\watt}
+(\SI{30.81}{\watt} core loss plus \SI{11.95}{\watt} winding loss).
+\edited{Breakdown of the \SI{42.76}{\watt} total added so the reader can see
+where it comes from (checked: $30.81 + 11.95 = 42.76$).}
+
+\subsection{Thermal Considerations and Cooling Strategy}
+\label{sec:inductor-thermal}
+
+The main constraint was asymmetric cooling: the upper core surface relies on
+convection to ambient air, while the lower surface interfaces with the cold
+plate, and the air gap acts as a thermal insulator between them. Thermal paste
+was applied between the upper and lower cores to reduce the temperature
+difference and improve heat transfer to the cooling system. Although not
+optimal, this configuration is suitable for the second experiment, which aims to
+demonstrate Galinstan cooling of a power-dense inductor and to assess the
+leakage-field interaction rather than to produce the best-performing system.
+Future designs should improve on this by cooling both the top and bottom cores,
+or by using asymmetric core designs with an integrated heat-transfer path, such
+as the inductor of Gao \emph{et al.}~\cite{gao2022modeling}.
+
+\subsection{Capacitor Tuning}
+\label{sec:capacitor-tuning}
+
+The allowable reactance of the inductor was limited by the maximum voltage
+developed across the series tuning capacitors needed to boost the volt-amperes
+(VA) in the inductor. The allowable voltage was set to about \SI{130}{\volt},
+with a maximum of \SI{150}{\volt} across any single capacitor. To find
+acceptable tuning values, an optimisation model was developed using the Solver
+add-in in Microsoft Excel, which made it possible to check quickly whether a
+given inductance was feasible or would cause the capacitor voltage to exceed its
+rating.
+
+The target capacitance is given by
+\begin{equation}
+  C_{\mathrm{target}} = \frac{1}{2\pi f \left(2\pi f L_{1} - X_{\mathrm{res}}\right)},
+  \label{eq:c-target}
+\end{equation}
+where $f$ is the resonant frequency of the network, $L_{1}$ is the inductance of
+the primary magnetics and $X_{\mathrm{res}}$ is the resonant reactance of the
+system. $X_{\mathrm{res}}$ sets the resonant current in the primary magnetics,
+as given by
+\begin{equation}
+  X_{\mathrm{res}} = \frac{2\sqrt{2}\, V_{\mathrm{DC}}}{I_{1}},
+  \label{eq:x-res}
+\end{equation}
+where $I_{1}$ is the desired resonant current and $V_{\mathrm{DC}}$ is the DC bus
+voltage. \Cref{eq:x-res} is valid only for a conduction angle of
+\SI{180}{\degree}.
+\issue{Check \cref{eq:x-res}. For a full bridge at \SI{180}{\degree} conduction
+the fundamental rms output voltage is $2\sqrt{2}\,V_{\mathrm{DC}}/\pi$, so one
+would expect $X_{\mathrm{res}} = 2\sqrt{2}\,V_{\mathrm{DC}}/(\pi I_{1})$; the
+$\pi$ appears to be missing. Also state $f$ and $V_{\mathrm{DC}}$. Back-calculating
+from the \SI{41.90}{\nano\farad} target in \cref{fig:capacitor-opt} with
+$L_1 = \SI{92.1}{\micro\henry}$, $f = \SI{85}{\kilo\hertz}$ and $I_1 = \SI{12}{\ampere}$
+gives $X_{\mathrm{res}} \approx \SI{4.5}{\ohm}$, which implies
+$V_{\mathrm{DC}} \approx \SI{19}{\volt}$ from \cref{eq:x-res} as written or
+$\approx\SI{60}{\volt}$ with the $\pi$. Whichever was used, quote it.}
+
+Initially, the optimisation model selected a single capacitor value for the
+entire board. The result was relatively poor, with the best design differing by
+\SI{8.11}{\percent} from the target capacitance. The model was then extended to
+allow a limited set of capacitor values to be selected for each of the four rows
+of the tuning board, which reduced the detuning to \SI{2.12}{\percent} of the
+target value. The final model output is shown in \cref{fig:capacitor-opt}.
+\edited{Detuning changed from 2.11\,\% to 2.12\,\%: the Solver output in
+\cref{fig:capacitor-opt} gives 2.1196\,\%. The arrangement shown (rows of
+$7\times\SI{22}{\nano\farad}$, $3\times\SI{68}{\nano\farad}$,
+$7\times\SI{22}{\nano\farad}$, $7\times\SI{22}{\nano\farad}$ in series) was
+checked: it gives \SI{41.01}{\nano\farad}, and at \SI{12}{\ampere} and
+\SI{85}{\kilo\hertz} the highest row voltage is about \SI{146}{\volt}, within the
+\SI{150}{\volt} limit.}
+
+\begin{figure}[tbp]
+  \centering
+  \includegraphics[width=0.75\linewidth]{capacitor_optimisation}
+  \caption{Final output of the capacitor optimisation.}
+  \label{fig:capacitor-opt}
+\end{figure}
+\issue{\Cref{fig:capacitor-opt} is a raw Excel screenshot (with a typo,
+``Parrallel''). For a thesis-style report, consider replacing it with a small
+table: capacitor value and number in parallel for each row, plus target,
+achieved and error.}
+
+% ---------------------------------------------------------------------
+\section{Analytical Thermal Modelling}
+\label{sec:thermal-model}
+
+Analytical models are developed to predict the performance of each system.
+These establish a baseline expectation against which the experimental results
+are compared.
+\edited{The draft had a single bullet point here; it was converted to prose.}
+
+\subsection{Thermal Network}
+\label{sec:thermal-network}
+
+Following the analyses of Kwon~\cite{kwon2025project} and
+Loh~\cite{loh2025project}, the input heat $\Qin$ divides at the resistor node
+$T_{\mathrm{M}}$ (\cref{fig:thermal-network}): part is lost to ambient through
+$\Rmisc$, and the rest, $\Qplate$, passes through the package resistance $\Rpack$
+(resistor and interface) to a fictitious isothermal plate node $T_{\mathrm{P}}$,
+and then through the cold-plate resistance $\Rcp$ to the coolant inlet:
+\begin{equation}
+  \Qin = \frac{T_{\mathrm{M}} - T_{\mathrm{A}}}{\Rmisc}
+       + \frac{T_{\mathrm{M}} - \Tin}{\Rpack + \Rcp}.
+  \label{eq:network}
+\end{equation}
+
+\begin{figure}[tbp]
+  \centering
+  \includegraphics[width=0.85\linewidth]{thermal_network}
+  \caption{Thermal network as an electrical analogue (temperature $\equiv$
+    potential, heat flow $\equiv$ current); $T_{\mathrm{A}}$ and $\Tin$ are fixed
+    boundary conditions.}
+  \label{fig:thermal-network}
+\end{figure}
+
+\subsection{\texorpdfstring{$\varepsilon$--NTU}{epsilon-NTU} Analysis of the Cold Plate}
+\label{sec:eps-ntu}
+
+For this analysis, the plate is considered isothermal at $T_{\mathrm{P}}$, so
+coolant entering at $\Tin$ approaches the plate temperature exponentially. An
+energy balance on a tube element of perimeter $P$ gives~\cite{bergman2017fundamentals}
+\begin{equation}
+  \frac{T_{\mathrm{P}} - T_{\mathrm{f}}(x)}{T_{\mathrm{P}} - \Tin}
+    = \exp\!\left(-\frac{hPx}{\mdot\,\cp}\right).
+  \label{eq:temp-profile}
+\end{equation}
+At the outlet ($x = L$, $PL = A$), the exponent is defined as the number of
+transfer units, $\NTU = hA/(\mdot\,\cp)$: the ratio of the wall-to-coolant
+convective conductance to the heat-capacity rate of the coolant. Each transfer
+unit reduces the remaining plate-to-coolant temperature difference by a factor
+of $e$, so the coolant absorbs about \SI{63}{\percent} of the maximum possible
+heat after one transfer unit~\cite{bergman2017fundamentals}. Defining the
+effectiveness $\varepsilon$ as this fraction gives
+\begin{equation}
+  \Qplate = \varepsilon\,\mdot\,\cp\,(T_{\mathrm{P}} - \Tin), \qquad
+  \varepsilon = 1 - e^{-\NTU}, \qquad
+  \Rcp = \frac{1}{\varepsilon\,\mdot\,\cp},
+  \label{eq:effectiveness}
+\end{equation}
+\begin{equation}
+  T_{\mathrm{P}} = \Tin + \Qplate\Rcp, \qquad
+  \Tout = \Tin + \frac{\Qplate}{\mdot\,\cp}.
+  \label{eq:plate-outlet}
+\end{equation}
+This is the effectiveness relation for one stream against an isothermal surface.
+Taking the limits of $\varepsilon$ shows whether a coolant is convection-limited
+or limited by heat transport (caloric-limited), as summarised in
+\cref{tab:ntu-regimes} and \cref{fig:eps-ntu}.
+\edited{``NTU is a ratio of the radial heat transfer into the fluid to the heat
+transfer axially down the pipe'' tightened to the conductance/capacity-rate
+definition, which is what $hA/(\mdot\,\cp)$ is. ``which allows us to define''
+sentence rebuilt.}
+
+\begin{table}[tbp]
+  \centering
+  \caption{Limiting regimes of the $\varepsilon$--NTU relation for an isothermal
+    plate.}
+  \label{tab:ntu-regimes}
+  \small
+  \begin{tabular}{@{}lllll@{}}
+    \toprule
+    Regime & NTU & $\varepsilon$ & $\Rcp$ & Lever to reduce $\Rcp$ \\
+    \midrule
+    Convection-limited & $\ll 1$ & $\approx \NTU$ &
+      $\approx 1/(hA) + 1/(2\mdot\,\cp)$ & Raise $hA$ (Nu, area) \\
+    Transitional & $\approx 1$ & $1 - e^{-\NTU}$ &
+      $1/(\varepsilon\,\mdot\,\cp)$ & Both \\
+    Caloric-limited & $\gg 1$ ($\gtrsim 3$) & $\to 1$ &
+      $\to 1/(\mdot\,\cp)$ & Raise $\mdot\,\cp$ (flow rate) \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\begin{figure}[tbp]
+  \centering
+  \includegraphics[width=\linewidth]{eps_ntu}
+  \caption{(a) Effectiveness and (b) normalised cold-plate resistance against
+    NTU. The series sum (dashed) converges to the exact result in both limits.}
+  \label{fig:eps-ntu}
+\end{figure}
+
+The isothermal-plate assumption relies on in-plane heat spreading within the
+\SI{15}{\milli\metre} 6063 aluminium base (\cref{fig:coldplate-heatflow}). The
+assumption weakens as the coolant temperature rise,
+$\Delta T_{\mathrm{cool}} = \Qplate/(\mdot\,\cp)$, increases. The predicted rise
+is below \SI{2}{\celsius} for water but approximately
+\SIrange{17}{20}{\celsius} for Galinstan. Because the same $\Rpack$ must be used
+across all tests, the thermal resistance of the resistor package is calibrated
+using the full-flow water tests, which provide the most nearly isothermal plate.
+\issue{Check \SIrange{17}{20}{\celsius}: with the $\mdot\,\cp$ values in
+\cref{tab:tests}, $\Qin/(\mdot\,\cp)$ gives about 21, 25 and \SI{22}{\celsius}
+for the three Galinstan tests. If the quoted range uses $\Qplate$ (i.e.\ after
+the loss through $\Rmisc$), say so. Similarly, the water \SI{0.5}{\litre\per\minute}
+test gives $72/34.9 \approx \SI{2.1}{\celsius}$, marginally above ``below
+\SI{2}{\celsius}''.}
+
+\begin{figure}[tbp]
+  \centering
+  \includegraphics[width=0.85\linewidth]{coldplate_heat_flow}
+  \caption{Heat-flow directions in the cold plate: in-plane spreading (plate),
+    through-thickness conduction (part of $\Rpack$), axial flow and radial
+    convection ($R_{\mathrm{conv}}$).}
+  \label{fig:coldplate-heatflow}
+\end{figure}
+
+\subsection{Convection, Material Properties and Tests}
+\label{sec:convection}
+
+The heat transfer coefficient $h$ is estimated using the Shah and London mean
+Nusselt number for an isothermal wall in the thermal entry
+region~\cite{shah1978laminar}. The entry-region correlation is restarted for each
+\SI{152}{\milli\metre} pass, on the assumption that the U-bends mix the flow.
+Gnielinski's correlation~\cite{bergman2017fundamentals} is used for water at
+$\mathrm{Re} \geq 4000$, with no estimate made for $2300 < \mathrm{Re} < 4000$.
+The NTU analysis uses these correlations for both coolants. For the turbulent
+water tests, however, the temperature predictions use the ATS-TCP-1001 datasheet
+value of $\Rcp$~\cite{ats2021tcp}, fitted as
+$\Rcp = 0.0274\,\Vdot^{-0.415}$~\si{\kelvin\per\watt} ($\Vdot$ in
+\si{\litre\per\minute}); \SI{1.8}{\litre\per\minute} lies just below the lowest
+datasheet point of \SI{1.89}{\litre\per\minute}. The Galinstan and laminar water
+tests use the $\varepsilon$--NTU model. Galinstan remains laminar up to
+\SI{5}{\milli\litre\per\second} ($\mathrm{Re} \leq 2110$).
+\Cref{tab:coolant-properties,tab:tests} summarise the cold-plate geometry, the
+coolant properties and the test conditions.
+\edited{``Tables 2-3 summarise the properties, tests and comparison method'':
+neither table describes a comparison method, so ``comparison method'' was
+removed. Unit (K/W) added to the $\Rcp$ fit. All values in
+\cref{tab:tests} were recomputed from the stated geometry and properties
+(Re, NTU and $\mdot\,\cp$ for water); they are internally consistent.}
+
+\begin{table}[tbp]
+  \centering
+  \caption{Cold-plate geometry (ATS-TCP-1001) and coolant properties.}
+  \label{tab:coolant-properties}
+  \small
+  \begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{4.3cm}ll L@{}}
+    \toprule
+    Quantity & Galinstan & Water & Note \\
+    \midrule
+    Tube bore / heated length per pass & \SI{8}{\milli\metre} / \SI{152}{\milli\metre}
+      & \SI{8}{\milli\metre} / \SI{152}{\milli\metre}
+      & 4 passes, $A = \SI{0.0153}{\metre\squared}$~\cite{ats2021tcp} \\
+    $\rho$ (\si{\kilogram\per\metre\cubed}) / $\cp$ (\si{\joule\per\kilogram\per\kelvin})
+      & 6370 / 366 & 1000 / 4182 & \cite{kwon2025project} \\
+    $k$ (\si{\watt\per\metre\per\kelvin}) / $\mu$ (\si{\milli\pascal\second})
+      & 16.5 / 2.4 & 0.60 / 1.0 & \cite{kwon2025project} \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+\edited{\Cref{tab:coolant-properties}: the heat-transfer area was cited to [3]
+(Krismer \& Kolar, a dual-active-bridge loss model); it is now cited to the
+cold-plate datasheet. Check that the datasheet gives the bore; otherwise cite
+your own measurement.}
+\issue{Galinstan $\cp$ is 366 here, cited to Kwon, but Kwon's report (and
+\cref{sec:liquid-metal}) gives \SI{360}{\joule\per\kilogram\per\kelvin}. If the
+model uses 366, cite where that comes from; otherwise correct it.}
+
+\begin{table}[tbp]
+  \centering
+  \caption{Steady-state tests.}
+  \label{tab:tests}
+  \small
+  \setlength{\tabcolsep}{4.5pt}
+  \begin{tabular}{@{}llrrlrrr@{}}
+    \toprule
+    Test & Flow & $\Qin$ (\si{\watt}) & Re & Regime & Nu & NTU &
+      $\mdot\,\cp$ (\si{\watt\per\kelvin}) \\
+    \midrule
+    Galinstan, full (\SI{18}{\ampere}) & \SI{1.4}{\milli\litre\per\second}  & 72 & 591  & Laminar   & 3.74 & 34.8 & 3.38\textsuperscript{\textdagger} \\
+    Galinstan, mid (\SI{12}{\ampere})  & \SI{1.0}{\milli\litre\per\second}  & 72 & 422  & Laminar   & 3.72 & 40.4 & 2.90\textsuperscript{\textdagger} \\
+    Galinstan, low (\SI{9}{\ampere})   & \SI{0.75}{\milli\litre\per\second} & 40 & 317  & Laminar   & 3.70 & 64.8 & 1.80\textsuperscript{\textdagger} \\
+    Water & \SI{3.6}{\litre\per\minute}  & 72 & 9549 & Turbulent & 76.0 & 0.35 & 251 \\
+    Water & \SI{1.8}{\litre\per\minute}  & 72 & 4775 & Turbulent & 38.4 & 0.35 & 125 \\
+    Water & \SI{0.73}{\litre\per\minute} & 72 & 1936 & Laminar   & 13.7 & 0.31 & 50.9 \\
+    Water & \SI{0.5}{\litre\per\minute}  & 72 & 1326 & Laminar   & 12.0 & 0.39 & 34.9 \\
+    \bottomrule
+    \multicolumn{8}{@{}p{\linewidth}@{}}{\footnotesize
+      \textsuperscript{\textdagger}\,Galinstan $\mdot\,\cp$ estimated from the
+      energy balance; nominal flows are estimated from the EMF flow sensor.}
+  \end{tabular}
+\end{table}

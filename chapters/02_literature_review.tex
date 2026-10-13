@@ -1,0 +1,654 @@
+% =====================================================================
+%  Chapter 2 -- Literature Review   (source: Literature_Review_Draft_v9.docx)
+% =====================================================================
+\chapter{Literature Review}
+\label{ch:literature}
+
+This chapter reviews the literature relevant to cooling power electronic
+converters (PECs) with liquid metal. \Cref{sec:motivation} outlines the drive
+towards higher power density and its consequences for thermal management, and
+\cref{sec:power-electronics} introduces the components of a typical PEC.
+\Cref{sec:thermal-management} reviews thermal management in PECs, common
+electronic cooling schemes and emerging schemes in the literature.
+\Cref{sec:liquid-metal} introduces liquid metal as a coolant, its
+electromagnetic pumping and its compatibility with electrical equipment.
+Finally, \cref{sec:research-gap} identifies the research gap and states the
+research questions of this project.
+\edited{The draft pointed to ``Section 2.6'' for the research gap; there is no
+Section 2.6 (the gap is \cref{sec:research-gap}). All section, figure, table and
+equation references are now generated with \texttt{\textbackslash cref}, so they
+will stay correct if the structure changes.}
+\issue{This paragraph (in the draft) promises ``research questions, hypotheses
+and aims'', but only research questions are stated in
+\cref{sec:research-gap}. Rubric criterion~B asks for ``well-formulated and
+aligned research questions and hypotheses''. Either add a hypothesis for each
+RQ (and the aims/objectives) or drop the promise. The wording above has been
+trimmed to ``research questions'' for now.}
+
+% ---------------------------------------------------------------------
+\section{Motivation}
+\label{sec:motivation}
+
+The continued electrification of the global economy is driving a sustained
+increase in electricity demand~\cite{iea2025electricity}. Advances in power
+electronics are enabling this shift, underpinning the electrification of
+transport~\cite{bosshard2016multi} and energy systems~\cite{steimer2010enabled}.
+Across all applications of PECs, there is a consistent trend toward higher power
+densities, driven by cost reduction, increased functionality and, in automotive
+and aerospace applications, hard weight and space
+limits~\cite{steimer2010enabled,biela2007cooling}.
+
+The trend toward higher power density has been present in the industry for
+decades and is projected to continue~\cite{morroni2023understanding}.
+Historically, this progress has largely been enabled by fundamental improvements
+in power-conversion efficiency, which allow the solution size of converters to
+shrink~\cite{morroni2023understanding}. Higher switching frequencies allow
+passive components to shrink; however, switching losses grow with switching
+frequency~\cite{morroni2023understanding}. Converter losses and thermal
+management therefore limit further increases in frequency and, with them, power
+density~\cite{morroni2023understanding}.
+
+To achieve higher power density, component volume must be reduced. However,
+reduced volume also reduces the surface area available for heat dissipation:
+heat flux rises, and the thermal resistance of the package
+worsens~\cite{morroni2023understanding}. Consequently, new cooling methods that
+can transfer more heat per unit area are required to reduce the size of PECs
+further~\cite{biela2007cooling}. Thermal management therefore becomes
+progressively more challenging for high-power-density PECs, and this is the
+problem that the cooling approaches reviewed in this chapter attempt to address.
+The difficulty of scaling magnetic components, in particular, often restricts
+the achievable power
+density~\cite{biela2007cooling,morroni2023understanding,sullivan2016size}.
+
+% ---------------------------------------------------------------------
+\section{Power Electronics}
+\label{sec:power-electronics}
+
+PECs process energy by switching semiconductor devices at high frequency, and
+rely on passive components, chiefly inductors, transformers and capacitors, to
+store and release energy in each switching cycle and to filter the resulting
+waveforms~\cite{morroni2023understanding}. Magnetic components (transformers and
+inductors) are often the largest passive devices and limit the achievable size
+of the converter~\cite{biela2007cooling,morroni2023understanding,sullivan2016size}.
+
+Because less energy must be stored per switching cycle as frequency rises,
+higher switching frequencies permit smaller
+inductors~\cite{morroni2023understanding}. Wide-bandgap devices enable higher
+switching frequencies and, therefore, smaller magnetics~\cite{gao2022modeling}.
+Even so, inductors, transformers and heat sinks account for the largest portion
+of a power solution's size~\cite{biela2007cooling,morroni2023understanding}.
+Moreover, raising the frequency increases winding and core
+losses~\cite{ouyang2014overview}. As a result, the design of highly power-dense
+magnetics requires additional consideration of material selection and thermal
+management~\cite{li2022review}.
+
+Inductive power transfer (IPT) systems, such as those used for electric vehicle
+(EV) charging, transfer power across a large air gap between loosely coupled
+coils. Thermal limits shape the magnetic and electronic design of these systems.
+Many commercial systems use active cooling on the magnetic coils, particularly on
+the space- and weight-constrained vehicle side~\cite{lawton2024power}. As in many
+other PEC applications, prolonged or repeated charging can damage the coils and
+power electronics. Liu \emph{et al.}\ therefore recommend research into
+technologies for cooling wireless chargers~\cite{liu2025thermal}.
+
+% ---------------------------------------------------------------------
+\section{Thermal Management in Power Electronics}
+\label{sec:thermal-management}
+
+Thermal management is driven primarily by the requirement for high reliability
+in PECs. Thermal stress is responsible for over \SI{50}{\percent} of electronic
+equipment failures~\cite{rahman2024emerging}. In power converters, power
+semiconductor devices are the components most responsible for failure,
+accounting for approximately \SI{31}{\percent} of PEC
+failures~\cite{kalay2025systematic}. Power semiconductor devices therefore have a
+significant effect on the reliability of the entire
+system~\cite{rahman2024emerging,kalay2025systematic}.
+
+Lifetime models attempt to quantify the relationship between thermal stress and
+the number of thermal cycles a semiconductor device can withstand before
+failure. One of the simplest is the Coffin--Manson
+model~\cite{kalay2025systematic,albarbar2018thermal}:
+\begin{equation}
+  N_{\mathrm{f}} = \alpha \left(\Delta T_{\mathrm{j}}\right)^{\beta},
+  \label{eq:coffin-manson}
+\end{equation}
+where $N_{\mathrm{f}}$ is the number of power cycles (in thousands) before
+failure, $\Delta T_{\mathrm{j}}$ is the swing in junction temperature
+$T_{\mathrm{j}}$, and $\alpha$ and $\beta$ are experimentally determined
+parameters~\cite{kalay2025systematic}. This simplified form considers only the
+temperature swing and omits the Arrhenius term for absolute temperature, which
+becomes significant mainly above about \SI{200}{\celsius}~\cite{kalay2025systematic}.
+\edited{Equation numbering in the draft started at (2.2) with no (2.1); equations
+are now numbered automatically.}
+The absolute temperature is nevertheless limited. The junction temperature of a
+power semiconductor must be kept below its rated maximum, typically
+\SIrange{125}{175}{\celsius} for silicon devices~\cite{laloya2016heat}, and
+packaging limits the junction temperature of even silicon carbide (SiC) and
+gallium nitride (GaN) devices to about \SI{175}{\celsius}~\cite{rahman2024emerging}.
+\edited{The rated-maximum statement was cited to [Liu \emph{et al.}, wireless
+charging]; Laloya \emph{et al.} is the source that states it (and the
+\SIrange{125}{175}{\celsius} range), so the two citations were merged.
+Grammar of the SiC/GaN clause fixed (``packaging limits even SiC \dots\ devices
+limit'').}
+Magnetic components are subject to similar
+limits~\cite{biela2007cooling,mengesha2025advanced}; soft ferrites, for example,
+have the lowest Curie temperature of the common soft magnetic
+materials~\cite{li2022review}. Successful thermal management for high
+reliability must therefore both hold the maximum temperature below these limits
+and suppress the temperature swing $\Delta T_{\mathrm{j}}$.
+
+Heat removal must also be achieved without degrading power density. In compact
+systems, up to half of the volume can be required for the cooling
+system~\cite{biela2007cooling}. Equally, the power consumed to move the coolant
+is a burden on the converter: it must remain small relative to the power
+processed if efficiency is to be maintained~\cite{laloya2016heat}. These failure
+modes, volume and efficiency considerations translate directly into a set of
+requirements for the cooling system, which are presented in
+\cref{sec:trends} alongside the schemes available to meet them.
+\edited{Cross-reference corrected: the draft pointed to Section 2.3.1, but the
+requirements are listed in \cref{sec:trends}.}
+
+% ---------------------------------------------------------------------
+\subsection{Cooling in the Presence of Magnetic Components}
+\label{sec:cooling-presence-magnetics}
+
+Inductors and other magnetic components are required in most
+PECs~\cite{morroni2023understanding}, so a cooling method for
+high-power-density converters must remain effective in their presence. Their
+thermal design is also becoming harder as converter design
+evolves~\cite{gao2022modeling}. Higher switching frequencies at higher power
+levels are increasingly accompanied by operating modes such as zero-voltage
+switching (ZVS) or discontinuous conduction mode (DCM), which reduce switching
+losses and lower the required inductance~\cite{gao2022modeling}. These operating
+modes result in relatively high inductor current ripple, which causes
+substantial AC loss and temperature rise in the inductor~\cite{gao2022modeling}.
+Soft ferrite cores have a low saturation flux density, typically
+\SIrange{0.2}{0.5}{\tesla}, so an air gap is often required, leading to fringing
+magnetic flux~\cite{li2022review}. In a gapped inductor, the fringing flux can
+increase the losses in the winding~\cite{ouyang2014overview}. Cooling systems
+made of conductive materials and placed close to the windings also experience
+increased losses~\cite{biela2007cooling,gao2022modeling}.
+
+Gao \emph{et al.}\ identify temperature limits as a major constraint on the
+design of such inductors and argue that improvements in thermal management are
+needed to enable further size reduction~\cite{gao2022modeling}. They also state
+that effective thermal management solutions for planar magnetics optimised for
+high-power, high-density applications, using cores such as ELP, are yet to be
+developed~\cite{gao2022modeling}.
+
+Because magnetic components cannot be removed from the converter, a cooling
+method for high-power-density PECs must incur only minimal loss and must not
+compromise their performance. This is particularly relevant to conductive
+coolants such as liquid metal (\cref{sec:liquid-metal}); existing approaches to
+cooling magnetic components are reviewed in \cref{sec:cooling-magnetics}.
+
+% ---------------------------------------------------------------------
+\subsection{Trends in Electronics Cooling}
+\label{sec:trends}
+
+The failure mechanisms discussed in \cref{sec:thermal-management} translate into
+four requirements for a converter cooling system. It must:
+\begin{itemize}
+  \item hold device temperatures below their maximum operating limit;
+  \item suppress the temperature swing;
+  \item be compact; and
+  \item have a low burden (pumping) power.
+\end{itemize}
+Many schemes have been developed to handle increasingly high heat
+fluxes~\cite{liu2025thermal,rahman2024emerging,laloya2016heat,mudawar2001assessment},
+and they meet these requirements to varying degrees. It is useful to divide these
+schemes broadly into single-phase and phase-change approaches, as they use
+fundamentally different principles for heat removal.
+
+\subsubsection*{Single-Phase Cooling}
+
+Natural air convection is the simplest and cheapest scheme, but its low heat
+removal capacity restricts it to devices dissipating only a few
+watts~\cite{rahman2024emerging,laloya2016heat}. Forced air, in which fans drive
+air across a heat sink, is used in many power converters and reaches heat fluxes
+of tens of \si{\watt\per\centi\metre\squared}; its large volume and weight limit
+the achievable power density~\cite{laloya2016heat}. The poor transport
+properties of air ultimately confine it to low-heat-flux
+devices~\cite{mudawar2001assessment}.
+
+Single-phase liquid cooling, typically with water circulated through a cold
+plate, pump and remote radiator, is therefore preferred at higher power
+density~\cite{rahman2024emerging,laloya2016heat}. Cold plates can handle tens of
+\si{\watt\per\centi\metre\squared}, and microchannel heat sinks approach
+\SI{1000}{\watt\per\centi\metre\squared}~\cite{laloya2016heat}. Because the
+coolant remains liquid, its flow rate provides an actuator with which to regulate
+the device temperature. The weakness of water is its low thermal conductivity
+$k$, about \SI{0.6}{\watt\per\metre\per\kelvin}~\cite{hodes2014potential}. In
+fully developed laminar flow the Nusselt number is constant, so the heat transfer
+coefficient scales with $k/D_{\mathrm{h}}$ and can only be raised by shrinking
+the hydraulic diameter $D_{\mathrm{h}}$~\cite{hodes2014potential}. Pressure drop
+rises steeply as channels narrow, limiting further scaling and increasing pump
+power~\cite{rahman2024emerging,laloya2016heat}. Studies of single-phase coolants
+point to a practical minimum hydraulic diameter below which the likelihood of
+clogging increases drastically~\cite{mudawar2001assessment}.
+\edited{This citation was highlighted in the draft. Checked: Mudawar (2001)
+does state that the likelihood of clogging ``increases very drastically'' at
+small hydraulic diameters, so the citation is correct and the highlight was
+removed.}
+
+\subsubsection*{Phase-Change Cooling}
+
+Phase change underpins many of the highest-heat-flux schemes. Absorbing latent
+heat through boiling gives higher heat transfer rates and more isothermal
+surfaces than single-phase cooling~\cite{laloya2016heat,mudawar2001assessment}.
+These systems, however, are complex to
+implement~\cite{laloya2016heat,mudawar2001assessment}. The central difficulty is
+the critical heat flux (CHF). Beyond the CHF, vapour restricts liquid access to
+the heated surface, causing the device temperature to rise uncontrollably; CHF is
+therefore the upper design limit for any phase-change
+system~\cite{mudawar2001assessment}. Because CHF depends on mass velocity,
+subcooling, pressure, hydraulic diameter, heated length and surface
+orientation~\cite{mudawar2001assessment}, it is difficult to predict, and the
+safety margin required erodes the performance advantage of phase change.
+Additionally, boiling tends to begin above the expected temperature, and the
+subsequent sudden drop in temperature can thermally shock the
+device~\cite{mudawar2001assessment}. Common implementations such as heat pipes
+and phase-change materials are passive~\cite{laloya2016heat}, removing the
+actuator through which the temperature swing could otherwise be regulated.
+
+\subsubsection*{Summary and Implications for Liquid Metal}
+
+A single-phase forced-liquid loop best meets the requirements for PEC thermal
+management, because a controlled flow rate can be used to suppress temperature
+swings; this is not possible with passive phase-change methods. With water,
+however, performance is fundamentally limited by thermal conductivity, so higher
+heat flux must be achieved with narrower channels. Narrow channels require
+greater pumping power, directly increasing the burden on the power system. A
+coolant with substantially higher thermal conductivity would raise the heat
+transfer coefficient at a given channel size, and the search for such coolants
+motivates research into liquid metals~\cite{hodes2014potential}, discussed in
+\cref{sec:liquid-metal}. Many studies have considered this approach for
+electronics, but the case of cooling magnetic components with liquid metal has
+not yet been examined. Any cooling strategy that operates close to magnetic
+components and their leakage fields can suffer increased eddy-current losses in
+its metallic parts, as examined in \cref{sec:cooling-magnetics}.
+\edited{First sentence changed from ``a single-phase forced-liquid-\emph{metal}
+loop best meets the requirements'': at this point the argument has only
+established that a single-phase forced-\emph{liquid} loop is best; liquid metal
+is introduced as the answer to water's conductivity limit in the following
+sentences. Restore the original if the stronger claim is intended.}
+
+% ---------------------------------------------------------------------
+\subsection{Cooling of Magnetic Components}
+\label{sec:cooling-magnetics}
+
+Magnetic components are conventionally cooled by convection from their exposed
+surfaces, which is limited by the heat transfer coefficient of
+air~\cite{biela2007cooling}. Planar constructions improve on this through their
+high surface-area-to-volume ratio~\cite{gao2022modeling,ouyang2014overview}, but
+a standard flat cold plate often still cools only one side of the core and falls
+short of cooling the windings~\cite{gao2022modeling}. Gao \emph{et al.}\
+addressed this by engineering the thermal conduction path using a custom
+aluminium cold plate, ceramic shim, aluminium bracket and thermal vias, which
+achieved an improved power density~\cite{gao2022modeling}. However, eddy currents
+induced in the metal raised the measured AC winding resistance by
+\SI{34}{\percent}~\cite{gao2022modeling}. Biela and Kolar similarly found that a
+heat-transfer component near an inductor air gap experiences significant
+eddy-current loss and must be recessed from it~\cite{biela2007cooling}. If a
+conductive liquid metal is exposed to similar fields, the coolant itself will
+incur losses. To the author's knowledge, this has not yet been assessed in the
+literature.
+
+% ---------------------------------------------------------------------
+\section{Liquid Metal as a Coolant}
+\label{sec:liquid-metal}
+
+Liquid metals have long been used as coolants where heat fluxes and operating
+temperatures exceed those that conventional fluids can
+tolerate~\cite{rowinski2015small}. Much of the early characterisation of liquid
+metal cooling systems was carried out as fundamental research for nuclear
+reactors, including small modular reactors (SMRs)~\cite{rowinski2015small},
+which produce on the order of tens to hundreds of megawatts. These systems are
+now at an advanced stage of research, with the switch to liquid metals driven
+largely by their high-temperature stability. SMRs typically use lead or sodium
+coolants, but lead is toxic and requires careful handling and
+containment~\cite{oecd2015handbook}, whereas sodium is highly chemically
+reactive, particularly with water and air, posing fire and explosion
+hazards~\cite{foust1972sodium}. These factors complicate broader commercial
+deployment.
+\issue{Historically, most liquid-metal coolant characterisation was done for
+fast (breeder) reactor programmes generally, not SMRs specifically. The sentence
+has been softened to ``nuclear reactors, including SMRs''; check this matches
+what Rowinski \emph{et al.} actually support.}
+
+With the rise of artificial intelligence (AI) and electrification, liquid metal
+has more recently been proposed as a coolant for computing hardware and
+PECs~\cite{fan2026ultra,zhang2015water}. The driving factor is its high thermal
+conductivity, which promises high heat transfer
+rates~\cite{hodes2014potential,fan2026ultra,zhang2019experimental,zhang2023investigation}.
+Such applications typically use gallium (Ga)-based eutectic alloys, the most
+common being Galinstan (GaInSn), which are non-toxic and have low melting points,
+remaining liquid at room temperature~\cite{hodes2014potential,an2024liquid}.
+\edited{``Gallium eutectic alloys, commonly referred to as Galinstan'' changed to
+``Ga-based eutectic alloys, the most common being Galinstan (GaInSn)'':
+Galinstan is one specific Ga--In--Sn alloy (and a trade name), not the name
+for the family.}
+
+Galinstan has a thermal conductivity of \SI{16.5}{\watt\per\metre\per\kelvin},
+approximately 28 times that of water (\cref{tab:galinstan-properties}), which
+enhances heat spreading and reduces temperature
+gradients~\cite{hodes2014potential,zhang2019experimental}. Its boiling point
+above \SI{1300}{\celsius} means that boiling will not occur when it is used to
+cool electronics~\cite{hodes2014potential}, and its melting point is below room
+temperature, so it is liquid under ambient conditions, although the reported
+melting point depends on alloy composition and ranges from
+\SI{-19}{\celsius}~\cite{hodes2014potential} to
+\SI{10}{\celsius}~\cite{zhang2019experimental}. A Galinstan loop is therefore
+single-phase, with no boiling limit to design around, and has the potential to
+remove a higher heat flux than water.
+
+These benefits come with significant trade-offs (\cref{tab:galinstan-properties}).
+Galinstan is electrically conductive, more than six times denser and 2.4 times
+as viscous as water, and has roughly one-fourteenth of its specific heat
+capacity. In a previous Part~IV project, Kwon used \GaInSn{68.5}{21.5}{10} with a
+density of \SI{6370}{\kilogram\per\metre\cubed} and a specific heat capacity of
+\SI{360}{\joule\per\kilogram\per\kelvin}~\cite{kwon2025project}, which gives
+about 0.55 of water's volumetric heat capacity. Many of these properties depend
+on the alloy~\cite{hodes2014potential}. Galinstan is therefore heavier, harder to
+pump and requires higher flow rates.
+\issue{Two property sets are mixed. The text said Galinstan's specific heat is
+``roughly one-twelfth'' of water's (that matches Kwon's 360~J/(kg$\cdot$K)),
+while \cref{tab:galinstan-properties} uses Hodes' 296~J/(kg$\cdot$K), i.e.\
+one-fourteenth. The sentence above now follows the table. Note also that
+\cref{sec:em-pumping} uses Kwon's ratio (0.55, $1.8\times$ flow) while citing
+Hodes, who gives 0.45 ($2.2\times$ flow), and that \cref{tab:coolant-properties}
+in \cref{ch:experimental} uses $\cp = 366$ (cited to Kwon, who gives 360). Pick
+one property set for the report (or explicitly state which is used where).}
+
+Cost is a further constraint. Ga-based alloys are reported at approximately
+US\$200/kg~\cite{an2024liquid} and at about US\$2/g (US\$2000/kg) for quantities
+of \SI{100}{\kilogram} or more~\cite{hodes2014potential}. This is significant
+given the very low cost and wide availability of water. However, when cost is
+considered at the system level, water and Galinstan systems are comparable
+because of the significant expense of water pumps~\cite{fan2026ultra}.
+Kwon~\cite{kwon2025project} concluded that the high up-front cost of liquid metal
+may limit it to specialised applications where efficiency, compactness and
+reliability justify the expense.
+\edited{``when cost is considered as a system water, and Galinstan is
+comparable'' rewritten; check the meaning is preserved.}
+\issue{The two cost figures differ by a factor of ten (US\$200/kg vs
+US\$2000/kg). Hodes (2014) is older; An \emph{et al.} (2024) is the more recent
+estimate. Either comment on the spread (e.g.\ price has fallen) or quote one.}
+
+\begin{table}[tbp]
+  \centering
+  \caption{Selected properties of Galinstan (66.0Ga--20.5In--13.5Sn by
+    weight~\cite{hodes2014potential}) relative to water.}
+  \label{tab:galinstan-properties}
+  \small
+  \begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{3.2cm}
+      >{\raggedright\arraybackslash}p{2.9cm} L >{\raggedright\arraybackslash}p{1.3cm}@{}}
+    \toprule
+    Property & Galinstan & Relative to water & Source \\
+    \midrule
+    Thermal conductivity & \SI{16.5}{\watt\per\metre\per\kelvin} & 28 times higher & \cite{hodes2014potential} \\
+    Density & \SI{6440}{\kilogram\per\metre\cubed} & More than six times higher & \cite{hodes2014potential} \\
+    Dynamic viscosity & \SI{2.4}{\milli\pascal\second} & 2.4 times higher & \cite{hodes2014potential} \\
+    Specific heat capacity & \SI{296}{\joule\per\kilogram\per\kelvin} & About one-fourteenth & \cite{hodes2014potential} \\
+    Volumetric heat capacity & \SI{1.9}{\mega\joule\per\metre\cubed\per\kelvin} & 0.45 times, so about 2.2 times the flow for equal $\Delta T$ & \cite{hodes2014potential} \\
+    Electrical conductivity & \SI{3.3e6}{\siemens\per\metre} & Conductor (deionised water: \SI{5.5e-6}{\siemens\per\metre}) & \cite{hodes2014potential} \\
+    Melting and boiling points & \SI{-19}{\celsius} and above \SI{1300}{\celsius} & Liquid at ambient temperature; boiling will not occur & \cite{hodes2014potential} \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+\edited{\Cref{tab:galinstan-properties}: the caption cited [13] (Kalay \&
+Akpolat, a reliability review) for the alloy composition; the composition and
+all values in the table come from Hodes \emph{et al.}, so the citation was
+changed. Kwon was removed from the electrical-conductivity source cell because
+Kwon gives \SI{3.46e6}{\siemens\per\metre}, not \num{3.3e6}. The draft
+numbered this ``Table 2.2'' with no Table 2.1.}
+\issue{The deionised-water conductivity (\SI{5.5e-6}{\siemens\per\metre}) has no
+source; Hodes does not give it. Add a citation.}
+
+Much of the reviewed work on Galinstan and other Ga-based coolants focuses on
+micro- and mini-channel heat sinks for electronics, typically for heat loads
+from watts to hundreds of watts. It is unclear from the literature whether such
+systems can be scaled up to the channel sizes and temperatures more typical of
+PECs. For example, EV-charging PECs have power classes on the order of tens of
+kilowatts for light-duty vehicles and are being standardised up to
+\SI{1}{\mega\watt} for heavy-duty
+vehicles~\cite{lawton2024power,liu2025thermal,abb2026mcs1200}. Large liquid
+metal systems have been realised for nuclear reactors~\cite{rowinski2015small},
+but these use different metals, operate at much higher temperatures and are much
+larger than PEC applications, although some work has addressed power electronic
+converters~\cite{fan2026ultra,fan2021liquid}.
+
+% ---------------------------------------------------------------------
+\subsection{Electromagnetic Pumping}
+\label{sec:em-pumping}
+
+The low volumetric heat capacity of Galinstan makes the pumping requirement more
+demanding. For a given heat load $Q$ and coolant temperature rise $\Delta T$,
+the required volumetric flow rate is
+\begin{equation}
+  \Vdot = \frac{Q}{\rho \, \cp \, \Delta T},
+  \label{eq:flow-requirement}
+\end{equation}
+where $\rho$ is the coolant density and $\cp$ its specific heat capacity. With
+0.55 of the volumetric heat capacity of water~\cite{hodes2014potential},
+Galinstan needs about 1.8 times the flow rate of water for the same temperature
+rise and heat load. The coolant temperature rise per unit heat load,
+$\Delta T/Q = 1/(\rho\,\cp\,\Vdot)$, is known as the caloric (or heat-capacity)
+resistance, which adds to the convective resistance at the heated surface. In
+the optimised heat sinks reported by Hodes \emph{et al.}, caloric resistance
+accounts for about \SI{55}{\percent} of the total thermal resistance for
+Galinstan, compared with \SI{40}{\percent} for water~\cite{hodes2014potential},
+and An \emph{et al.}\ identify caloric resistance as the primary bottleneck for
+liquid metal micro- and mini-channel heat sinks~\cite{an2024liquid}. The high
+thermal conductivity partly offsets this, as it yields higher heat transfer
+coefficients in wider channels~\cite{zhang2015water,an2024liquid}. However,
+liquid metal requires more pumping power than water at the same volume flow
+because of its higher viscosity~\cite{an2024liquid}. Most comparisons between
+water and Galinstan cooling are made at the chip scale, in mini- or
+micro-channels. Pumps for electronics cooling are generally reported as
+individual designs~\cite{fan2026ultra,fan2021liquid,hart2025magnetohydrodynamically},
+with only~\cite{fan2026ultra} providing a comparison with an equivalent water
+system.
+\issue{0.55/1.8$\times$ are Kwon's numbers but are cited to Hodes, who gives
+0.45/2.2$\times$ (and \cref{tab:galinstan-properties} uses 0.45/2.2$\times$).
+Make the number and the citation agree.}
+\edited{The 55\,\%/40\,\% split is Hodes' result only, so the sentence was
+restructured so that An \emph{et al.} is cited for the ``primary bottleneck''
+point rather than for the percentages.}
+\issue{``Only~\cite{fan2026ultra} provides a comparison with an equivalent water
+system'' conflicts with the end of the next paragraph, which reports (via An
+\emph{et al.}) a conduction pump compared against a water-cooling mechanical
+pump. Qualify this claim (e.g.\ ``at converter scale'') or remove it.}
+
+The electrical conductivity of Galinstan allows it to be driven by
+electromagnetic (EM) pumps with no moving parts. These pumps are silent,
+vibration-free and compact~\cite{hodes2014potential}. The EM pump built in a
+previous Part~IV project is a permanent-magnet DC conduction
+pump~\cite{kwon2025project,loh2025project}, although pumps can also be based on
+electromagnetic induction~\cite{an2024liquid}. In a conduction pump, a current
+passed through the conductive fluid, perpendicular to a magnetic field, produces
+a Lorentz force. The driving force, and therefore the flow rate, can be
+increased by increasing the magnetic flux density or the driving
+current~\cite{an2024liquid}. Flow is usually adjusted by varying the driving
+current~\cite{an2024liquid}, which allows the cooling to be modulated and
+temperature swings to be suppressed. For electronics cooling, conduction pumps
+typically operate at high current (\SIrange{1}{100}{\ampere}) and low voltage
+(\SIrange{0.01}{0.5}{\volt}), consuming approximately
+\SIrange{0.1}{50}{\watt}~\cite{an2024liquid}. Their efficiency is low: up to
+about \SI{10}{\percent} for a pump reported in~\cite{hodes2014potential} and
+above \SI{6}{\percent} over most flow rates for a pump reviewed
+in~\cite{an2024liquid}. Even so, a conduction pump consumed less than
+\SI{15}{\percent} of the power of a mechanical water pump at the same heating
+power and cooling performance~\cite{an2024liquid}.
+\edited{The current/voltage/power ranges were cited to Zhang \emph{et al.}
+(2015); they come from An \emph{et al.} (2024), so the citation was corrected.
+``only 15\,\%'' changed to ``less than 15\,\%'': An \emph{et al.} report
+\SI{1.5}{\watt} against ``more than \SI{10}{\watt}''.}
+
+Induction pumps instead induce current in the liquid metal through an
+alternating or travelling magnetic field. They are more complex and larger, but
+can produce greater driving forces~\cite{an2024liquid}. Furthermore, the
+magnetic field can be derived directly from the converter. Fan \emph{et al.}\
+integrated a magnetohydrodynamic (MHD) pump into an inductor so that it pumps
+the liquid metal while remaining part of the converter~\cite{fan2021liquid}.
+Because the inductor is part of the converter being cooled, the flow rate
+self-adjusts with converter loading~\cite{fan2021liquid}. As the field is
+produced by the converter current, the coolant is exposed to alternating fields
+and therefore to eddy-current losses~\cite{fan2026ultra}.
+
+In summary, permanent-magnet DC conduction pumps are usually preferred for
+electronics cooling because of their simple construction and compact size.
+Electromagnetic pumping, despite its low electrical-to-hydraulic efficiency,
+provides effective heat transport at low pumping power.
+\issue{The draft said conduction pumps are preferred for their ``efficient
+operation at relatively low currents'', which contradicts the previous
+paragraph (they need \SIrange{1}{100}{\ampere} and are $\lesssim\SI{10}{\percent}$
+efficient). Replaced with ``simple construction and compact size''; confirm this
+matches your intent.}
+
+% ---------------------------------------------------------------------
+\subsection{Compatibility with Electrical Equipment}
+\label{sec:compatibility}
+
+The use of Galinstan in commercial settings requires a high level of user safety
+and compatibility with the electrical equipment. Three key concerns arise when
+a new material is introduced into these environments: material safety, corrosion
+and electromagnetic compatibility.
+
+\subsubsection*{Material Safety}
+
+Galinstan was developed as a non-toxic, non-flammable replacement for mercury in
+thermometry~\cite{hodes2014potential}. Ga-based alloys are low-melting-point
+metals that avoid the toxicity of mercury, the flammability of NaK
+(sodium--potassium alloy) and the radioactivity of francium~\cite{an2024liquid}.
+Galinstan's vapour pressure is negligible even at high temperatures, so it poses
+no inhalation risk~\cite{hodes2014potential}. Galinstan does not pose a major
+hazard, although long-term exposure to gallium oxide should be
+avoided~\cite{hodes2014potential}. Gallium oxide can damage the respiratory
+system at high airborne concentrations, but only minimal amounts are released
+from a closed liquid metal loop~\cite{an2024liquid}. Prior prototypes managed
+risks, including skin contact and spillage, using nitrile gloves, eye protection
+and containment trays~\cite{kwon2025project,loh2025project}.
+
+\subsubsection*{Corrosion and Chemical Compatibility}
+
+Galinstan is widely described as corrosive to metals~\cite{hodes2014potential},
+although An \emph{et al.}\ report that Ga-based alloys are generally unreactive,
+except that they corrode aluminium severely and copper surfaces require
+protection above \SI{100}{\celsius}~\cite{an2024liquid}. This presents a
+potential challenge for PEC hardware, as many conventional designs use aluminium
+for structural components, heat sinks or electromagnetic shielding. Moreover, the
+effect of Galinstan exposure on the mechanical properties of ductile metals
+(e.g.\ aluminium) remains to be evaluated~\cite{hodes2014potential}. The high
+velocities required to reduce the caloric resistance also raise concern about
+erosion, which has yet to be studied~\cite{hodes2014potential}. Plastics or
+nickel-plated metals address both corrosion and surface
+oxide~\cite{hodes2014potential}, and ceramic substrates such as aluminium nitride
+are compatible with Ga-based alloys~\cite{an2024liquid} while being both
+thermally conductive and electrically insulating.
+\edited{Sentence fragment (``Although oxidation is severe on aluminium \dots'')
+merged into the previous sentence. An \emph{et al.} describe the effect on
+aluminium as \emph{corrosion}, not oxidation, so the wording follows the
+source.}
+
+\subsubsection*{Electrical Hazards and Electromagnetic Compatibility}
+
+With a conductivity of about \SI{3.3e6}{\siemens\per\metre}~\cite{hodes2014potential},
+Galinstan is a conductor wherever it flows. Its high surface tension resists
+seepage through small cracks at moderate pressure, but a leak onto energised
+circuitry is a direct short, and the electronics must be de-energised before
+clean-up~\cite{hodes2014potential}. The loop also galvanically connects every
+wetted metal part, so a cooling system design must consider how the EM pump is
+energised, as the pump supply can also energise any metallic radiator and cold
+plate~\cite{kwon2025project}.
+
+AC fields from nearby magnetics induce eddy currents in the conductive
+coolant~\cite{an2024liquid}. The skin depth in Galinstan,
+$\delta = 1/\sqrt{\pi f \mu_0 \sigma}$, calculated from the conductivity above,
+is about \SI{0.95}{\milli\metre} at \SI{85}{\kilo\hertz} and about
+\SI{0.55}{\milli\metre} at \SI{250}{\kilo\hertz}. Given Galinstan's
+incompatibility with many metals, plastic piping may be preferred for low cost;
+near magnetics, where alternating magnetic fields are present, nickel-plated
+metals may be a better choice to manage eddy-current heating. Channel placement
+and geometry may therefore govern the choice of piping material.
+\edited{Skin-depth expression added so the quoted values can be checked
+(they are correct for $\sigma = \SI{3.3e6}{\siemens\per\metre}$).}
+\issue{Nickel is ferromagnetic, so a nickel-plated pipe in an \SI{85}{\kilo\hertz}
+field will itself see eddy-current and hysteresis loss. Your own simulation
+(\cref{sec:inductor-design}) found that copper or aluminium shielding reduces the
+coolant loss by over \SI{70}{\percent}. Consider recommending nickel-plated
+\emph{copper} (as Hodes cites) or a copper shield instead, and cross-reference
+that result here.}
+
+% ---------------------------------------------------------------------
+\section{Research Gap and Objectives}
+\label{sec:research-gap}
+
+\subsection{Research Gap}
+
+Single-phase water cooling is bounded by the thermal conductivity of
+water~\cite{hodes2014potential}. Galinstan has a much higher thermal
+conductivity, which can improve heat transfer~\cite{hodes2014potential}. This
+study aims to address two gaps identified in the literature.
+
+The first is the lack of comparisons between water and liquid metal at the scale
+of a converter's cooling loop. Existing comparisons are made for micro- and
+mini-channel heat
+sinks~\cite{hodes2014potential,zhang2015water,zhang2019experimental,an2024liquid},
+or lie at the scale of nuclear reactors, which use different metals at much
+higher temperatures~\cite{rowinski2015small}. This study aims to quantify the
+trade-offs of the Galinstan system (as designed
+in~\cite{kwon2025project,loh2025project}) relative to a comparable water-cooling
+system.
+
+The second is the cooling of magnetic components with Galinstan. To the author's
+knowledge, no study has demonstrated Galinstan cooling of a magnetic component,
+such as a power-dense inductor, or quantified the eddy-current losses induced in
+the coolant by its leakage field. Eddy-current losses have been assessed in AC
+conduction pumps~\cite{fan2026ultra}, and an inductor has been used to drive a
+pump~\cite{fan2026ultra,fan2021liquid}, but not to cool the inductor itself
+directly. This matters because most converters contain inductors, transformers
+or other magnetics. In compact systems, even a cooling system that does not
+directly cool the magnetics is close to them and must therefore tolerate their
+leakage fields.
+
+This project addresses both gaps using the existing Galinstan loop of
+Loh~\cite{loh2025project} and Kwon~\cite{kwon2025project}. The loop comprises a
+permanent-magnet MHD pump, perfluoroalkoxy (PFA) tubing, a cold plate and a
+fan-cooled radiator, and can remove up to a \SI{72}{\watt} resistive
+load~\cite{kwon2025project,loh2025project}. The loop was not tested against water
+in the same apparatus, and its experiments did not consider magnetics:
+Loh~\cite{loh2025project} focused on switching devices because Galinstan was
+unlikely to interfere with them, unlike magnetics, and Kwon~\cite{kwon2025project}
+excluded direct integration and testing with magnetics because of time
+limitations and uncertainty about electromagnetic interference. Both recommended
+comparison with water cooling, and Kwon also recommended testing higher heat
+loads and investigating the interaction with inductive pad
+fields~\cite{kwon2025project,loh2025project}.
+\edited{``This project was not tested against water'' referred to the previous
+project's loop, not this project; reworded to ``The loop was not tested
+\dots''.}
+
+\subsection{Research Questions}
+\label{sec:research-questions}
+
+These gaps lead to two research questions.
+
+\begin{description}[leftmargin=3.2em,labelwidth=2.6em,labelsep=0.6em,itemsep=4pt]
+  \item[RQ1] At the same heat load, how do the thermal resistance and pumping
+    power of the Galinstan loop compare with those of a similar conventional
+    water loop?
+  \item[RQ2] Can the Galinstan loop cool a power-dense inductor while adding
+    minimal loss to the existing aluminium cold plate, and how large is the
+    eddy-current loss induced in the coolant?
+\end{description}
+\edited{``Research Questions'' promoted from a bold paragraph label to
+\cref{sec:research-questions}, parallel to the Research Gap subsection.}
+\issue{RQ2: ``adding minimal loss to the existing aluminium cold plate'' is
+ambiguous; the loss in question is induced in the coolant (and any metal) by the
+inductor's leakage field, not added to the plate. Suggested: ``\dots cool a
+power-dense inductor mounted on the existing cold plate, and how large is the
+eddy-current loss induced in the coolant by its leakage field?'' Also, RQ1 asks
+about thermal resistance and pumping power, whereas \cref{tab:measurements}
+also measures system volume; either add volume (power density) to RQ1 or explain
+why it is measured.}
