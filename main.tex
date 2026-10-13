@@ -80,6 +80,27 @@
 \usepackage[labelsep=colon,skip=6pt]{caption}
 \captionsetup[table]{position=top}
 \usepackage{float}
+% Float placement. With LaTeX's defaults most floats here ended up on sparse
+% float-only pages, centred vertically, away from the text that cites them.
+% Allow more and larger floats on text pages (floats use [htbp]), accept a
+% float-only page only when it is at least 3/4 full, and stack the floats at
+% the top of such a page instead of spreading them down it.
+\setcounter{topnumber}{3}
+\setcounter{bottomnumber}{2}
+\setcounter{totalnumber}{4}
+\renewcommand{\topfraction}{0.85}
+\renewcommand{\bottomfraction}{0.6}
+\renewcommand{\textfraction}{0.12}
+\renewcommand{\floatpagefraction}{0.75}
+% When a page with floats cannot be filled exactly (e.g. the next heading does
+% not fit), open up the gap between the floats and the text rather than the
+% spacing between paragraphs.
+\setlength{\textfloatsep}{20pt plus 20pt minus 4pt}
+\makeatletter
+\setlength{\@fptop}{0pt}
+\setlength{\@fpsep}{\floatsep}
+\setlength{\@fpbot}{0pt plus 1fil}
+\makeatother
 \usepackage{pdfpages}                % signed statement of contribution
 \usepackage{nomencl}                 % nomenclature (ECSE template)
 \makenomenclature
@@ -199,8 +220,22 @@
       \step[fieldset=url, null]
       \step[fieldset=urldate, null]
     }
+    % Zotero stores an article number (e.g. 100133) as the page range; print it
+    % as "Art. no." rather than as a page number
+    \map{
+      \pertype{article}
+      \step[fieldsource=pages, notmatch=\regexp{-}, final]
+      \step[fieldset=eid, origfieldval]
+      \step[fieldset=pages, null]
+    }
   }
 }
+\DeclareFieldFormat[article]{eid}{Art\adddot\space no\adddot\space#1}
+% Break long DOIs and URLs without stretching the gaps around "." and "/"
+\setcounter{biburlnumpenalty}{9000}
+\setcounter{biburlucpenalty}{9000}
+\setcounter{biburllcpenalty}{9000}
+\biburlbigskip=0mu plus 1mu\relax
 
 % ---------------------------------------------------------------------
 %  Cross-referencing

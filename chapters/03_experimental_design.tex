@@ -44,7 +44,7 @@ evaluated using the measurements summarised in \cref{tab:measurements}. The
 principal performance metrics are coolant flow rate, component temperatures,
 heat removal rate and pump power consumption.
 
-\begin{table}[tbp]
+\begin{table}[htbp]
   \centering
   \caption{Planned experimental measurements.}
   \label{tab:measurements}
@@ -111,7 +111,7 @@ using identical test procedures'', but Experiment~2 (\cref{sec:exp2}) runs only
 on the Galinstan system. The text above now says that only Experiment~1 runs on
 both; correct this if the water system is also used in Experiment~2.}
 
-\begin{table}[tbp]
+\begin{table}[htbp]
   \centering
   \caption{Planned experimental flow rates.}
   \label{tab:flow-rates}
@@ -216,7 +216,7 @@ incorrect ``Section~2'' reference removed. ``Consequently'' before the shielding
 result was dropped because the shielding result does not follow from the
 loss ratios.}
 
-\begin{figure}[tbp]
+\begin{figure}[htbp]
   \centering
   \includegraphics[width=0.72\linewidth]{inductor_flux_density}
   \caption{Magnetic flux density in the selected inductor design ($N = 8$,
@@ -272,7 +272,7 @@ above and close to the saturation flux density of Material~R at
 flux density in the bulk of the core; otherwise justify ``within the linear
 region''.}
 
-\begin{table}[tbp]
+\begin{table}[htbp]
   \centering
   \caption{Final inductor design parameters.}
   \label{tab:inductor-design}
@@ -296,15 +296,7 @@ which is the \emph{measured} inductance; the model value is
 here, or label it as measured. Check the core part number: Magnetics part numbers
 take the form 0X49938EC, with the material letter in place of X.}
 
-\subsection{Model Validation}
-\label{sec:model-validation}
-
-Once the inductor had been built (\cref{fig:inductor-photo}), measurements were
-taken to design the LCC tuning required to drive the desired resonant current;
-these measurements also serve to validate the model. The model values at the
-rated current of \SI{12}{\ampere} rms are given in \cref{tab:inductor-model}.
-
-\begin{table}[tbp]
+\begin{table}[htbp]
   \centering
   \caption{Inductor model values at the rated current of \SI{12}{\ampere} rms.}
   \label{tab:inductor-model}
@@ -318,7 +310,15 @@ rated current of \SI{12}{\ampere} rms are given in \cref{tab:inductor-model}.
   \end{tabular}
 \end{table}
 
-\begin{figure}[tbp]
+\subsection{Model Validation}
+\label{sec:model-validation}
+
+Once the inductor had been built (\cref{fig:inductor-photo}), measurements were
+taken to design the LCC tuning required to drive the desired resonant current;
+these measurements also serve to validate the model. The model values at the
+rated current of \SI{12}{\ampere} rms are given in \cref{tab:inductor-model}.
+
+\begin{figure}[htbp]
   \centering
   \includegraphics[width=0.42\linewidth]{inductor_photo}
   \caption{Constructed planar inductor.}
@@ -414,7 +414,7 @@ checked: it gives \SI{41.01}{\nano\farad}, and at \SI{12}{\ampere} and
 \SI{85}{\kilo\hertz} the highest row voltage is about \SI{146}{\volt}, within the
 \SI{150}{\volt} limit.}
 
-\begin{figure}[tbp]
+\begin{figure}[htbp]
   \centering
   \includegraphics[width=0.75\linewidth]{capacitor_optimisation}
   \caption{Final output of the capacitor optimisation.}
@@ -449,7 +449,7 @@ and then through the cold-plate resistance $\Rcp$ to the coolant inlet:
   \label{eq:network}
 \end{equation}
 
-\begin{figure}[tbp]
+\begin{figure}[htbp]
   \centering
   \includegraphics[width=0.85\linewidth]{thermal_network}
   \caption{Thermal network as an electrical analogue (temperature $\equiv$
@@ -496,7 +496,7 @@ transfer axially down the pipe'' tightened to the conductance/capacity-rate
 definition, which is what $hA/(\mdot\,\cp)$ is. ``which allows us to define''
 sentence rebuilt.}
 
-\begin{table}[tbp]
+\begin{table}[htbp]
   \centering
   \caption{Limiting regimes of the $\varepsilon$--NTU relation for an isothermal
     plate.}
@@ -516,7 +516,7 @@ sentence rebuilt.}
   \end{tabular}
 \end{table}
 
-\begin{figure}[tbp]
+\begin{figure}[htbp]
   \centering
   \includegraphics[width=\linewidth]{eps_ntu}
   \caption{(a) Effectiveness and (b) normalised cold-plate resistance against
@@ -539,7 +539,7 @@ the loss through $\Rmisc$), say so. Similarly, the water \SI{0.5}{\litre\per\min
 test gives $72/34.9 \approx \SI{2.1}{\celsius}$, marginally above ``below
 \SI{2}{\celsius}''.}
 
-\begin{figure}[tbp]
+\begin{figure}[htbp]
   \centering
   \includegraphics[width=0.85\linewidth]{coldplate_heat_flow}
   \caption{Heat-flow directions in the cold plate: in-plane spreading (plate),
@@ -573,7 +573,7 @@ removed. Unit (K/W) added to the $\Rcp$ fit. All values in
 \cref{tab:tests} were recomputed from the stated geometry and properties
 (Re, NTU and $\mdot\,\cp$ for water); they are internally consistent.}
 
-\begin{table}[tbp]
+\begin{table}[htbp]
   \centering
   \caption{Cold-plate geometry (ATS-TCP-1001) and coolant properties.}
   \label{tab:coolant-properties}
@@ -600,7 +600,7 @@ your own measurement.}
 \cref{sec:liquid-metal}) gives \SI{360}{\joule\per\kilogram\per\kelvin}. If the
 model uses 366, cite where that comes from; otherwise correct it.}
 
-\begin{table}[tbp]
+\begin{table}[htbp]
   \centering
   \caption{Steady-state tests.}
   \label{tab:tests}
