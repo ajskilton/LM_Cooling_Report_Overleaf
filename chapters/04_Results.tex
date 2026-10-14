@@ -1,0 +1,81 @@
+% =====================================================================
+%  Chapter 4 --   Results
+% =====================================================================
+
+\chapter{Results}
+\label{ch:results}
+
+\subsection{Analytical Thermal Models}
+
+Table~\ref{tab:tn_results} compares the measured and predicted resistor
+temperature $T_\mathrm{M}$ and coolant outlet temperature $T_\mathrm{out}$.
+$R_\mathrm{pack}$ was calibrated on the two turbulent water tests, so those rows
+check the method's consistency rather than validate it independently. Likewise,
+Galinstan $T_\mathrm{out}$ is computed from the energy-balance flow rate and
+agrees closely by construction. The independent test of the model is therefore
+$T_\mathrm{M}$ in the Galinstan and laminar water tests.
+
+\begin{table}[htbp]
+    \centering
+    \caption{Measured and predicted temperatures
+        ($R_\mathrm{pack} = \SI{0.242}{\celsius\per\watt}$; turbulent water
+        $R_\mathrm{cp}$ from the ATS datasheet, laminar water from the
+        $\varepsilon$-NTU model). $\dagger$~Calibration tests. Galinstan
+        $T_\mathrm{out}$ uses the energy-balance flow, so it agrees by construction.}
+    \label{tab:tn_results}
+    \begin{tabular}{lcccc}
+        \toprule
+        Test & \multicolumn{2}{c}{$T_\mathrm{M}$ (\si{\celsius})}
+             & \multicolumn{2}{c}{$T_\mathrm{out}$ (\si{\celsius})} \\
+        \cmidrule(lr){2-3}\cmidrule(lr){4-5}
+             & Measured & Predicted & Measured & Predicted \\
+        \midrule
+        Galinstan \SI{1.4}{\milli\litre\per\second}               & 59.3 & 61.8 & 47.6 & 47.4 \\
+        Galinstan \SI{0.75}{\milli\litre\per\second} (\SI{40}{\watt}) & 51.1 & 51.1 & 43.6 & 43.6 \\
+        Water \SI{3.6}{\litre\per\minute}$^\dagger$               & 49.2 & 49.3 & 33.5 & 33.4 \\
+        Water \SI{1.8}{\litre\per\minute}$^\dagger$               & 48.6 & 48.6 & 32.7 & 32.5 \\
+        Water \SI{0.73}{\litre\per\minute}                        & 50.1 & 53.1 & 33.3 & 34.9 \\
+        Water \SI{0.5}{\litre\per\minute}                         & 50.5 & 54.1 & 33.9 & 35.7 \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+The predicted $T_\mathrm{M}$ lies within the $\pm\SI{3.1}{\celsius}$ measurement
+band in five of the six tests, with an RMS error of \SI{1.8}{\celsius} for
+Galinstan and \SI{2.3}{\celsius} for water. The turbulent water tests agree
+within \SI{0.1}{\celsius}. The mid-flow Galinstan test
+(\SI{1.0}{\milli\litre\per\second}) is excluded because its energy balance
+closed at only about \SI{80}{\percent}, which indicates a flow-measurement error
+or an incomplete approach to steady state.
+
+The two laminar water tests are over-predicted by \SI{3.0}{\celsius} and
+\SI{3.6}{\celsius}. In the laminar regime the model's $R_\mathrm{cp}$ rises to
+\SIrange{0.074}{0.088}{\celsius\per\watt}, three to four times the turbulent
+value. The measurements show no such loss: $T_\mathrm{M} - T_\mathrm{in}$ stays
+between \SI{16.1}{\celsius} and \SI{16.6}{\celsius} from
+\SIrange{3.6}{0.5}{\litre\per\minute}, and the measured $R_\mathrm{cp}$ follows
+the manufacturer's turbulent trend (Figure~\ref{fig:flow_sweep}). This suggests
+the flow in these tests was not fully laminar. The flow meter is uncertain below
+\SI{1}{\litre\per\minute}, and the Reynolds number scales with
+$\dot{V}/\mu$. With $\mu \approx \SI{0.75}{\milli\pascal\second}$ at the
+\SI{33}{\celsius} test temperature, the \SI{0.73}{\litre\per\minute} test
+reaches $\mathrm{Re} \approx 2600$, inside the transitional range, and any
+under-reading of the flow would raise this further. Disturbances from the inlet
+and U-bends can also persist at $\mathrm{Re} \approx$ 1300--1900, where the
+development length of 66--97 tube diameters far exceeds the 19-diameter pass
+length. If these tests are treated as turbulent, the datasheet trend predicts
+$T_\mathrm{M}$ within \SI{0.7}{\celsius}. The laminar prediction is therefore
+best read as a conservative upper bound. In the turbulent range the
+$\varepsilon$-NTU model lies within \SI{15}{\percent} of the datasheet
+(\SI{0.024}{\celsius\per\watt} against \SI{0.021}{\celsius\per\watt} at
+\SI{2}{\litre\per\minute}).
+
+Galinstan is caloric-limited at every tested flow: at least \SI{97}{\percent} of
+its cold-plate resistance is $R_\mathrm{cal}$, so the pump, not the cold-plate
+geometry, sets its thermal performance. Hodes et al.~\cite{hodes2014} reached
+the same conclusion. Galinstan's volumetric heat capacity is 0.45 times that of
+water, and caloric resistance made up \SI{55}{\percent} of the total for their
+optimised Galinstan minichannel against \SI{40}{\percent} for water. The larger
+share found here reflects a flow rate far below their optimum, and it means
+higher pump flow, not improved convection, is the main route to better
+liquid-metal performance in this system.

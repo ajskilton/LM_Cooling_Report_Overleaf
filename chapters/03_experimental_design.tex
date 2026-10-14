@@ -14,29 +14,26 @@ leakage fields on the thermal performance of the Galinstan coolant (RQ2).
 \cref{sec:inductor-design} the design of the inductor used in the second
 experiment, and \cref{sec:thermal-model} the analytical thermal model against
 which the measurements are compared.
-\edited{Structure: the draft had three top-level headings (Experimental Design,
-Inductor Design for Experimentation, Analytical Thermal Modelling), each one to
-two pages long. In a thesis layout each would become a separate chapter, so they
-are now Sections~\ref{sec:programme}--\ref{sec:thermal-model} of one chapter, and
-the previously unnumbered sub-headings are numbered. The last two sentences of
-this paragraph were added as a chapter roadmap to match \cref{ch:literature};
-the links to RQ1/RQ2 were also added.}
-\edited{Voice and tense made consistent across the chapter: first person
-(``our setup'', ``enabled us'', ``allows us'', ``we can analyse'') changed to
-impersonal phrasing, matching the literature review; procedures are in the
-present tense and completed design work in the past tense. ``Part 4'' and
-``Part IV'' are now both ``Part~IV''.}
 
 % ---------------------------------------------------------------------
 \section{Experimental Programme}
 \label{sec:programme}
 
-To provide a baseline for comparison, a water cooling system was designed to
+To provide a baseline for comparison, a water cooling system was designed, details in my partner's report~\cite{ekbote_project_2026}, to
 replicate the Galinstan apparatus previously constructed by the 2025 Part~IV
 Project Group \#51~\cite{kwon_project_2025,loh_project_2025}. Both cooling systems
 are tested using an identical experimental procedure, so that differences in
 measured performance can be attributed primarily to the coolant and pumping
-method rather than to the test apparatus.
+method rather than to the test apparatus. Diagram of the test apparatus is show in \cref{fig:cooling-loop}.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.72\linewidth]{figures/cooling_loop.pdf}
+  \caption{Liquid-metal cooling loop. Galinstan is pumped through the heat
+    source (inductor or resistor test load), past the flow sensor, and
+    through the radiator before returning to the pump.}
+  \label{fig:cooling-loop}
+\end{figure}
 
 Galinstan is corrosive to many commonly used sensor materials, which restricts
 the range of compatible measurement devices. System performance is therefore
@@ -86,14 +83,6 @@ heat removal rate and pump power consumption.
     \bottomrule
   \end{tabularx}
 \end{table}
-\edited{\Cref{tab:measurements}: the temperature row was garbled in the draft
-(thermocouples appeared in both columns, with a dangling ``at''); it has been
-re-split into ``what'' and ``how''. Column heading ``Data Name'' changed to
-``Quantity''; flow rate symbol $V$ changed to $\Vdot$ to match
-\cref{eq:flow-requirement}.}
-\issue{Define $h$ and $B$ in $\Vdot = Eh/B$; $h$ also clashes with the heat transfer coefficient in \cref{sec:thermal-model}, so consider another symbol (presumably the channel dimension
-parallel to the field and the flux density at the sensor electrodes), and give
-the sensor geometry or a reference to Kwon/Loh.}
 
 \subsection{Experiment 1: Baseline Thermal Comparison}
 \label{sec:exp1}
@@ -153,13 +142,9 @@ source and the radiator. These measurements are used to compare the overall heat
 transfer performance of the two systems and to validate a thermal model against
 the low- and full-flow tests. In addition, the data are used to construct a
 thermal resistance network that identifies differences in the heat transfer
-mechanisms of the two systems, as detailed in \cref{sec:thermal-model}.
-\edited{The placeholder ``Section [XX.]'' now points to \cref{sec:thermal-model}
-(Analytical Thermal Modelling). ``70 C'' corrected to \SI{70}{\celsius}.}
-\issue{The procedure states \SI{72}{\watt} at every flow rate, but
-\cref{tab:tests} lists the Galinstan low-flow (\SI{9}{\ampere}) test at
-\SI{40}{\watt}. State the exception and the reason (presumably the
-\SI{70}{\celsius} limit).}
+mechanisms of the two systems, as detailed in \cref{sec:thermal-model}. 
+Later, two additional flow rates (8.3 mL/s and 12.2 mL/s) were tested on the water-cooling setup. 
+This was done via the installation of a flow restriction with the goal of achieving laminar flow.
 
 \subsection{Experiment 2: Inductor Cooling}
 \label{sec:exp2}
@@ -185,7 +170,7 @@ description reordered so the method follows the aim.}
 \section{Inductor Design for Experimentation}
 \label{sec:inductor-design}
 
-In high-power-density automotive converters, magnetics are typically cooled from
+In high-power-density converters, magnetics are typically cooled from
 both the top and the bottom, as close as possible to the
 windings~\cite{krismer_accurate_2010,biela_cooling_2007}. Such cooling systems are
 therefore exposed to leakage fields from the magnetic components, and these
@@ -274,7 +259,7 @@ region''.}
 
 \begin{table}[htbp]
   \centering
-  \caption{Final inductor design parameters.}
+  \caption{Final inductor model parameters at the rated current of \SI{12}{\ampere} rms.}
   \label{tab:inductor-design}
   \begin{tabular}{@{}lll@{}}
     \toprule
@@ -282,30 +267,10 @@ region''.}
     \midrule
     Core geometry  & Magnetics Inc.\ 0\,9938\,EC & -- \\
     Core material  & Magnetics Inc.\ Material~R  & -- \\
-    Inductance     & 92.1 & \si{\micro\henry} \\
-    Air-gap length & 0.6  & \si{\milli\metre} \\
-    Turns          & 8    & -- \\
-    \bottomrule
-  \end{tabular}
-\end{table}
-\issue{\Cref{tab:inductor-design} gives an air gap of \SI{0.6}{\milli\metre},
-but the caption of \cref{fig:flux-density} (from the draft) says
-$l_{\mathrm{g}} = \SI{0.7}{\milli\metre}$. It also lists \SI{92.1}{\micro\henry},
-which is the \emph{measured} inductance; the model value is
-\SI{92.5}{\micro\henry} (\cref{tab:inductor-model}). Use the design (model) value
-here, or label it as measured. Check the core part number: Magnetics part numbers
-take the form 0X49938EC, with the material letter in place of X.}
-
-\begin{table}[htbp]
-  \centering
-  \caption{Inductor model values at the rated current of \SI{12}{\ampere} rms.}
-  \label{tab:inductor-model}
-  \begin{tabular}{@{}lll@{}}
-    \toprule
-    Parameter & Model & Unit \\
-    \midrule
-    Inductance & 92.5  & \si{\micro\henry} \\
-    Core loss  & 30.81 & \si{\watt} \\
+    Air-gap length & 0.6   & \si{\milli\metre} \\
+    Turns          & 8     & -- \\
+    Inductance     & 92.5  & \si{\micro\henry} \\
+    Core loss      & 30.81 & \si{\watt} \\
     \bottomrule
   \end{tabular}
 \end{table}
@@ -623,3 +588,68 @@ model uses 366, cite where that comes from; otherwise correct it.}
       energy balance; nominal flows are estimated from the EMF flow sensor.}
   \end{tabular}
 \end{table}
+
+\section{Finite Element Analysis}
+
+The thermal network reproduces the measured resistor temperatures by lumping the
+cold plate into a single isothermal node. For Galinstan, the plate is not isothermal.
+The network also cannot resolve how heat spreads from discrete resistor
+footprints through the press-fit tube contact. It cannot capture flow
+redevelopment at the U-bends or the transitional flow suspected in the low-flow
+water tests. A finite-element conjugate heat transfer simulation completed in SimScale~\cite{simscale_gmbh_simscale_2021} resolves the temperature fields in the plate and
+coolant and the local peak temperatures that govern component and insulation
+limits.
+
+The simulation was set up as follows. First, to reduce computation time, a simplified plate model was created in OnShape~\cite{ptc_onshape_2015}. This model was then imported into the SimScale Software, the simulation was set up as in~\cref{tab:simulation-setup}. Parameters not present were left as their default.
+
+\begin{table}[htbp]
+  \centering
+  \caption{Simulation setup.}
+  \label{tab:simulation-setup}
+  \small
+  \begin{tabular}{@{}ll@{}}
+    \toprule
+    Parameter & Setting \\
+    \midrule
+    Analysis type    & Conjugate heat transfer \\
+    Compressible     & Yes \\
+    Turbulence model & $k$--$\omega$ SST \\
+    Time dependency  & Steady-state \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+Next, an internal flow volume was defined in the geometry. The model was populated with the default material parameters for aluminium, copper and water. A custom Galinstan material was prepared using the parameters specified in~\cref{tab:coolant-properties}. The boundary conditions were set to a pressure of 1~atm at the outlet, and the heat flux was set to \SI{72}{\watt}. The velocity inlet temperature was set to \SI{29.8}{C}, and the velocity was adjusted to match the desired flow rate.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{coldplate_figure.pdf}
+    \caption{Cold-plate model used for the CFD analysis.
+        (a)~Isometric view and (b)~cut showing internal volume.}
+    \label{fig:cfd_setup}
+\end{figure}
+
+All cases were solved with the $k$--$\omega$ SST turbulence model, so that any local instability or transition induced by the sharp turn in the flow path could be captured without assuming the flow regime in advance. Although the governing equations are therefore the same for every case, the boundary layer structure, and hence the gradients the mesh must resolve, differs substantially between the laminar and turbulent ranges. Mesh independence was consequently assessed separately for each range and each coolant, with each study performed at the most demanding operating point so that the resulting mesh is conservative for all milder cases. For either regime, this is the highest flow rate simulated below transition, when the hydrodynamic and thermal boundary layers are thinnest. Each worst case was paired with the maximum applied heat flux of \SI{72}{\watt}. The same three systematically more refined meshes were used in each study. Because the SST model is not a transition model and can predict spurious turbulence in flow that should remain laminar, the laminar worst-case was also solved with the laminar model on the selected mesh, and the turbulent viscosity ratio $\mu_t/\mu$ was checked to confirm that it remained negligible. The studies were conducted independently for each coolant rather than transferring a mesh between them: Galinstan has a very low Prandtl number ($Pr \sim 0.02$), giving a thermal boundary layer much thicker than the velocity boundary layer, whereas water ($Pr \sim 6$) has a thermal boundary layer thinner than the velocity boundary layer and therefore requires finer near-wall resolution for the temperature field.
+
+\begin{table}[htbp]
+  \centering
+  \caption{Mesh independence test matrix for each coolant and flow range. All cases use the $k$--$\omega$ SST model unless noted.}
+  \label{tab:mesh_independence}
+  \small
+  \renewcommand{\arraystretch}{1.25}
+  \begin{tabularx}{\textwidth}{@{}l l l c c >{\raggedright\arraybackslash}X@{}}
+    \toprule
+    \textbf{Test} & \textbf{Coolant} & \textbf{Range} & \textbf{$Re$} & \textbf{Meshes} & \textbf{Purpose} \\
+    \midrule
+    MI-G1 & \multirow{3}{*}{Galinstan} & Laminar   & $Re_{\mathrm{lam,max}}$  & 3 & Worst-case laminar mesh study (GCI) \\
+    MI-G2 &                            & Turbulent & $Re_{\mathrm{turb,max}}$ & 3 & Worst-case turbulent mesh study (GCI); confirm $y^+ \leq 1$ \\
+    MI-G3 &                            & Laminar   & $Re_{\mathrm{lam,max}}$  & 1 & Model check: SST vs.\ laminar model; confirm $\mu_t/\mu \approx 0$ \\
+    \midrule
+    MI-W1 & \multirow{3}{*}{Water}     & Laminar   & $Re_{\mathrm{lam,max}}$  & 3 & Worst-case laminar mesh study (GCI) \\
+    MI-W2 &                            & Turbulent & $Re_{\mathrm{turb,max}}$ & 3 & Worst-case turbulent mesh study (GCI); confirm $y^+ \leq 1$ \\
+    MI-W3 &                            & Laminar   & $Re_{\mathrm{lam,max}}$  & 1 & Model check: SST vs.\ laminar model; confirm $\mu_t/\mu \approx 0$ \\
+    \bottomrule
+    \multicolumn{6}{@{}p{\textwidth}@{}}{\footnotesize All tests use the maximum applied heat flux $q''_{\max}$. Monitored outputs: peak wall temperature, mean heat transfer coefficient and pressure drop.} \\
+  \end{tabularx}
+\end{table}
+

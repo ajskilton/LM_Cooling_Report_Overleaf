@@ -303,26 +303,25 @@
 \frontheadings
 \frontplainstyle
 \pagestyle{empty}
-\input{frontmatter/titlepage}
+%\input{frontmatter/titlepage}
 
 \pagestyle{front}
-\input{frontmatter/abstract}
+%\input{frontmatter/abstract}
 
 % Signed Statement of Contribution (student + supervisor). Replace
 % frontmatter/Declaration.pdf with the signed copy.
-\includepdf[pagecommand=\thispagestyle{front}]{frontmatter/Declaration}
-
-\tableofcontents
-\listoffigures
-\listoftables
-\input{frontmatter/acknowledgements}
-\input{frontmatter/glossary}
-\input{frontmatter/abbreviations}
-\input{frontmatter/nomenclature}
-\printnomenclature
-\ifreview
-  \listoftodos[Review Notes]
-\fi
+% \includepdf[pagecommand=\thispagestyle{front}]{frontmatter/Declaration}
+% \tableofcontents
+% \listoffigures
+% \listoftables
+% \input{frontmatter/acknowledgements}
+% \input{frontmatter/glossary}
+% \input{frontmatter/abbreviations}
+% \input{frontmatter/nomenclature}
+% \printnomenclature
+% \ifreview
+%   \listoftodos[Review Notes]
+% \fi
 
 \clearpage{\pagestyle{empty}\cleardoublepage}% blank verso (if any) without a page number
 \mainmatter
@@ -333,9 +332,11 @@
 % numbered as Chapter 2 so its section numbers match the draft. Once the
 % introduction exists, add \include{chapters/01_introduction} here and
 % delete the counter line.
-\setcounter{chapter}{1}
+\setcounter{chapter}{0}
+\include{chapters/01_Introduction}
 \include{chapters/02_literature_review}
 \include{chapters/03_experimental_design}
+\include{chapters/04_Results}
 
 \backmatter
 \printbibliography[heading=bibintoc,title={References}]
