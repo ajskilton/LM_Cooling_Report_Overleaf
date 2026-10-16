@@ -1,19 +1,49 @@
+% =====================================================================
+%  Chapter 1 -- Introduction (limited to one page)
+% =====================================================================
 \chapter{Introduction}
 \label{ch:Introduction}
 
 The continued electrification of the global economy is driving a sustained
 increase in electricity demand~\cite{international_energy_agency_electricity_2025},
-and PECs enable this shift in transport~\cite{bosshard_multi-objective_2016} and
-energy systems~\cite{steimer_enabled_2010}. Across all their applications, the
-power density of PECs is increasing, driven by cost reduction, increased
-functionality and, in automotive and aerospace applications, hard weight and
-space limits~\cite{steimer_enabled_2010,biela_cooling_2007}. The trend has
-persisted for decades, enabled largely by improvements in power-conversion
-efficiency, and is projected to continue~\cite{morroni_understanding_2023}.
+and power electronic converters (PECs) enable this shift in
+transport~\cite{bosshard_multi-objective_2016} and energy
+systems~\cite{steimer_enabled_2010}. Their power density has risen for decades,
+driven by cost, functionality and hard weight and space
+limits~\cite{steimer_enabled_2010,biela_cooling_2007}, and is projected to keep
+rising~\cite{morroni_understanding_2023}. As converters shrink, however, the
+same losses must be removed from a smaller volume, so thermal management
+increasingly limits how far power density can
+rise~\cite{biela_cooling_2007,morroni_understanding_2023}.
 
-Inductive power transfer (IPT) systems, such as those used for electric vehicle
-(EV) charging, transfer power across a large air gap between loosely coupled
-coils. Many commercial designs already actively cool the coils, particularly on the
-space- and weight-constrained vehicle side~\cite{lawton_power_2024}. However, Liu
-\emph{et al.}\ recommend further research into new technologies for cooling
-wireless chargers~\cite{liu_thermal_2025}.
+Inductive power transfer (IPT) chargers for electric vehicles illustrate this
+challenge. At the standard \SI{85}{\kilo\hertz}~\cite{society_of_automotive_engineers_r_2024},
+a \SI{10}{\kilo\watt} system dissipates several hundred watts, much of it in pads
+that generate strong alternating magnetic fields~\cite{kim_thermal_2022}. Many
+commercial designs already actively cool the coils~\cite{lawton_power_2024}, and
+Liu \emph{et al.}\ call for new technologies to cool wireless
+chargers~\cite{liu_thermal_2025}. Water cooling, however, is limited by the low
+thermal conductivity of water~\cite{laloya_heat_2016}. Galinstan, a liquid metal
+with about 28 times that thermal conductivity~\cite{noauthor_gainsn_nodate}, can instead
+be driven by a magnetohydrodynamic (MHD) pump with no moving
+parts~\cite{hodes_potential_2014}, but its low volumetric heat capacity and
+electrical conductivity bring trade-offs~\cite{hodes_potential_2014,an_liquid_2024},
+and few studies compare it with water at converter
+scale~\cite{fan_ultra-efficient_2026}.
+
+This project builds on the 2025 Part~IV Project~\#51, in which Kwon and Loh
+built an MHD-pumped Galinstan cooling loop and recommended comparing it with
+water cooling and testing it near magnetic
+components~\cite{kwon_project_2025,loh_project_2025}. Its aim is to evaluate
+MHD-pumped Galinstan as a coolant for high-power-density PECs, and to identify
+where in an IPT system it is most useful. The objectives are to (i)~compare the
+thermal resistance and pumping power of the Galinstan loop with those of a water
+loop using the same cold plate~\cite{ekbote_project_2026}; (ii)~explain and
+extend the measurements with thermal models and a conjugate heat transfer
+simulation; and (iii)~use a power-dense \SI{85}{\kilo\hertz} inductor to
+demonstrate Galinstan cooling of magnetics and measure the eddy-current loss
+induced in the coolant. These objectives are framed as two research questions
+in \cref{sec:research-questions}. \Cref{ch:literature} reviews the literature,
+\cref{ch:experimental} describes the methodology, \cref{ch:results} presents
+the results and \cref{sec:discussion} discusses them.
+\issue{Add the Conclusion chapter to the last sentence once it is written.}

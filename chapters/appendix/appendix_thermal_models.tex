@@ -145,9 +145,9 @@ largest change is about \SI{3}{\percent}, at the joins themselves.
 
 For each test, $\Rcp$ is calculated as follows.
 \begin{enumerate}
-  \item Calculate Re, Pr and Pe from the flow rate and properties
-    (\cref{eq:app-groups}), and identify the regime.
-  \item For laminar flow, calculate $x^*$ for one pass (\cref{eq:app-xstar}) and
+  \item Calculate Re, Pr and Pe from the flow rate and properties using
+    \cref{eq:app-groups}, and identify the regime.
+  \item For laminar flow, calculate $x^*$ for one pass from \cref{eq:app-xstar} and
     $\overline{\mathrm{Nu}}$ from \cref{eq:app-shah}; for turbulent flow, use
     \cref{eq:app-gnielinski}.
   \item Convert to $h = \mathrm{Nu}\,k/D$ and multiply by $A$ to obtain the
@@ -191,25 +191,27 @@ the \SI{0.152}{\metre} pass. NTU is well below 1, so this test is
 convection-limited: the convective term $1/(hA) = \SI{0.064}{\celsius\per\watt}$
 makes up most of $\Rcp$.
 
-\paragraph{Example 2: water, \SI{3.6}{\litre\per\minute} (turbulent).}
+\paragraph{Example 2: water, \SI{3.5}{\litre\per\minute} (turbulent).}
 \begin{align*}
-  \mathrm{Re} &= 9549 \quad\text{(turbulent)},
+  \mathrm{Re} &= 9284 \quad\text{(turbulent)},
     \qquad \mathrm{Pr} = 6.97\\
-  f &= (0.790\ln 9549 - 1.64)^{-2} = 0.0319\\
-  \mathrm{Nu} &= \frac{(0.0319/8)(9549 - 1000)(6.97)}
-                      {1 + 12.7\,(0.0319/8)^{1/2}\,(6.97^{2/3} - 1)} = 76.0\\
-  h &= \frac{76.0 \times 0.60}{0.008} = \SI{5703}{\watt\per\metre\squared\per\kelvin},
-    \qquad hA = \SI{87.1}{\watt\per\kelvin}\\
-  \mdot\,\cp &= \SI{250.9}{\watt\per\kelvin}\\
-  \NTU &= \frac{87.1}{250.9} = 0.35,
-    \qquad \varepsilon = 1 - e^{-0.35} = 0.293\\
-  \Rcp &= \frac{1}{0.293 \times 250.9} = \SI{0.0136}{\celsius\per\watt}
+  f &= (0.790\ln 9284 - 1.64)^{-2} = 0.0321\\
+  \mathrm{Nu} &= \frac{(0.0321/8)(9284 - 1000)(6.97)}
+                      {1 + 12.7\,(0.0321/8)^{1/2}\,(6.97^{2/3} - 1)} = 74.1\\
+  h &= \frac{74.1 \times 0.60}{0.008} = \SI{5555}{\watt\per\metre\squared\per\kelvin},
+    \qquad hA = \SI{85.0}{\watt\per\kelvin}\\
+  \mdot\,\cp &= \SI{244.0}{\watt\per\kelvin}\\
+  \NTU &= \frac{85.0}{244.0} = 0.35,
+    \qquad \varepsilon = 1 - e^{-0.35} = 0.294\\
+  \Rcp &= \frac{1}{0.294 \times 244.0} = \SI{0.0139}{\celsius\per\watt}
 \end{align*}
 Turbulence raises Nu about fivefold compared with Example~1, but the flow rate
 is also five times higher, so NTU stays at about 0.35 and the cold plate remains
 convection-limited. The model value is \SI{15}{\percent} below the datasheet
 value of \SI{0.016}{\celsius\per\watt}, which is used for the temperature
 predictions (\cref{sec:convection}).
+\edited{Example~2 recalculated at the measured \SI{3.5}{\litre\per\minute}
+(\SI{58.3}{\milli\litre\per\second}); it was \SI{3.6}{\litre\per\minute}.}
 
 \paragraph{Example 3: Galinstan, \SI{1.4}{\milli\litre\per\second} (laminar,
 fully developed).}
@@ -254,18 +256,18 @@ this has a negligible effect on $\Rcp$.
     \toprule
     & \multicolumn{2}{c}{Water} & Galinstan \\
     \cmidrule(lr){2-3}\cmidrule(l){4-4}
-    & \SI{0.73}{\litre\per\minute} & \SI{3.6}{\litre\per\minute}
+    & \SI{0.73}{\litre\per\minute} & \SI{3.5}{\litre\per\minute}
       & \SI{1.4}{\milli\litre\per\second} \\
     \midrule
-    Re / regime & 1936 / laminar & 9549 / turbulent & 591 / laminar \\
+    Re / regime & 1936 / laminar & 9284 / turbulent & 591 / laminar \\
     Pr & 6.97 & 6.97 & 0.053 \\
     $x^*$ & 0.0014 & -- & 0.60 \\
-    Nu & 13.7 & 76.0 & 3.74 \\
-    $h$ (\si{\watt\per\metre\squared\per\kelvin}) & 1028 & 5703 & 7713 \\
-    $\mdot\,\cp$ (\si{\watt\per\kelvin}) & 50.9 & 250.9 & 3.38 \\
+    Nu & 13.7 & 74.1 & 3.74 \\
+    $h$ (\si{\watt\per\metre\squared\per\kelvin}) & 1028 & 5555 & 7713 \\
+    $\mdot\,\cp$ (\si{\watt\per\kelvin}) & 50.9 & 244.0 & 3.38 \\
     NTU & 0.31 & 0.35 & 34.8 \\
-    $\Rcp$ (\si{\celsius\per\watt}) & 0.074 & 0.0136 & 0.295 \\
-    $1/(hA)$ share of $\Rcp$ & \SI{86}{\percent} & \SI{85}{\percent} & \SI{3}{\percent} \\
+    $\Rcp$ (\si{\celsius\per\watt}) & 0.074 & 0.0139 & 0.295 \\
+    $1/(hA)$ share of $\Rcp$ & \SI{86}{\percent} & \SI{84}{\percent} & \SI{3}{\percent} \\
     Limiting regime & convection & convection & caloric \\
     \bottomrule
   \end{tabular}
@@ -312,6 +314,12 @@ is calculated as in \cref{eq:app-nu,eq:app-shah,eq:app-gnielinski,eq:app-seban}.
     \bottomrule
   \end{tabular}
 \end{table}
+\issue{\Cref{tab:app-area} and \cref{fig:disc-regimes}(b) use
+\SI{30}{\milli\litre\per\second} for the low-flow water test, which was measured
+at \SI{29.2}{\milli\litre\per\second}. At \SI{29.2}{\milli\litre\per\second} the
+water row becomes $hA_0 = 42.8$, $\mdot\,\cp = 122.0$, $\Rcp = 0.028$, 0.121 and
+0.472; the conclusions are unchanged. Regenerate the figure if you want an exact
+match, or call the case ``about \SI{30}{\milli\litre\per\second}''.}
 
 \paragraph{Interpretation.} The two coolants respond differently because they
 start in different regimes.

@@ -1,0 +1,85 @@
+% =====================================================================
+% Galinstan cooling tests: resistor, cold-plate inlet and outlet temperatures
+% Use:      \input{figures/galinstan_transient}
+% Preamble: \usepackage{pgfplots}
+%           \usepgfplotslibrary{groupplots}
+%           \pgfplotsset{compat=1.16}
+%           (siunitx and cleveref are already loaded by main.tex)
+% Data:     figures/data/galinstan_test{16,20}.dat
+%           (test 16: full flow, 72 W; test 20: low flow, 40 W)
+%           columns: t (min), TL, TR, Tin, Tout (degC)
+%           15 s centred moving average of the raw logger data, sampled
+%           every 0.25 min. Logger channels: "L Resistor", "R Resistor",
+%           "Cold Inlet", "Cold Outlet".
+% Colours and line styles match figures/water_transient.tex.
+% =====================================================================
+\def\lmdatadir{figures/data}
+
+\definecolor{wtResL}{HTML}{E76F51}
+\definecolor{wtResR}{HTML}{8F2D14}
+\definecolor{wtIn}{HTML}{1D4E89}
+\definecolor{wtOut}{HTML}{2A9D8F}
+
+\pgfplotsset{
+  lmpanel/.style={
+    scale only axis,
+    width=0.415\textwidth, height=4.1cm,
+    ymin=18, ymax=74, ytick={20,30,...,70},
+    grid=major, grid style={dashed, black!15},
+    axis x line*=bottom, axis y line*=left,
+    tick align=outside, tick label style={font=\small},
+    label style={font=\small},
+    title style={font=\small, yshift=-3pt},
+    every axis plot/.append style={line width=0.8pt, no markers},
+  },
+  lmL/.style={wtResL},
+  lmR/.style={wtResR, densely dashed},
+  lmI/.style={wtIn},
+  lmO/.style={wtOut, densely dashed},
+}
+
+\begin{figure}[htbp]
+  \centering
+  \begin{tikzpicture}
+    \begin{groupplot}[
+      group style={group size=2 by 1,
+                   horizontal sep=0.55cm,
+                   ylabels at=edge left, yticklabels at=edge left},
+      lmpanel,
+      xlabel={Time (\si{\minute})},
+      ylabel={Temperature (\si{\celsius})},
+    ]
+    % -------- (a) Test 16 --------
+    \nextgroupplot[
+      title={(a) \SI{1.4}{\milli\litre\per\second}, \SI{72}{\watt}},
+      xmin=0, xmax=170, xtick={0,30,...,150},
+      legend columns=4,
+      legend style={at={(1.033,1.21)}, anchor=south, draw=none, fill=none,
+                    font=\small, /tikz/every even column/.append style={column sep=10pt}},
+      legend cell align=left,
+    ]
+    \addplot[lmL] table[x=t, y=TL]   {\lmdatadir/galinstan_test16.dat};
+    \addplot[lmR] table[x=t, y=TR]   {\lmdatadir/galinstan_test16.dat};
+    \addplot[lmI] table[x=t, y=Tin]  {\lmdatadir/galinstan_test16.dat};
+    \addplot[lmO] table[x=t, y=Tout] {\lmdatadir/galinstan_test16.dat};
+    \legend{Left resistor, Right resistor, Cold-plate inlet, Cold-plate outlet}
+
+    % -------- (b) Test 20 --------
+    \nextgroupplot[
+      title={(b) \SI{0.75}{\milli\litre\per\second}, \SI{40}{\watt}},
+      xmin=0, xmax=110, xtick={0,30,...,90},
+    ]
+    \addplot[lmL] table[x=t, y=TL]   {\lmdatadir/galinstan_test20.dat};
+    \addplot[lmR] table[x=t, y=TR]   {\lmdatadir/galinstan_test20.dat};
+    \addplot[lmI] table[x=t, y=Tin]  {\lmdatadir/galinstan_test20.dat};
+    \addplot[lmO] table[x=t, y=Tout] {\lmdatadir/galinstan_test20.dat};
+    \end{groupplot}
+  \end{tikzpicture}
+  \caption{Measured left and right resistor temperatures and cold-plate inlet
+    and outlet Galinstan temperatures over each Galinstan test: (a)~full flow,
+    \SI{1.4}{\milli\litre\per\second} at \SI{72}{\watt}; (b)~low flow,
+    \SI{0.75}{\milli\litre\per\second} at \SI{40}{\watt}. Note the different
+    time axes. Traces are a \SI{15}{\second} moving average of the
+    logged data.}
+  \label{fig:galinstan_transient}
+\end{figure}

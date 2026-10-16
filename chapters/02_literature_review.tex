@@ -3,33 +3,109 @@
 % =====================================================================
 \chapter{Literature Review}
 \label{ch:literature}
-\edited{Roadmap rewritten to follow the restructured argument: power density is
-rising (\cref{sec:motivation}); thermal management is needed for reliability
-(\cref{sec:thermal-management}) and must contend with magnetic leakage fields
-(\cref{sec:cooling-magnetics}); four key considerations and a comparison of
-cooling strategies lead to the proposal of liquid metal cooling
-(\cref{sec:cooling-strategies}), which \cref{sec:liquid-metal} evaluates. It no
-longer refers to a separate Power Electronics section.}
+\edited{Section 2.3 restructured under three requirements (reliability, form
+factor, efficiency), each comparing single-phase and phase-change cooling and
+their implications for magnetic components. \Cref{tab:cooling-strategies} is
+regrouped to match, with an added row for loss in magnetics.}
 
 This chapter reviews the literature on cooling power electronic converters
-(PECs) with liquid metal. It presents the current trend that the power density of PECs is
-increasing (\cref{sec:motivation}); that their reliability then depends on
-thermal management (\cref{sec:thermal-management}), which must contend with
-magnetic leakage fields (\cref{sec:cooling-magnetics}); and that, against the
-resulting key considerations, liquid metal cooling is a potential solution
-(\cref{sec:cooling-strategies}). \Cref{sec:liquid-metal} evaluates this
+(PECs) with liquid metal. It opens with the sources of loss in inductive power
+transfer (IPT) systems, the application that motivates this work
+(\cref{sec:ipt-losses}). It then presents the current trend that the power
+density of PECs is increasing (\cref{sec:motivation}), and the reliability,
+form-factor and efficiency requirements that their thermal management must meet,
+which point to liquid metal cooling as a potential solution
+(\cref{sec:thermal-management}). \Cref{sec:liquid-metal} evaluates this
 proposal, and \cref{sec:research-gap} identifies the research gap and states
 the research questions of this project.
 \edited{The draft pointed to ``Section 2.6'' for the research gap; there is no
 Section 2.6 (the gap is \cref{sec:research-gap}). All section, figure, table and
 equation references are now generated with \texttt{\textbackslash cref}, so they
 will stay correct if the structure changes.}
-\issue{This paragraph (in the draft) promises ``research questions, hypotheses
-and aims'', but only research questions are stated in
-\cref{sec:research-gap}. Rubric criterion~B asks for ``well-formulated and
-aligned research questions and hypotheses''. Either add a hypothesis for each
-RQ (and the aims/objectives) or drop the promise. The wording above has been
-trimmed to ``research questions'' for now.}
+
+% ---------------------------------------------------------------------
+\section{Thermal Losses in Inductive Power Transfer Systems}
+\label{sec:ipt-losses}
+
+IPT systems transfer power across a large air gap between loosely coupled
+coils, and their losses are spread across the power electronics, the
+compensation network and the magnetic pads. \Cref{fig:kim-losses} shows the
+loss distribution that Kim \emph{et al.}\ measured and simulated for a
+\SI{10}{\kilo\watt} IPT system with double-D (DD) pads, operating at
+\SI{85}{\kilo\hertz} at a worst-case ambient temperature of
+\SI{50}{\celsius}~\cite{kim_thermal_2022}. Most of the loss occurs in the pads,
+chiefly in the Litz wire and ferrite, with smaller shares in the compensation
+capacitors and in the aluminium shielding sheet, in which the leakage field
+induces eddy currents. The inverter and rectifier dissipate about
+\SIrange{70}{80}{\watt} each.
+
+\begin{figure}[htbp]
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[
+      xbar stacked,
+      width=0.78\linewidth, height=5.6cm,
+      bar width=8pt,
+      xmin=0, xmax=300,
+      xlabel={Power loss (\si{\watt})},
+      symbolic y coords={Inverter,Rectifier,Transformer,Cpi,Lsi,Secondary,Primary},
+      ytick=data,
+      yticklabels={Inverter, Rectifier, Transformer, $C_{\mathrm{pi}}$,
+        $L_{\mathrm{si}}$, Secondary pad, Primary pad},
+      tick label style={font=\small},
+      label style={font=\small},
+      xmajorgrids=true, grid style={dashed, gray!30},
+      axis x line*=bottom, axis y line*=left,
+      enlarge y limits=0.1,
+      legend style={at={(0.98,0.04)}, anchor=south east, font=\small,
+        draw=none, fill=white, fill opacity=0.85, text opacity=1},
+      legend cell align=left,
+    ]
+      \addplot[fill=blue!60, draw=none] coordinates
+        {(0,Inverter) (0,Rectifier) (0,Transformer) (0,Cpi) (0,Lsi) (40,Secondary) (165,Primary)};
+      \addplot[fill=red!70, draw=none] coordinates
+        {(0,Inverter) (0,Rectifier) (0,Transformer) (0,Cpi) (0,Lsi) (10,Secondary) (68,Primary)};
+      \addplot[fill=green!55!black, draw=none] coordinates
+        {(0,Inverter) (0,Rectifier) (0,Transformer) (0,Cpi) (0,Lsi) (12,Secondary) (39,Primary)};
+      \addplot[fill=cyan!70, draw=none] coordinates
+        {(0,Inverter) (0,Rectifier) (0,Transformer) (0,Cpi) (0,Lsi) (5,Secondary) (17,Primary)};
+      \addplot[fill=brown!70, draw=none] coordinates
+        {(80,Inverter) (70,Rectifier) (34,Transformer) (8,Cpi) (11,Lsi) (0,Secondary) (0,Primary)};
+      \legend{Litz wire, Ferrite, Capacitors, Aluminium, Other components}
+    \end{axis}
+  \end{tikzpicture}
+  \caption{Power loss distribution across a \SI{10}{\kilo\watt},
+    \SI{85}{\kilo\hertz} IPT system with DD pads at an ambient temperature of
+    \SI{50}{\celsius}, recreated from Kim \emph{et al.}~\cite{kim_thermal_2022}
+    (values read from the original figure). $L_{\mathrm{si}}$ and $C_{\mathrm{pi}}$
+    are components of the compensation network.}
+  \label{fig:kim-losses}
+\end{figure}
+
+These losses differ in density. The pad losses are spread over about
+\SI{0.8}{\metre} by \SI{0.6}{\metre} inside a strong alternating magnetic field,
+and the pad is cooled passively, reaching a simulated peak temperature of about
+\SI{96}{\celsius}. Its components also change with temperature: the Litz wire
+resistance rises by about \SI{0.4}{\percent} per degree and the ferrite loss
+varies nonlinearly, so power loss and temperature cannot be considered
+separately~\cite{kim_thermal_2022}. The semiconductor losses, by contrast, are
+concentrated in small switching devices placed away from the coupler. Where an
+alternative coolant could be used in an IPT system therefore depends on both the
+heat flux and the magnetic field the cooling system is exposed to, a question this report
+returns to in \cref{sec:disc-suitability}.
+
+Wireless charging of light-duty electric vehicles is standardised at a nominal
+operating frequency of \SI{85}{\kilo\hertz}~\cite{society_of_automotive_engineers_r_2024},
+the frequency used by Kim \emph{et al.}~\cite{kim_thermal_2022} and by
+high-power IPT systems for public transport~\cite{bosshard_multi-objective_2016}.
+The magnetic components of these systems are driven at this frequency, so any
+cooling hardware placed near them is exposed to leakage fields at this
+frequency. For this reason,
+the power-dense inductor used in this work (\cref{sec:inductor-design}) is
+operated at \SI{85}{\kilo\hertz}.
+\issue{The Zotero record for SAE J2954 (\texttt{society\_of\_automotive\_engineers\_r\_2024})
+has typos in its title (``J2594'', ``Vechicles''), which will print in the
+reference list. Fix them in Zotero and re-export the bib file.}
 
 % ---------------------------------------------------------------------
 \section{Power Density in Power Electronic Converters}
@@ -43,28 +119,84 @@ largest passive devices, are difficult to scale and often restrict the
 achievable power
 density~\cite{biela_cooling_2007,morroni_understanding_2023,sullivan_size_2016};
 with heat sinks, they account for the largest portion of a power solution's
-size~\cite{biela_cooling_2007,morroni_understanding_2023}. Because less energy
-must be stored per cycle as frequency rises, higher switching frequencies permit
-smaller inductors~\cite{morroni_understanding_2023}, with modern wide-bandgap 
-devices enabling such frequencies increases~\cite{gao_modeling_2022}. However, switching losses grow
-with frequency~\cite{morroni_understanding_2023}, as do winding and core
-losses~\cite{ouyang_overview_2014}, so converter losses and thermal management
-become more challenging, limiting further increases in frequency and power
-density~\cite{morroni_understanding_2023}.
+size~\cite{biela_cooling_2007,morroni_understanding_2023}. Higher switching
+frequencies, now practical with wide-bandgap devices~\cite{gao_modeling_2022},
+permit smaller passive components because less energy is stored per
+cycle~\cite{morroni_understanding_2023}, but losses limit this gain.
 
-Shrinking components also reduces the area available for heat dissipation,
-raising heat flux and worsening the thermal resistance of the
-package~\cite{morroni_understanding_2023}, so further size reduction requires
-cooling methods that transfer more heat per unit area~\cite{biela_cooling_2007}.
+Friedli \emph{et al.}\ demonstrated this trade-off with \SI{10}{\kilo\watt}
+rectifiers built for switching frequencies from \SI{72}{\kilo\hertz} to
+\SI{1}{\mega\hertz}~\cite{friedli_essence_2014}. As the frequency rose, the
+boost inductor shrank, but the efficiency fell almost linearly from
+\SI{97.3}{\percent} to \SI{93}{\percent} as the switching losses grew. With
+forced-air cooling, the growing heat sink cancelled the gain, so the power
+density peaked at \SI{6.5}{\kilo\watt\per\deci\metre\cubed} near
+\SI{350}{\kilo\hertz}, and \SI{1}{\mega\hertz} could not be air-cooled at all.
+Only with water cooling did the power density keep rising, to
+\SI{14.1}{\kilo\watt\per\deci\metre\cubed} at
+\SI{1}{\mega\hertz}~\cite{friedli_essence_2014}. The cooling method therefore
+sets the achievable power density, and as shrinking components raise the heat
+flux~\cite{morroni_understanding_2023}, further size reduction requires cooling
+methods that transfer more heat per unit area~\cite{biela_cooling_2007}.
 
 % ---------------------------------------------------------------------
 \section{Thermal Management of Power Electronic Converters}
 \label{sec:thermal-management}
 
+The thermal management of a power-dense PEC must meet three requirements. It
+must keep the converter reliable, fit within its form factor, and do so
+efficiently, without adding significant loss to the converter, including in
+nearby magnetic components. The following sections consider each requirement
+in turn, comparing the two established families of cooling: single-phase
+cooling with air or water, and phase-change cooling by boiling or heat pipes.
+\Cref{tab:cooling-strategies} summarises how each meets these
+requirements~\cite{liu_thermal_2025,rahman_emerging_2024,laloya_heat_2016,mudawar_assessment_2001}.
+
+\begin{table}[htbp]
+  \centering
+  \caption[Thermal management requirements and established cooling strategies]{Summary
+    of how established cooling strategies meet the requirements for PEC thermal
+    management. COP: coefficient of performance, the ratio of heat removed to
+    cooling power consumed.}
+  \label{tab:cooling-strategies}
+  \small
+  \begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{3.0cm} L L@{}}
+    \toprule
+    Requirement & Single-phase (air, water) & Phase change (boiling, heat pipes) \\
+    \midrule
+    \multicolumn{3}{@{}l}{\textit{Reliability}} \\
+    \quad Maximum temperature
+      & Forced air: tens of \si{\watt\per\centi\metre\squared};
+        water cold plate: hundreds of \si{\watt\per\centi\metre\squared};
+        water microchannel: $\approx$\SI{1000}{\watt\per\centi\metre\squared}
+      & Highest, but capped by CHF \\
+    \quad Temperature swing
+      & Fan speed or flow rate provides control input
+      & Boiling-onset thermal shock; no control input when passive \\
+    \addlinespace
+    \multicolumn{3}{@{}l}{\textit{Form factor}} \\
+    \quad Compactness
+      & Air: bulky heat sink; water: compact at the device, pump and radiator remote
+      & Smaller and lighter than single-phase \\
+    \addlinespace
+    \multicolumn{3}{@{}l}{\textit{Efficiency}} \\
+    \quad Burden power
+      & Fans (COP 10--100) or pump (COP 300--500); rises steeply as channels narrow
+      & Low; often passive \\
+    \quad Loss in magnetics
+      & \multicolumn{2}{>{\raggedright\arraybackslash}p{0.62\linewidth}}{Any
+        conductive cooling hardware in a leakage field incurs eddy-current loss} \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+\subsection{Reliability Requirement}
+\label{sec:reliability}
+
 Thermal management is required, above all, to keep increasingly power-dense
 PECs reliable. Thermal stress causes over \SI{50}{\percent} of electronic
-equipment failures~\cite{rahman_emerging_2024}. Power semiconductors dominate 
-the overall reliability of power converters, accounting for approximately 
+equipment failures~\cite{rahman_emerging_2024}, and power semiconductors, which
+dominate the overall reliability of power converters, account for approximately
 \SI{31}{\percent} of PEC failures~\cite{kalay_systematic_2025}. The
 Coffin--Manson model relates the number of thermal cycles to failure of a
 semiconductor device to its junction temperature
@@ -78,23 +210,29 @@ $\Delta T_{\mathrm{j}}$ is the junction temperature swing, and $\alpha$ and
 $\beta$ are experimentally determined parameters~\cite{kalay_systematic_2025}.
 This simplified form omits the absolute-temperature term, which becomes
 significant mainly above about \SI{200}{\celsius}~\cite{kalay_systematic_2025}.
-Similarly, magnetic components are subject to failure due to thermal stresses~\cite{biela_cooling_2007,mengesha_advanced_2025,li_review_2022, lawton_power_2024}.
+Magnetic components also fail under thermal
+stress~\cite{biela_cooling_2007,mengesha_advanced_2025,li_review_2022,lawton_power_2024}.
+For reliability, the cooling system must therefore hold the maximum temperature
+of both semiconductors and magnetics below their operating limits, and suppress
+the temperature swing.
 
-Magnetic components also constrain the cooling hardware itself. They are
-conventionally cooled by convection from their exposed surfaces, which the
-heat transfer coefficient of air limits~\cite{biela_cooling_2007}.
-Engineered conduction paths improve on this. Gao \emph{et al.}\ increased power
-density using a custom aluminium cold plate, ceramic shim, bracket and thermal
-vias (\cref{fig:gao-inductor})~\cite{gao_modeling_2022}. Such hardware, however,
-sits in the component's leakage field and suffers eddy-current
-loss~\cite{biela_cooling_2007,gao_modeling_2022,ouyang_overview_2014}. In Gao
-\emph{et al.}'s design, this raised the measured AC winding resistance by
-\SI{34}{\percent}~\cite{gao_modeling_2022}. Biela and Kolar similarly found that
-heat-transfer components near an inductor air gap must be recessed from
-it~\cite{biela_cooling_2007}. Because magnetic components are present in most
-converters~\cite{morroni_understanding_2023}. Their leakage fields must be
-considered in any PEC cooling design, even where the magnetics are not the main
-thermal constraint.
+Single-phase cooling meets both requirements to a degree. Natural convection,
+the simplest scheme, is limited by the low heat transfer coefficient of
+air~\cite{biela_cooling_2007}, and is the conventional way of cooling magnetic
+components from their exposed surfaces. Gao \emph{et al.}'s passively cooled
+planar inductor rose more than \SI{65}{\celsius} in temperature at
+\SI{12}{\ampere} rms, whereas with an engineered conduction path to a
+liquid-cooled cold plate (\cref{fig:gao-inductor}) the rise was less than
+\SI{3}{\celsius}~\cite{gao_modeling_2022}. Forced air and liquid cooling raise
+the achievable heat flux, and their fan speed or flow rate provides a control
+input over the temperature swing. Their heat flux, however, is bounded by the
+coolant~\cite{rahman_emerging_2024,laloya_heat_2016}. Phase-change cooling
+absorbs latent heat and offers the highest heat
+flux~\cite{laloya_heat_2016,mudawar_assessment_2001}. Above the critical heat
+flux (CHF), however, vapour blocks liquid access to the surface and the device
+temperature rises uncontrollably. CHF is difficult to predict, so the safety
+margin it demands erodes this advantage~\cite{mudawar_assessment_2001}, and
+passive phase-change schemes offer no control over the temperature swing.
 
 \begin{figure}[tbp]
   \centering
@@ -107,68 +245,58 @@ thermal constraint.
   \label{fig:gao-inductor}
 \end{figure}
 
-Finally, the cooling system must not erode the power density it is meant to
-enable. In compact converters, thermal management systems can occupy a large share of the
-volume~\cite{biela_cooling_2007,friedli_essence_2014}. Additionally, 
-to retain efficiency, the power drawn for thermal management must remain small relative to the power
-processed~\cite{laloya_heat_2016}. PEC thermal management therefore has four key
-considerations. Without introducing loss into nearby magnetics, the cooling
-system must (i)~hold the maximum temperature of both semiconductor and magnetic
-components below their operating limits, (ii)~suppress the temperature swing,
-(iii)~be compact and (iv)~draw minimal power. \cref{tab:cooling-strategies}
-summarises how established cooling strategies meet these
-considerations~\cite{liu_thermal_2025,rahman_emerging_2024,laloya_heat_2016,mudawar_assessment_2001}.
+\subsection{Form Factor Requirement}
+\label{sec:form-factor}
 
-\begin{table}[htbp]
-  \centering
-  \caption[Key considerations and established cooling strategies]{Summary of
-    how established cooling strategies meet the key considerations for PEC
-    thermal management. COP: coefficient of performance, the ratio of heat
-    removed to cooling power consumed.}
-  \label{tab:cooling-strategies}
-  \small
-  \begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{2.6cm} L L@{}}
-    \toprule
-    Consideration & Single-phase (air, water) & Phase change (boiling, heat pipes) \\
-    \midrule
-    (i) Maximum temperature
-      & Forced air: tens of \si{\watt\per\centi\metre\squared};
-        water cold plate: hundreds of \si{\watt\per\centi\metre\squared};
-        water microchannel: $\approx$\SI{1000}{\watt\per\centi\metre\squared}
-      & Highest, but capped by CHF \\
-    \addlinespace
-    (ii) Temperature swing
-      & Fan speed or flow rate provides control input
-      & Boiling-onset thermal shock; no control input when passive \\
-    \addlinespace
-    (iii) Compactness
-      & Air: bulky heat sink; water: compact at the device, pump and radiator remote
-      & Smaller and lighter than single-phase \\
-    \addlinespace
-    (iv) Power drawn
-      & Fans (COP 10--100) or pump (COP 300--500); rises steeply as channels narrow
-      & Low; often passive \\
-    \bottomrule
-  \end{tabularx}
-\end{table}
+The cooling system must not erode the power density it is meant to enable. With
+the magnetic components, heat sinks account for the largest portion of a power
+converter's size, and in compact converters the thermal management system can
+occupy a large share of the
+volume~\cite{biela_cooling_2007,morroni_understanding_2023,friedli_essence_2014}.
+Air cooling requires bulky heat sinks, which limited the power density of the
+rectifiers of Friedli \emph{et al.}\ (\cref{sec:motivation}). Water cooling is
+compact at the device, as the pump and radiator can be placed
+remotely~\cite{friedli_essence_2014,laloya_heat_2016}, while phase-change
+systems can be smaller and lighter still~\cite{laloya_heat_2016}. For magnetic
+components, a compact cooling system must be placed as close as possible to the
+windings, typically on both the top and bottom of the
+core~\cite{krismer_accurate_2010,biela_cooling_2007}, which places it directly in
+the component's leakage field.
 
-Single-phase schemes remove heat using a flowing coolant, with fan
-speed or flow rate providing a control input over the temperature swing. Their
-heat flux, however, is bounded by the coolant. Raising it requires narrower
-channels, which raise the pressure drop and pumping power
-steeply~\cite{rahman_emerging_2024,laloya_heat_2016}. There is an inherent trade-off between 
-consideration~(i) and~(iv) for single-phase cooling.
-Phase-change instead absorbs latent heat and offers higher heat flux at lower pumping power and
-size~\cite{laloya_heat_2016,mudawar_assessment_2001}. Above the critical heat
-flux (CHF), however, vapour blocks liquid access to the surface and the device
-temperature rises uncontrollably. CHF is difficult to predict, so the safety
-margin it demands erodes this advantage~\cite{mudawar_assessment_2001}. Additionally,
-passive schemes offer no control over the temperature swing. No established
-scheme therefore satisfies all four considerations.
+\subsection{Efficiency Requirement}
+\label{sec:efficiency-req}
 
-The single-phase trade-off stems from the low thermal conductivity of air and water. Therefore, a coolant with
-substantially higher conductivity could ease it while keeping flow-rate control. 
-This motivates much of the research into liquid metal coolants~\cite{hodes_potential_2014}.
+To retain the efficiency of the converter, the power drawn by the cooling system,
+its burden power, must remain small relative to the power
+processed~\cite{laloya_heat_2016}, and the cooling hardware must not introduce
+excessive loss into the converter. Single-phase cooling requires fans or pumps,
+and raising its heat flux requires narrower channels, which raise the pressure
+drop and pumping power steeply~\cite{rahman_emerging_2024,laloya_heat_2016}.
+Single-phase cooling therefore trades the maximum temperature it can hold
+against the burden power it draws. Phase-change cooling draws little or no
+burden power, and is often passive~\cite{laloya_heat_2016}.
+
+Cooling hardware placed near magnetic components, whether single-phase or
+phase-change, sits in their leakage field and suffers eddy-current
+loss~\cite{biela_cooling_2007,gao_modeling_2022,ouyang_overview_2014}. In Gao
+\emph{et al.}'s design, the cold plate and bracket raised the measured AC winding
+resistance by \SI{34}{\percent}~\cite{gao_modeling_2022}, and the aluminium
+shielding sheet of an IPT pad dissipates about \SI{17}{\watt} in the same way
+(\cref{fig:kim-losses})~\cite{kim_thermal_2022}. Biela and Kolar similarly found
+that heat-transfer components near an inductor air gap must be recessed from
+it~\cite{biela_cooling_2007}. Because magnetic components are present in most
+converters~\cite{morroni_understanding_2023}, their leakage fields must be
+considered in any PEC cooling design, even where the magnetics are not the main
+thermal constraint.
+
+No established scheme therefore meets all three requirements. Phase-change
+cooling offers the highest heat flux at low burden power, but is capped by CHF
+and offers no control over the temperature swing when passive. Single-phase
+cooling is controllable, but its heat flux is bounded by the low thermal
+conductivity of air and water, so a higher heat flux costs pumping power. A
+coolant with substantially higher thermal conductivity could ease this trade-off
+while keeping flow-rate control, which motivates much of the research into
+liquid metal coolants~\cite{hodes_potential_2014}.
 
 % ---------------------------------------------------------------------
 \section{Liquid Metal as a Coolant}
@@ -241,7 +369,8 @@ kilowatts for light-duty vehicles and are being standardised up to
 vehicles~\cite{lawton_power_2024,liu_thermal_2025,abb_e-mobility_mcs1200_nodate}. Large liquid
 metal systems have been realised for nuclear reactors~\cite{rowinski_small_2015},
 but these use different metals, operate at much higher temperatures and are much
-larger than PEC applications, although some work has addressed power electronic
+larger than even the most powerful PEC applications, although some work has
+addressed power electronic
 converters~\cite{fan_ultra-efficient_2026,fan_liquid_2021}.
 
 % ---------------------------------------------------------------------
@@ -293,9 +422,10 @@ force~\cite{an_liquid_2024}. The field can also come from the converter itself.
 Fan \emph{et al.}\ integrated an MHD pump into an inductor, so that the flow
 self-adjusts with converter load~\cite{fan_liquid_2021}. The cost is
 eddy-current losses in the coolant~\cite{fan_ultra-efficient_2026}. EM pumps
-are, however, generally reported as individual designs, and
-only~\cite{fan_ultra-efficient_2026} compares one against an equivalent water
-system.
+are, however, generally reported as individual designs. Among liquid metal
+systems developed for power electronics, only those of Fan
+\emph{et al.}\ have been compared against an equivalent water
+system~\cite{fan_liquid_2021,fan_ultra-efficient_2026}.
 
 % ---------------------------------------------------------------------
 \subsection{Compatibility with Electrical Equipment}
@@ -323,7 +453,7 @@ energised circuitry is a direct short~\cite{hodes_potential_2014}. The loop also
 galvanically connects every wetted part, so the EM pump supply can energise the
 radiator and cold plate~\cite{kwon_project_2025}. There is also potential for nearby
 magnetics to induce eddy currents in the coolant, though this has not been strictly explored in the literature
-(\cref{sec:cooling-magnetics})~\cite{an_liquid_2024, fan_ultra-efficient_2026}.
+(\cref{sec:thermal-management})~\cite{an_liquid_2024, fan_ultra-efficient_2026}.
 As a result, low-cost plastic piping suits low-field regions. 
 Near magnetics, it may be preferable to shield the coolant with a more conductive material to reduce eddy losses.
 
@@ -335,17 +465,17 @@ Near magnetics, it may be preferable to shield the coolant with a more conductiv
 \edited{Trimmed only. The two opening sentences (water cooling is bounded by
 water's thermal conductivity; Galinstan's higher conductivity can improve heat
 transfer, both cited to Hodes \emph{et al.}) repeated
-\cref{sec:cooling-strategies,sec:liquid-metal} and were cut. The two closing
+\cref{sec:thermal-management,sec:liquid-metal} and were cut. The two closing
 sentences of the second gap (most converters contain magnetics; a cooling
 system that does not cool them must still tolerate their leakage fields) are
-now made in \cref{sec:cooling-magnetics} and are replaced by a back-reference.
+now made in \cref{sec:thermal-management} and are replaced by a back-reference.
 In the first gap, ``which use different metals at much higher temperatures''
 was cut, as \cref{sec:liquid-metal} already says so.}
 
 This study aims to address two gaps identified in the literature.
 
 The first is the lack of comparisons between water and liquid metal at the scale
-of a converter's cooling loop. Existing comparisons are made for micro- and
+of a converter's cooling loop. Most existing comparisons are made for micro- and
 mini-channel heat
 sinks~\cite{hodes_potential_2014,zhang_water-based_2015,zhang_experimental_2019,an_liquid_2024},
 or lie at the scale of nuclear reactors~\cite{rowinski_small_2015}. This study
@@ -360,7 +490,7 @@ such as a power-dense inductor, or quantified the eddy-current losses induced in
 the coolant by its leakage field. Eddy-current losses have been assessed in AC
 conduction pumps~\cite{fan_ultra-efficient_2026}, and an inductor has been used to drive a
 pump~\cite{fan_ultra-efficient_2026,fan_liquid_2021}, but not to cool the inductor itself
-directly. As argued in \cref{sec:cooling-magnetics}, the coolant's loss in a
+directly. As argued in \cref{sec:thermal-management}, the coolant's loss in a
 leakage field matters even where the coolant does not cool the magnetics.
 
 This project addresses both gaps using the existing Galinstan loop of

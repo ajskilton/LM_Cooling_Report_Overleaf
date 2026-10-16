@@ -32,6 +32,18 @@
 % =====================================================================
 \documentclass[11pt,a4paper,twoside,openany]{report}
 
+% The report class has no \frontmatter, \mainmatter or \backmatter (the book
+% class does). Define them as in book.cls for the roman/arabic page numbering:
+% with openany they start a new page, with openright a new odd page.
+\makeatletter
+\providecommand{\frontmatter}{%
+  \if@openright\cleardoublepage\else\clearpage\fi\pagenumbering{roman}}
+\providecommand{\mainmatter}{%
+  \if@openright\cleardoublepage\else\clearpage\fi\pagenumbering{arabic}}
+\providecommand{\backmatter}{%
+  \if@openright\cleardoublepage\else\clearpage\fi}
+\makeatother
+
 \newif\ifreview
 \reviewfalse
 \ifdefined\REVIEW \reviewtrue \fi
@@ -80,6 +92,7 @@
 \usepackage[labelsep=colon,skip=6pt]{caption}
 \captionsetup[table]{position=top}
 \usepackage{float}
+\usepackage{placeins}                % \FloatBarrier keeps floats in their section
 % Float placement. With LaTeX's defaults most floats here ended up on sparse
 % float-only pages, centred vertically, away from the text that cites them.
 % Allow more and larger floats on text pages (floats use [htbp]), accept a
@@ -109,6 +122,7 @@
 \usepackage{subcaption}
 \usepackage{pgfplots}
  \pgfplotsset{compat=1.17}
+\usepgfplotslibrary{groupplots}      % multi-panel transient figures
 
 % ---------------------------------------------------------------------
 %  Headings
@@ -235,6 +249,12 @@
   }
 }
 \DeclareFieldFormat[article]{eid}{Art\adddot\space no\adddot\space#1}
+% Some Zotero titles carry a zero-width space (U+200B), which pdfLaTeX cannot
+% typeset; drop it here so the fix survives a refresh from Zotero. Also allow a
+% line break after a Unicode em dash (U+2014), so that long titles such as
+% Ouyang's do not run into the margin.
+\DeclareUnicodeCharacter{200B}{}
+\DeclareUnicodeCharacter{2014}{\textemdash\allowbreak}
 % Break long DOIs and URLs without stretching the gaps around "." and "/"
 \setcounter{biburlnumpenalty}{9000}
 \setcounter{biburlucpenalty}{9000}
@@ -252,6 +272,8 @@
 \crefname{figure}{Fig.}{Figs.}
 \Crefname{figure}{Figure}{Figures}
 \crefname{table}{Table}{Tables}
+\crefname{appendix}{Appendix}{Appendices}
+\crefname{subappendix}{Appendix}{Appendices}
 \crefname{equation}{}{}
 \crefformat{equation}{(#2#1#3)}
 \crefrangeformat{equation}{(#3#1#4)--(#5#2#6)}
@@ -270,6 +292,16 @@
   \newcommand{\issue}[1]{\ignorespaces}
   \newcommand{\edited}[1]{\ignorespaces}
 \fi
+% A value or detail still to be supplied. Always shown, in red, so that it
+% cannot be missed in a submitted copy.
+\newcommand{\missing}[1]{\textcolor{red}{[#1]}}
+% \figureorplaceholder[options]{file}: as \includegraphics, but while
+% figures/<file> does not exist yet it draws a framed placeholder naming the
+% file, so the report still compiles.
+\newcommand{\figureorplaceholder}[2][]{%
+  \IfFileExists{figures/#2}{\includegraphics[#1]{#2}}{%
+    \fbox{\parbox[c][4cm][c]{0.85\linewidth}{\centering
+      \missing{Figure to be added: figures/\detokenize{#2}}}}}}
 
 % ---------------------------------------------------------------------
 %  Convenience macros
@@ -285,6 +317,7 @@
 \newcommand{\Qplate}{Q_{\mathrm{plate}}}
 \newcommand{\Tin}{T_{\mathrm{in}}}
 \newcommand{\Tout}{T_{\mathrm{out}}}
+\newcommand{\Tres}{T_{\mathrm{resistor}}}
 \newcommand{\Galinstan}{Galinstan}
 \newcommand{\GaInSn}[3]{Ga\textsubscript{#1}In\textsubscript{#2}Sn\textsubscript{#3}}
 
@@ -317,7 +350,7 @@
 % \includepdf[pagecommand=\thispagestyle{front}]{frontmatter/Declaration}
 % \tableofcontents
 % \listoffigures
-% \listoftableshttps://mytimetable.auckland.ac.nz/timetables?date=2024-06-03&view=week
+% \listoftables
 % \input{frontmatter/acknowledgements}
 % \input{frontmatter/glossary}
 % \input{frontmatter/abbreviations}
@@ -332,11 +365,6 @@
 \bodyheadings
 \bodyplainstyle
 \pagestyle{lawton}
-% Chapter 1 (Introduction) is not yet written; the Literature Review is
-% numbered as Chapter 2 so its section numbers match the draft. Once the
-% introduction exists, add \include{chapters/01_introduction} here and
-% delete the counter line.
-\setcounter{chapter}{0}
 \include{chapters/01_Introduction}
 \include{chapters/02_literature_review}
 \include{chapters/03_experimental_design}
@@ -346,7 +374,12 @@
 \backmatter
 \printbibliography[heading=bibintoc,title={References}]
 
-\appendix   
+\appendix
+% cleveref does not detect \appendix here, so appendix chapters were cited as
+% "Chapter A". Label them (and their sections) as appendices explicitly; the
+% names are set with the other \crefname commands in the preamble.
+\crefalias{chapter}{appendix}
+\crefalias{section}{subappendix}
 \input{chapters/appendix/appendix_simscale_validation}
 \input{chapters/appendix/appendix_thermal_models}
 

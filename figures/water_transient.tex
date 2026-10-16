@@ -1,0 +1,94 @@
+% =====================================================================
+% Water cooling tests: resistor, cold-plate inlet and outlet temperatures
+% Use:      \input{figures/water_transient}
+% Preamble: \usepackage{pgfplots}
+%           \usepgfplotslibrary{groupplots}
+%           \pgfplotsset{compat=1.16}
+%           (siunitx and cleveref are already loaded by main.tex)
+% Data:     figures/data/water_test{17,19,24,25}.dat
+%           columns: t (min), TL, TR, Tin, Tout (degC)
+%           15 s centred moving average of the raw logger data, sampled
+%           every 0.25 min. Sensors: WS9 left resistor, WS3 right
+%           resistor, WS4 cold-plate inlet, WS5 cold-plate outlet.
+% =====================================================================
+\def\wtdatadir{figures/data}
+
+\definecolor{wtResL}{HTML}{E76F51}
+\definecolor{wtResR}{HTML}{8F2D14}
+\definecolor{wtIn}{HTML}{1D4E89}
+\definecolor{wtOut}{HTML}{2A9D8F}
+
+\pgfplotsset{
+  wtpanel/.style={
+    scale only axis,
+    width=0.415\textwidth, height=4.1cm,
+    xmin=0, xmax=190, xtick={0,30,...,180},
+    ymin=18, ymax=54,  ytick={20,30,...,50},
+    grid=major, grid style={dashed, black!15},
+    axis x line*=bottom, axis y line*=left,
+    tick align=outside, tick label style={font=\small},
+    label style={font=\small},
+    title style={font=\small, yshift=-3pt},
+    every axis plot/.append style={line width=0.8pt, no markers},
+  },
+  wtL/.style={wtResL},
+  wtR/.style={wtResR, densely dashed},
+  wtI/.style={wtIn},
+  wtO/.style={wtOut, densely dashed},
+}
+
+\begin{figure}[htbp]
+  \centering
+  \begin{tikzpicture}
+    \begin{groupplot}[
+      group style={group size=2 by 2,
+                   horizontal sep=0.55cm, vertical sep=1.25cm,
+                   xlabels at=edge bottom, xticklabels at=edge bottom,
+                   ylabels at=edge left,  yticklabels at=edge left},
+      wtpanel,
+      xlabel={Time (\si{\minute})},
+      ylabel={Temperature (\si{\celsius})},
+    ]
+    % -------- (a) Test 17 --------
+    \nextgroupplot[
+      title={(a) \SI{58.3}{\milli\litre\per\second} (\SI{3.50}{\litre\per\minute})},
+      legend columns=4,
+      legend style={at={(1.033,1.21)}, anchor=south, draw=none, fill=none,
+                    font=\small, /tikz/every even column/.append style={column sep=10pt}},
+      legend cell align=left,
+    ]
+    \addplot[wtL] table[x=t, y=TL]   {\wtdatadir/water_test17.dat};
+    \addplot[wtR] table[x=t, y=TR]   {\wtdatadir/water_test17.dat};
+    \addplot[wtI] table[x=t, y=Tin]  {\wtdatadir/water_test17.dat};
+    \addplot[wtO] table[x=t, y=Tout] {\wtdatadir/water_test17.dat};
+    \legend{Left resistor, Right resistor, Cold-plate inlet, Cold-plate outlet}
+
+    % -------- (b) Test 19 --------
+    \nextgroupplot[title={(b) \SI{29.2}{\milli\litre\per\second} (\SI{1.75}{\litre\per\minute})}]
+    \addplot[wtL] table[x=t, y=TL]   {\wtdatadir/water_test19.dat};
+    \addplot[wtR] table[x=t, y=TR]   {\wtdatadir/water_test19.dat};
+    \addplot[wtI] table[x=t, y=Tin]  {\wtdatadir/water_test19.dat};
+    \addplot[wtO] table[x=t, y=Tout] {\wtdatadir/water_test19.dat};
+
+    % -------- (c) Test 24 --------
+    \nextgroupplot[title={(c) \SI{12.2}{\milli\litre\per\second} (\SI{0.73}{\litre\per\minute})}]
+    \addplot[wtL] table[x=t, y=TL]   {\wtdatadir/water_test24.dat};
+    \addplot[wtR] table[x=t, y=TR]   {\wtdatadir/water_test24.dat};
+    \addplot[wtI] table[x=t, y=Tin]  {\wtdatadir/water_test24.dat};
+    \addplot[wtO] table[x=t, y=Tout] {\wtdatadir/water_test24.dat};
+
+    % -------- (d) Test 25 --------
+    \nextgroupplot[title={(d) \SI{8.3}{\milli\litre\per\second} (\SI{0.50}{\litre\per\minute})}]
+    \addplot[wtL] table[x=t, y=TL]   {\wtdatadir/water_test25.dat};
+    \addplot[wtR] table[x=t, y=TR]   {\wtdatadir/water_test25.dat};
+    \addplot[wtI] table[x=t, y=Tin]  {\wtdatadir/water_test25.dat};
+    \addplot[wtO] table[x=t, y=Tout] {\wtdatadir/water_test25.dat};
+    \end{groupplot}
+  \end{tikzpicture}
+  \caption{Measured left and right resistor temperatures and cold-plate inlet
+    and outlet water temperatures over each water test, at flow rates of
+    (a)~\SI{58.3}{}, (b)~\SI{29.2}{}, (c)~\SI{12.2}{} and
+    (d)~\SI{8.3}{\milli\litre\per\second}. Traces are a \SI{15}{\second}
+    moving average of the logged data.}
+  \label{fig:water_transient}
+\end{figure}
