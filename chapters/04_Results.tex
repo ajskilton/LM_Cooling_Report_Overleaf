@@ -166,4 +166,29 @@ The higher-flow laminar test has higher power; hence, any errors in the thermal 
 
 \subsection{Finite Element Analysis}
 
+\subsection{Pump Comparison}
+
+\begin{table}[htbp]
+  \centering
+  \caption{Pump characteristics for each coolant loop.}
+  \label{tab:pumps}
+  \small
+  \begin{tabular}{@{}lrr@{}}
+    \toprule
+    Parameter & Galinstan & Water \\
+    \midrule
+    Pump type & MHD & Centrifugal \\
+    Flow rate (\si{\milli\litre\per\second}) & 0--1.5 & 20.8--58.3 \\
+    Power draw (\si{\watt}) & 0--0.85 & 1.8--11.5 \\
+    Size (\si{\centi\metre\cubed}) & 13.57 & 766.64 \\
+    Mechanical efficiency\textsuperscript{\textdagger} (\si{\percent}) & 0.56 & 28.7 \\
+    Cooling-to-pump power ratio\textsuperscript{\textdaggerdbl} & 84.7 & 47.6 \\
+    \bottomrule
+    \multicolumn{3}{@{}p{0.75\linewidth}@{}}{\footnotesize
+      \textsuperscript{\textdagger}\,Maximum mechanical efficiency.
+      \textsuperscript{\textdaggerdbl}\,Maximum ratio of heat transferred to
+      pump (burden) power.}
+  \end{tabular}
+\end{table}
+
 
