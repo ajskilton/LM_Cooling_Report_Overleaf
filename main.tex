@@ -30,7 +30,7 @@
 %  \reviewfalse to \reviewtrue below, or build with
 %          pdflatex "\def\REVIEW{}\input{main}"
 % =====================================================================
-\documentclass[11pt,a4paper,twoside,openany]{book}
+\documentclass[11pt,a4paper,twoside,openany]{report}
 
 \newif\ifreview
 \reviewfalse
@@ -105,6 +105,10 @@
 \usepackage{nomencl}                 % nomenclature (ECSE template)
 \makenomenclature
 \usepackage[titles]{tocloft}         % TOC/LOF/LOT entries as in the ECSE template
+
+\usepackage{subcaption}
+\usepackage{pgfplots}
+ \pgfplotsset{compat=1.17}
 
 % ---------------------------------------------------------------------
 %  Headings
@@ -313,7 +317,7 @@
 % \includepdf[pagecommand=\thispagestyle{front}]{frontmatter/Declaration}
 % \tableofcontents
 % \listoffigures
-% \listoftables
+% \listoftableshttps://mytimetable.auckland.ac.nz/timetables?date=2024-06-03&view=week
 % \input{frontmatter/acknowledgements}
 % \input{frontmatter/glossary}
 % \input{frontmatter/abbreviations}
@@ -337,8 +341,13 @@
 \include{chapters/02_literature_review}
 \include{chapters/03_experimental_design}
 \include{chapters/04_Results}
+\include{chapters/05_discussion_thermal}
 
 \backmatter
 \printbibliography[heading=bibintoc,title={References}]
+
+\appendix   
+\input{chapters/appendix/appendix_simscale_validation}
+\input{chapters/appendix/appendix_thermal_models}
 
 \end{document}

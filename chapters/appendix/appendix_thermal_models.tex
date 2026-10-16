@@ -1,0 +1,355 @@
+% =====================================================================
+% Appendix: Convective heat transfer calculations for the thermal network
+% Uses the report's macros: \Rcp, \Qplate, \Tin, \Tout, \mdot, \cp, \NTU, \Vdot
+% Requires: amsmath, siunitx, booktabs, cleveref
+% =====================================================================
+\chapter{Convective Heat Transfer Calculations}
+\label{app:convection}
+
+This appendix explains how the cold-plate resistance $\Rcp$ in
+\cref{sec:eps-ntu} is calculated from the flow rate and coolant properties, and
+works through three of the tests in full.
+
+\section{Heat Transfer Coefficient and Nusselt Number}
+
+Heat passes from the tube wall into the coolant by convection, at a rate
+\begin{equation}
+  Q = hA\,(T_{\mathrm{wall}} - T_{\mathrm{f}}),
+\end{equation}
+where $A$ is the wetted area and $h$ the heat transfer coefficient
+(\si{\watt\per\metre\squared\per\kelvin}). $h$ is not a material property; it
+depends on the coolant, the flow and the geometry. Correlations therefore give
+it in dimensionless form, as the Nusselt number
+\begin{equation}
+  \mathrm{Nu} = \frac{hD}{k}
+  \qquad\Longrightarrow\qquad
+  h = \frac{\mathrm{Nu}\,k}{D},
+  \label{eq:app-nu}
+\end{equation}
+where $D$ is the tube bore and $k$ the coolant thermal conductivity. Nu is the
+ratio of the heat actually removed by the flowing coolant to the heat that would
+be conducted through a stationary layer of coolant of thickness $D$. Two
+consequences matter here. First, for a given Nu, $h$ is proportional to $k$, so
+Galinstan ($k = \SI{16.5}{\watt\per\metre\per\kelvin}$) gives roughly 27 times
+the $h$ of water ($k = \SI{0.60}{\watt\per\metre\per\kelvin}$) at the same Nu.
+Second, Nu depends on the flow regime and on how far along the tube the flow
+has travelled, as described below.
+
+\section{Flow Parameters}
+
+Three dimensionless groups describe the flow:
+\begin{align}
+  \mathrm{Re} &= \frac{\rho u D}{\mu} = \frac{4\rho\Vdot}{\pi D \mu},
+  & \mathrm{Pr} &= \frac{\mu\,\cp}{k},
+  & \mathrm{Pe} &= \mathrm{Re}\,\mathrm{Pr},
+  \label{eq:app-groups}
+\end{align}
+where $u$ is the mean velocity and $\Vdot$ the volumetric flow rate.
+\begin{itemize}
+  \item The \emph{Reynolds number} Re compares inertial and viscous forces. Below
+    $\mathrm{Re} \approx 2300$ the flow is laminar, moving in smooth layers, and
+    heat crosses the tube mainly by conduction. Above $\mathrm{Re} \approx 4000$
+    it is turbulent, and eddies mix heat across the tube far more effectively. In
+    between, the flow is transitional and unpredictable.
+  \item The \emph{Prandtl number} Pr is a fluid property comparing how quickly
+    momentum and heat diffuse. Water has $\mathrm{Pr} \approx 7$. Galinstan, like
+    other liquid metals, has $\mathrm{Pr} \ll 1$ (0.053): its high conductivity
+    spreads heat far faster than viscosity spreads momentum.
+  \item The \emph{P\'eclet number} Pe compares heat carried along the tube by the
+    flow with heat conducted across it. It controls how quickly the temperature
+    profile develops.
+\end{itemize}
+
+\section{Thermal Entry Region}
+
+Where the coolant first meets the heated wall, only a thin layer next to the
+wall has warmed up. Heat has only a short distance to conduct across this thin
+thermal boundary layer, so $h$ is high. Further along the tube the layer thickens
+until it fills the bore; Nu then falls to a constant, \emph{fully developed}
+value, which for laminar flow at constant wall temperature is
+3.66~\cite{bergman_fundamentals_2017}. The length of this \emph{thermal entry
+region} is measured by the dimensionless distance
+\begin{equation}
+  x^* = \frac{L}{D\,\mathrm{Re}\,\mathrm{Pr}} = \frac{L}{D\,\mathrm{Pe}},
+  \label{eq:app-xstar}
+\end{equation}
+where $L$ is the heated length. Small values ($x^* < 0.01$) mean the flow
+is still in the entry region over most of $L$; values above about 0.05 mean it is
+fully developed over most of $L$. Equivalently, the thermal entry length is
+approximately $L_{\mathrm{th}} \approx 0.05\,\mathrm{Re}\,\mathrm{Pr}\,D$.
+
+The cold plate has four straight \SI{152}{\milli\metre} passes joined by
+U-bends. The bends are assumed to mix the flow, so each pass is treated as a new
+entry region with $L = \SI{152}{\milli\metre}$. Because every pass then has the
+same mean Nu, this value applies to the whole heated area
+$A = \pi D \times 4 \times \SI{0.152}{\metre} = \SI{0.0153}{\metre\squared}$.
+
+\section{Correlations}
+
+\paragraph{Laminar flow ($\mathrm{Re} < 2300$).} Shah and
+London~\cite{shah_laminar_1978} give the mean Nusselt number over a heated
+length $L$ of a circular tube at constant wall temperature, with a fully
+developed velocity profile, as
+\begin{equation}
+\overline{\mathrm{Nu}}_T =
+\begin{cases}
+1.615\,(x^*)^{-1/3} - 0.7,  & x^* \le 0.005, \\[2pt]
+1.615\,(x^*)^{-1/3} - 0.2,  & 0.005 < x^* < 0.03, \\[2pt]
+3.657 + \dfrac{0.0499}{x^*}, & x^* \ge 0.03.
+\end{cases}
+\label{eq:app-shah}
+\end{equation}
+The first two branches describe the entry region, where Nu rises as
+$(x^*)^{-1/3}$ as the boundary layer becomes thinner; the third tends to the
+fully developed value of 3.657. This correlation was chosen because it gives the
+mean Nu over the length, which is what $hA$ requires; it covers the entry
+region, which is significant for short passes; and its constant wall
+temperature matches the isothermal-plate assumption of \cref{sec:eps-ntu}.
+
+\paragraph{Turbulent flow ($\mathrm{Re} \geq 4000$).} Gnielinski's
+correlation~\cite{bergman_fundamentals_2017} is used for turbulent water:
+\begin{equation}
+  \mathrm{Nu} = \frac{(f/8)(\mathrm{Re} - 1000)\,\mathrm{Pr}}
+                     {1 + 12.7\,(f/8)^{1/2}\left(\mathrm{Pr}^{2/3} - 1\right)},
+  \qquad
+  f = \left(0.790 \ln \mathrm{Re} - 1.64\right)^{-2},
+  \label{eq:app-gnielinski}
+\end{equation}
+where $f$ is the Darcy friction factor for a smooth tube. It is valid from
+$\mathrm{Re} \approx 3000$, lower than most turbulent correlations, which suits
+the low end of the water flow range. Entry effects are neglected because
+turbulent boundary layers develop within a few diameters.
+
+\paragraph{Transitional flow ($2300 \le \mathrm{Re} < 4000$).} No correlation
+is reliable here, so no value of $\Rcp$ is estimated in this range.
+
+\paragraph{Turbulent liquid metal.} Gnielinski's correlation is not valid for
+$\mathrm{Pr} < 0.5$. Where turbulent Galinstan is shown in the discussion
+figures (above about \SI{9.5}{\milli\litre\per\second}), the Seban--Shimazaki
+correlation for a liquid metal at constant wall
+temperature~\cite{bergman_fundamentals_2017} is used instead:
+\begin{equation}
+  \mathrm{Nu} = 5.0 + 0.025\,\mathrm{Pe}^{0.8}.
+  \label{eq:app-seban}
+\end{equation}
+No Galinstan test reached this regime.
+
+\paragraph{Note on the plotted curves.} The three branches of
+\cref{eq:app-shah} do not meet exactly: Nu jumps by about 0.5 at $x^* = 0.005$
+and 0.3 at $x^* = 0.03$. In the flow-sweep figures these jumps are blended
+smoothly over a factor of about 1.8 in $x^*$ either side of each join. Values
+away from the joins, including every tested condition, are unchanged; the
+largest change is about \SI{3}{\percent}, at the joins themselves.
+
+\section{Calculation Procedure}
+
+For each test, $\Rcp$ is calculated as follows.
+\begin{enumerate}
+  \item Calculate Re, Pr and Pe from the flow rate and properties
+    (\cref{eq:app-groups}), and identify the regime.
+  \item For laminar flow, calculate $x^*$ for one pass (\cref{eq:app-xstar}) and
+    $\overline{\mathrm{Nu}}$ from \cref{eq:app-shah}; for turbulent flow, use
+    \cref{eq:app-gnielinski}.
+  \item Convert to $h = \mathrm{Nu}\,k/D$ and multiply by $A$ to obtain the
+    convective conductance $hA$.
+  \item Calculate the heat-capacity rate $\mdot\,\cp = \rho\Vdot\cp$, then
+    $\NTU = hA/(\mdot\,\cp)$ and $\varepsilon = 1 - e^{-\NTU}$.
+  \item Obtain $\Rcp = 1/(\varepsilon\,\mdot\,\cp)$ and the coolant temperature
+    rise $\Delta T_{\mathrm{cool}} = \Qplate/(\mdot\,\cp)$.
+\end{enumerate}
+For Galinstan, $\mdot\,\cp$ in step~4 is taken from the energy balance,
+$\Qplate/(\Tout - \Tin)$, rather than the nominal EMF-sensor flow
+(\cref{tab:tests}). Re and Nu are evaluated at the nominal flow; in fully
+developed laminar flow Nu barely depends on flow, so this choice has no
+practical effect.
+
+\section{Worked Examples}
+
+\paragraph{Example 1: water, \SI{0.73}{\litre\per\minute} (laminar, entry
+region).}
+\begin{align*}
+  \Vdot &= \SI{0.73}{\litre\per\minute} = \SI{1.217e-5}{\metre\cubed\per\second}\\
+  \mathrm{Re} &= \frac{4(1000)(1.217\times10^{-5})}{\pi(0.008)(0.001)} = 1936
+    \quad\text{(laminar)}\\
+  \mathrm{Pr} &= \frac{(0.001)(4182)}{0.60} = 6.97,
+    \qquad \mathrm{Pe} = 1936 \times 6.97 = \num{13500}\\
+  x^* &= \frac{0.152}{0.008 \times \num{13500}} = 0.00141
+    \quad\text{(entry region, first branch)}\\
+  \overline{\mathrm{Nu}} &= 1.615\,(0.00141)^{-1/3} - 0.7 = 13.7\\
+  h &= \frac{13.7 \times 0.60}{0.008} = \SI{1028}{\watt\per\metre\squared\per\kelvin},
+    \qquad hA = 1028 \times 0.0153 = \SI{15.7}{\watt\per\kelvin}\\
+  \mdot\,\cp &= 1000\,(1.217\times10^{-5})\,(4182) = \SI{50.9}{\watt\per\kelvin}\\
+  \NTU &= \frac{15.7}{50.9} = 0.31,
+    \qquad \varepsilon = 1 - e^{-0.31} = 0.266\\
+  \Rcp &= \frac{1}{0.266 \times 50.9} = \SI{0.074}{\celsius\per\watt}
+\end{align*}
+With $\Qplate = \SI{62.3}{\watt}$, $\Delta T_{\mathrm{cool}} =
+62.3/50.9 = \SI{1.2}{\celsius}$. Since $x^* < 0.005$, the flow stays in the
+entry region throughout each pass: the estimated thermal entry length,
+$0.05\,\mathrm{Re}\,\mathrm{Pr}\,D \approx \SI{5.4}{\metre}$, is far longer than
+the \SI{0.152}{\metre} pass. NTU is well below 1, so this test is
+convection-limited: the convective term $1/(hA) = \SI{0.064}{\celsius\per\watt}$
+makes up most of $\Rcp$.
+
+\paragraph{Example 2: water, \SI{3.6}{\litre\per\minute} (turbulent).}
+\begin{align*}
+  \mathrm{Re} &= 9549 \quad\text{(turbulent)},
+    \qquad \mathrm{Pr} = 6.97\\
+  f &= (0.790\ln 9549 - 1.64)^{-2} = 0.0319\\
+  \mathrm{Nu} &= \frac{(0.0319/8)(9549 - 1000)(6.97)}
+                      {1 + 12.7\,(0.0319/8)^{1/2}\,(6.97^{2/3} - 1)} = 76.0\\
+  h &= \frac{76.0 \times 0.60}{0.008} = \SI{5703}{\watt\per\metre\squared\per\kelvin},
+    \qquad hA = \SI{87.1}{\watt\per\kelvin}\\
+  \mdot\,\cp &= \SI{250.9}{\watt\per\kelvin}\\
+  \NTU &= \frac{87.1}{250.9} = 0.35,
+    \qquad \varepsilon = 1 - e^{-0.35} = 0.293\\
+  \Rcp &= \frac{1}{0.293 \times 250.9} = \SI{0.0136}{\celsius\per\watt}
+\end{align*}
+Turbulence raises Nu about fivefold compared with Example~1, but the flow rate
+is also five times higher, so NTU stays at about 0.35 and the cold plate remains
+convection-limited. The model value is \SI{15}{\percent} below the datasheet
+value of \SI{0.016}{\celsius\per\watt}, which is used for the temperature
+predictions (\cref{sec:convection}).
+
+\paragraph{Example 3: Galinstan, \SI{1.4}{\milli\litre\per\second} (laminar,
+fully developed).}
+\begin{align*}
+  \mathrm{Re} &= \frac{4(6370)(1.4\times10^{-6})}{\pi(0.008)(0.0024)} = 591
+    \quad\text{(laminar)}\\
+  \mathrm{Pr} &= \frac{(0.0024)(366)}{16.5} = 0.053,
+    \qquad \mathrm{Pe} = 591 \times 0.053 = 31.5\\
+  x^* &= \frac{0.152}{0.008 \times 31.5} = 0.603
+    \quad\text{(fully developed, third branch)}\\
+  \overline{\mathrm{Nu}} &= 3.657 + \frac{0.0499}{0.603} = 3.74\\
+  h &= \frac{3.74 \times 16.5}{0.008} = \SI{7713}{\watt\per\metre\squared\per\kelvin},
+    \qquad hA = \SI{117.9}{\watt\per\kelvin}\\
+  \mdot\,\cp &= \frac{\Qplate}{\Tout - \Tin} = \frac{60.35}{17.83}
+    = \SI{3.38}{\watt\per\kelvin}\\
+  \NTU &= \frac{117.9}{3.38} = 34.8,
+    \qquad \varepsilon = 1 - e^{-34.8} \approx 1.000\\
+  \Rcp &= \frac{1}{1.000 \times 3.38} = \SI{0.295}{\celsius\per\watt}
+\end{align*}
+The temperature profile is fully developed within about \SI{13}{\milli\metre}
+of each pass entry ($0.05\,\mathrm{Re}\,\mathrm{Pr}\,D$), so Nu is close to the
+fully developed value. Despite the low Nu, Galinstan's high conductivity gives
+an $h$ about 7.5 times that of Example~1. The cold plate is nevertheless
+caloric-limited: the convective term $1/(hA) = \SI{0.0085}{\celsius\per\watt}$
+is under \SI{3}{\percent} of $\Rcp$, and $\Rcp$ is essentially $1/(\mdot\,\cp)$.
+Doubling $h$ would change $\Rcp$ by less than \SI{0.01}{\percent}; only a higher
+flow rate reduces it.
+
+\Cref{eq:app-shah} assumes the velocity profile is fully developed. For
+Galinstan the hydrodynamic entry length ($0.05\,\mathrm{Re}\,D \approx
+\SI{0.24}{\metre}$) exceeds the pass length, so the velocity and temperature
+profiles develop together and the true Nu is somewhat higher. As shown above,
+this has a negligible effect on $\Rcp$.
+
+\begin{table}[htbp]
+  \centering
+  \caption{Summary of the worked examples.}
+  \label{tab:app-examples}
+  \small
+  \setlength{\tabcolsep}{5pt}
+  \begin{tabular}{@{}lrrr@{}}
+    \toprule
+    & \multicolumn{2}{c}{Water} & Galinstan \\
+    \cmidrule(lr){2-3}\cmidrule(l){4-4}
+    & \SI{0.73}{\litre\per\minute} & \SI{3.6}{\litre\per\minute}
+      & \SI{1.4}{\milli\litre\per\second} \\
+    \midrule
+    Re / regime & 1936 / laminar & 9549 / turbulent & 591 / laminar \\
+    Pr & 6.97 & 6.97 & 0.053 \\
+    $x^*$ & 0.0014 & -- & 0.60 \\
+    Nu & 13.7 & 76.0 & 3.74 \\
+    $h$ (\si{\watt\per\metre\squared\per\kelvin}) & 1028 & 5703 & 7713 \\
+    $\mdot\,\cp$ (\si{\watt\per\kelvin}) & 50.9 & 250.9 & 3.38 \\
+    NTU & 0.31 & 0.35 & 34.8 \\
+    $\Rcp$ (\si{\celsius\per\watt}) & 0.074 & 0.0136 & 0.295 \\
+    $1/(hA)$ share of $\Rcp$ & \SI{86}{\percent} & \SI{85}{\percent} & \SI{3}{\percent} \\
+    Limiting regime & convection & convection & caloric \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\section{Effect of Heated Area}
+\label{app:area-scaling}
+
+\Cref{fig:disc-regimes}(b) estimates how $\Rcp$ would change if the same heat
+were removed through a smaller heated area, for example a shorter heated length
+or a smaller component footprint. It uses the $\varepsilon$--NTU relation of
+\cref{sec:eps-ntu} with only the area changed.
+
+\paragraph{Method.} The area is scaled by a factor $f$, $A \rightarrow fA$, while
+the flow rate, coolant properties and heat transfer coefficient $h$ are held at
+their values for the tested cold plate. The heat-capacity rate $\mdot\,\cp$ is
+therefore unchanged, and the number of transfer units scales directly with $f$:
+\begin{equation}
+  \NTU(f) = f\,\NTU_0 = f\,\frac{hA_0}{\mdot\,\cp},
+  \qquad
+  \Rcp(f) = \frac{1}{\mdot\,\cp\left(1 - e^{-f\,\NTU_0}\right)},
+  \label{eq:app-area}
+\end{equation}
+where $A_0 = \SI{0.0153}{\metre\squared}$ is the tested heated area and $hA_0$
+is calculated as in \cref{eq:app-nu,eq:app-shah,eq:app-gnielinski,eq:app-seban}.
+\Cref{tab:app-area} lists the inputs for the three cases plotted.
+
+\begin{table}[htbp]
+  \centering
+  \caption{Inputs and results for the heated-area scaling of
+    \cref{fig:disc-regimes}(b).}
+  \label{tab:app-area}
+  \small
+  \setlength{\tabcolsep}{5pt}
+  \begin{tabular}{@{}lrrrrrr@{}}
+    \toprule
+    Case & $hA_0$ & $\mdot\,\cp$ & $\NTU_0$ & \multicolumn{3}{c}{$\Rcp$ (\si{\celsius\per\watt})} \\
+    \cmidrule(l){5-7}
+     & (\si{\watt\per\kelvin}) & (\si{\watt\per\kelvin}) & & $f = 1$ & $f = 0.2$ & $f = 0.05$ \\
+    \midrule
+    Water, \SI{30}{\milli\litre\per\second}      & 44.0  & 125.5 & 0.35 & 0.027 & 0.118 & 0.458 \\
+    Galinstan, \SI{1.45}{\milli\litre\per\second} & 117.9 & 3.38  & 34.9 & 0.296 & 0.296 & 0.358 \\
+    Galinstan, \SI{10}{\milli\litre\per\second}   & 217.4 & 23.3  & 9.3  & 0.043 & 0.051 & 0.115 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\paragraph{Interpretation.} The two coolants respond differently because they
+start in different regimes.
+\begin{itemize}
+  \item Water starts with $\NTU_0 \approx 0.35$. For small NTU,
+    $1 - e^{-\NTU} \approx \NTU$, so \cref{eq:app-area} reduces to
+    $\Rcp \approx 1/(f\,hA_0)$: halving the area roughly doubles the resistance,
+    which appears as a straight line on the logarithmic axes.
+  \item Galinstan starts with $\NTU_0 \gg 1$, so $e^{-f\,\NTU_0}$ remains
+    negligible and $\Rcp \approx 1/(\mdot\,\cp)$ until $f\,\NTU_0$ falls to about
+    3. Its resistance therefore stays flat until
+    \begin{equation}
+      f \approx \frac{3}{\NTU_0} = \frac{3\,\mdot\,\cp}{hA_0},
+    \end{equation}
+    which is $f \approx 0.09$ at \SI{1.45}{\milli\litre\per\second} and
+    $f \approx 0.3$ at \SI{10}{\milli\litre\per\second}. Below this point the
+    excess convective capacity has been used up and $\Rcp$ begins to rise.
+\end{itemize}
+The comparison shows that a coolant with a large NTU can tolerate a large
+reduction in heated area, and hence a large increase in heat flux, before its
+cold-plate resistance increases, whereas a coolant near the convection-limited
+boundary cannot.
+
+\paragraph{Assumptions and limitations.}
+\begin{itemize}
+  \item $h$ is held at its value for the tested geometry. In a shorter laminar
+    tube a larger fraction of the length would lie in the thermal entry region,
+    raising the mean Nu; this would favour laminar water slightly at small $f$.
+    In turbulent flow $h$ is nearly independent of length, so the effect is small
+    for the cases shown.
+  \item The plate is assumed to remain isothermal. With a smaller area the heat
+    flux and the spreading resistance in the plate both increase, which this
+    calculation does not capture.
+  \item Pressure drop and pumping power are not considered; the flow rate is
+    simply held constant.
+  \item The coolant temperature rise $\Qplate/(\mdot\,\cp)$ is unchanged by $f$,
+    so for Galinstan at low flow it remains 17--\SI{18}{\celsius}.
+\end{itemize}
+The results are therefore indicative of trends, not predictions for a specific
+design. A minichannel or reduced-area design would need to be assessed with the
+conjugate heat transfer model.

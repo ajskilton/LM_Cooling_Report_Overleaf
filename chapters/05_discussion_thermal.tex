@@ -1,0 +1,255 @@
+% =====================================================================
+% Discussion: thermal performance of Galinstan vs water, and suitability
+% Figures: discussion_regimes.pdf (new), combined_rcp.pdf (results section)
+% Requires: amsmath, siunitx, booktabs, tabularx, cleveref
+% Uses report macros: \Rcp, \Rpack, \Qplate, \Tin, \mdot, \cp, \NTU, \Vdot
+% =====================================================================
+\chapter{Discussion}
+\label{sec:discussion}
+
+\section{Performance of Galinstan in the Tested Cold Plate}
+\label{sec:disc-performance}
+
+\begin{table}[htbp]
+  \centering
+  \caption{Measured performance of the cold plate with each coolant. Galinstan
+    flows are from the energy balance; $\Rcp$ is from the $\varepsilon$--NTU
+    model (water at \SI{3.6}{\litre\per\minute} and \SI{1.8}{\litre\per\minute}:
+    model value shown for comparison with Galinstan).}
+  \label{tab:disc-performance}
+  \small
+  \setlength{\tabcolsep}{4pt}
+  \begin{tabular}{@{}lrrrrrr@{}}
+    \toprule
+    Test & $\Vdot$ & $\Qplate$ & $T_{\mathrm{M}} - \Tin$ & $(T_{\mathrm{M}} - \Tin)/\Qplate$
+      & $\Delta T_{\mathrm{cool}}$ & NTU \\
+     & (\si{\milli\litre\per\second}) & (\si{\watt}) & (\si{\celsius})
+      & (\si{\celsius\per\watt}) & (\si{\celsius}) & \\
+    \midrule
+    Galinstan, full & 1.45 & 60.4 & 29.5 & 0.488 & 17.8 & 34.8 \\
+    Galinstan, low  & 0.77 & 30.8 & 24.6 & 0.799 & 17.1 & 64.8 \\
+    Water, \SI{3.6}{\litre\per\minute}  & 60.0 & 62.6 & 16.1 & 0.257 & 0.25 & 0.35 \\
+    Water, \SI{1.8}{\litre\per\minute}  & 30.0 & 62.8 & 16.6 & 0.264 & 0.50 & 0.35 \\
+    Water, \SI{0.73}{\litre\per\minute} & 12.2 & 62.3 & 16.4 & 0.264 & 1.22 & 0.31 \\
+    Water, \SI{0.5}{\litre\per\minute}  &  8.3 & 62.2 & 16.6 & 0.267 & 1.78 & 0.39 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+\issue{\Cref{tab:disc-performance} uses $T_{\mathrm{M}} = \SI{51.1}{\celsius}$ for the
+Galinstan low-flow test, as in the thermal network results; the SimScale
+comparison used \SI{50.0}{\celsius} and \SI{50.1}{\celsius}. Use one set of
+values throughout.}
+
+The Galinstan tests ran at 0.8--\SI{1.5}{\milli\litre\per\second}, six to
+forty times below the water tests, and operates at its caloric limit
+$1/(\mdot\,\cp)$. The comparison in
+\cref{tab:disc-performance} therefore reflects the flow the pump could deliver
+rather than a general disadvantage of utilising a Galinstan coolant.
+
+\section{Why Galinstan Is Caloric-Limited}
+\label{sec:disc-caloric}
+
+Galinstan's NTU was 35 to 65 in the tests, so $\varepsilon \approx 1$ and
+$\Rcp \approx 1/(\mdot\,\cp)$. As a result, the coolant leaves the plate at almost the plate
+temperature, and is therefore limited by the ability of the flow to store and transport heat energy.
+Galinstan's high thermal conductivity gives a wall heat transfer coefficient of
+about \SI{7700}{\watt\per\metre\squared\per\kelvin}, roughly 7.5 times that of
+laminar water (\cref{app:convection}), but this advantage is not utilised with the current setup. 
+The convective term $1/(hA)$, where galinstan has an advantage, accounts for less than \SI{3}{\percent} of $\Rcp$.
+Water, by contrast, has $\NTU \approx 0.3$--0.4 at every tested flow, so
+convection makes up about \SI{85}{\percent} of its $\Rcp$.
+
+\Cref{fig:disc-regimes}(a) extends this over the full flow range. Galinstan
+remains caloric-limited ($\NTU > 3$) up to the edge of the laminar region.
+In contrast, water stays close to the convection-limited boundary above about
+\SI{10}{\milli\litre\per\second}. For a caloric-limited coolant, the volumetric heat capacity is 
+$\rho\cp$ the most important quantity, and here water has the
+advantage (\cref{tab:disc-properties}): it absorbs about 1.8 times more heat per
+unit volume per degree.
+
+\begin{table}[htbp]
+  \centering
+  \caption{Coolant properties relevant to suitability. Thermal properties are
+    those used in the model (\cref{tab:coolant-properties}).}
+  \label{tab:disc-properties}
+  \small
+  \begin{tabularx}{\linewidth}{@{}lrrX@{}}
+    \toprule
+    Property & Galinstan & Water & Implication \\
+    \midrule
+    $\rho\cp$ (\si{\mega\joule\per\metre\cubed\per\kelvin})
+      & 2.33 & 4.18 & Water carries 1.8$\times$ more heat per unit flow \\
+    $k$ (\si{\watt\per\metre\per\kelvin}) & 16.5 & 0.60
+      & Galinstan $h$ is about 27$\times$ higher at equal Nu \\
+    $\mu$ (\si{\milli\pascal\second}) & 2.4 & 1.0
+      & Laminar pressure drop 2.4$\times$ higher at equal flow \\
+    $\rho$ (\si{\kilogram\per\metre\cubed}) & 6370 & 1000
+      & 6.4$\times$ coolant mass for the same volume \\
+    Pr & 0.053 & 6.97 & Heat diffuses far faster than momentum in Galinstan \\
+    Electrical conductivity (\si{\siemens\per\metre})
+      & $\approx 3.5 \times 10^{6}$ & $\ll 1$ & Galinstan can be pumped
+        electromagnetically, but heats and is retarded in AC fields \\
+    Liquid range at \SI{1}{atm} (\si{\celsius})
+      & $-19$ to $>1300$ & 0 to 100 & Galinstan cannot boil at component
+        temperatures \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+\issue{\Cref{tab:disc-properties}: add citations for the electrical
+conductivity and liquid range of Galinstan (e.g.\ the manufacturer's datasheet
+or the liquid-metal section of the literature review).}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\textwidth]{discussion_regimes.pdf}
+  \caption{(a) NTU against flow rate for both coolants in the ATS-TCP-1001 cold
+    plate, with the tested flows marked. Galinstan remains caloric-limited over
+    the whole range; water sits near the convection-limited boundary. Gaps mark
+    the transitional range ($2300 < \mathrm{Re} < 4000$); turbulent Galinstan
+    uses the Seban--Shimazaki correlation~\cite{bergman_fundamentals_2017}.
+    (b) Indicative effect of reducing the heated area at fixed flow, with $h$
+    held at its tested-geometry value. Water's $\Rcp$ rises in proportion to
+    $1/A$, while Galinstan's is almost unaffected until the area falls below
+    about \SI{20}{\percent} of the tested value.}
+  \label{fig:disc-regimes}
+\end{figure}
+
+Something here on pumping power and scalability.
+
+\section{Validity of the Measurements and Models}
+\label{sec:disc-validity}
+
+The conclusions above rest on two Galinstan tests and four water tests, and
+their limitations should be weighed. Three points stand out.
+
+First, the low-flow water results are limited by the flow measurement rather
+than by the model. The measured $T_{\mathrm{M}} - \Tin$ stays between
+\SI{16.1}{\celsius} and \SI{16.6}{\celsius} from \SIrange{60}{8.3}{\milli\litre\per\second},
+and the \SI{0.5}{\litre\per\minute} point lies below water's caloric limit
+(\cref{fig:combined_rcp}). A cold plate cannot have $\Rcp < 1/(\mdot\,\cp)$, so
+the true flow in that test must have been at least \SI{9.6}{\milli\litre\per\second},
+about \SI{15}{\percent} above the reading. This supports the conclusion that the
+flow meter under-reads below its rated range and that these tests were not
+laminar.
+
+Second, $\Rpack$ was calibrated on the turbulent water tests, where the plate is
+close to isothermal. Galinstan's coolant temperature rise of
+17--\SI{18}{\celsius} violates this assumption: the outlet end of the plate runs
+hotter than the mean, and the inferred $\Rpack$ for Galinstan ranges from
+\SIrange{0.19}{0.24}{\celsius\per\watt} (isothermal plate) to
+\SIrange{0.33}{0.51}{\celsius\per\watt} (uniform flux). The full-flow Galinstan point lying slightly below its caloric
+limit is consistent with this. The lumped model therefore describes Galinstan
+less reliably than water, although the agreement within the measurement
+uncertainty (\cref{sec:results}) shows it captures the dominant behaviour.
+
+Third, the conjugate heat transfer simulations address the main weakness of the
+lumped model. They are mesh-independent above \num{427e3} cells and reproduce
+all four probe temperatures within \SI{1.4}{\celsius} for both Galinstan tests.
+The consistent over-prediction of the right-hand resistor by about
+\SI{1.3}{\celsius} in both runs suggests a small systematic asymmetry in the
+model, such as the heat-load distribution, rather than random error. The CFD
+model can therefore be used with reasonable confidence to explore geometries and
+flows that the test rig could not reach.
+
+\section{Where Galinstan Is Best Suited}
+\label{sec:disc-suitability}
+
+The NTU analysis gives a clear criterion: Galinstan is advantageous where the
+cooling surface, rather than the coolant flow, limits heat removal; that is,
+where water would be convection-limited. \Cref{fig:disc-regimes}(b) illustrates
+this using the validated $\varepsilon$--NTU model. The heated area is scaled by a
+factor $f$ while the flow rate and heat transfer coefficient are held at their
+values in the tested cold plate, so that $\NTU$ falls in proportion to $f$ and
+$\Rcp = 1/[\mdot\,\cp\,(1 - e^{-f\,\NTU_0})]$, where $\NTU_0$ is the value for
+the full plate. This represents concentrating the same heat into a smaller
+footprint or a shorter heated length; the method and its assumptions are given in
+\cref{app:area-scaling}. Reducing the heated area at
+fixed flow raises water's $\Rcp$ almost in proportion, because water is already
+close to convection-limited. At the tested flow, Galinstan's $\Rcp$ barely changes until
+the area is reduced to about a fifth, because its excess $hA$ is simply used up. At
+\SI{5}{\percent} of the tested area, Galinstan at \SI{10}{\milli\litre\per\second}
+($\Rcp \approx \SI{0.12}{\celsius\per\watt}$) outperforms water at three times
+the flow ($\Rcp \approx \SI{0.46}{\celsius\per\watt}$). Galinstan's resistance only begins to rise once
+$f\,\NTU_0$ falls to about 3, so a coolant that starts with a large NTU can
+absorb a large reduction in area before its performance suffers. Because $h$ is
+held fixed and pressure drop is not considered, the result is indicative only,
+but it shows the type of application in which Galinstan's conductivity becomes
+useful.
+
+Galinstan is therefore best suited to applications combining: (i) high heat
+flux over a small area, such as direct cooling of power semiconductors or local
+hot spots, or minichannel and microchannel heat sinks; (ii) a pump able to
+deliver flow rates comparable to water, for which a sealed electromagnetic pump
+with no moving parts may offer a reliability advantage; (iii) component
+temperatures near or above \SI{100}{\celsius}, where water would boil without
+pressurisation; and (iv) locations away from strong alternating magnetic fields.
+\Cref{tab:disc-suitability} applies these criteria to the main components of an
+IPT system.
+
+\begin{table}[htbp]
+  \centering
+  \caption{Indicative suitability of Galinstan cooling for IPT system
+    components, based on the criteria of \cref{sec:disc-suitability}.}
+  \label{tab:disc-suitability}
+  \small
+  \begin{tabularx}{\linewidth}{@{}l>{\raggedright\arraybackslash}p{2.6cm}cX@{}}
+    \toprule
+    Component & Heat load character & Suitability & Reason \\
+    \midrule
+    Inverter and rectifier modules & High flux, small area & Good
+      & Water likely convection-limited; much weaker AC fields than at the
+        coupler \\
+    Coupler coils (Litz) and ferrite pads & Distributed, moderate flux & Poor
+      & Strong AC field causes eddy-current heating and MHD drag in a conductive
+        coolant \\
+    Resonant compensation capacitors & Moderate flux & Limited
+      & Benefit only if close to their temperature limit; proximity to high
+        voltage and AC fields \\
+    Vehicle-side assembly & Weight-sensitive & Poor
+      & 6.4$\times$ the coolant mass of water, and high material cost \\
+    Large cold plates at low flow (as tested) & Low flux, large area & Poor
+      & Caloric-limited; water carries 1.8$\times$ more heat per unit flow \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+These findings agree with Hodes et al.~\cite{hodes_potential_2014}, who found
+that Galinstan's low volumetric heat capacity makes its caloric resistance a
+larger share of the total than for water (\SI{55}{\percent} against
+\SI{40}{\percent} in their optimised minichannel), and that its advantage depends
+on geometries that exploit its high conductivity. The larger caloric share found
+here (above \SI{97}{\percent}) reflects a cold plate designed for water and a
+flow rate far below their optimum, rather than a contradiction of their result.
+\issue{Check the citation key for Hodes et al.\ (2014). Also check the
+volumetric heat-capacity ratio: Hodes quote 0.45, while the properties used here
+give $2.33/4.18 = 0.56$; the difference is likely the Galinstan $\cp$ (see the
+360 vs \SI{366}{\joule\per\kilogram\per\kelvin} note).}
+
+\section{Limitations and Recommendations}
+\label{sec:disc-limitations}
+
+The main limitations of this study are the small number of valid Galinstan
+tests, the uncertain flow measurement for both coolants at low flow, the
+water-calibrated $\Rpack$, and the use of a single cold plate designed for
+water. The comparison has also been made at equal volumetric flow rather than at
+equal pumping power, which would penalise Galinstan further for its higher
+density and viscosity.
+
+Further work should:
+\begin{enumerate}
+  \item compare the coolants at equal pumping power, using the validated CFD
+    model to obtain pressure drop as well as temperature;
+  \item test Galinstan at higher flow rates, closer to
+    \SIrange{10}{30}{\milli\litre\per\second}, with an independently calibrated
+    flow meter;
+  \item use the CFD model to evaluate small-area, high-flux geometries such as
+    minichannel cold plates, where \cref{fig:disc-regimes}(b) indicates
+    Galinstan may outperform water;
+  \item quantify eddy-current heating and MHD drag through coupled
+    electromagnetic--thermal analysis before Galinstan is placed near the IPT
+    coupler; and
+  \item assess long-term material compatibility, since gallium alloys attack
+    aluminium and slowly alloy with copper.
+\end{enumerate}
+\issue{Add a citation for the gallium--aluminium and gallium--copper
+compatibility statement.}
