@@ -10,8 +10,9 @@ The following sections detail the methodology used to evaluate
 magnetohydrodynamically pumped Galinstan as a coolant for PECs. Two objectives
 guided the work. The first is to compare the thermal performance of the
 Galinstan cooling loop with that of a similar water cooling loop under
-equivalent operating conditions (RQ1). The second is to quantify the influence
-of a high-frequency magnetic leakage field on the Galinstan coolant (RQ2).
+equivalent operating conditions (RQ1). The second is to demonstrate Galinstan
+cooling of a power-dense inductor and to quantify the influence of its
+high-frequency leakage field on the coolant (RQ2).
 \Cref{sec:setup} describes the experimental setup, including the two cooling
 loops, the instrumentation and the safety considerations.
 \Cref{sec:inductor-design} presents the design of the power-dense inductor used
@@ -258,9 +259,8 @@ of the simulation model, although this measurement included the effect of long
 leads, which would be expected to increase it. The AC resistance
 $R_{\mathrm{ac}}$, which determines the winding loss, was measured with an LCR
 meter at low excitation as \SI{83}{\milli\ohm}, giving a winding loss of
-\SI{11.95}{\watt} at \SI{12}{\ampere} rms. 
-Though it should be noted, the resistance of the winding would increase with 
-the operating temperature of the windings.
+\SI{11.95}{\watt} at \SI{12}{\ampere} rms. This is a lower bound, because the
+winding resistance rises with its operating temperature.
 
 For a heat transfer investigation in which temperatures are continuously
 monitored, the uncertainty in the loss estimate is acceptable. For the later
@@ -285,10 +285,9 @@ with an integrated heat-transfer path, such as the inductor of Gao
 \subsection{Capacitor Tuning}
 \label{sec:capacitor-tuning}
 
-The allowable reactance of the inductor was limited by the maximum voltage
-developed across the series tuning capacitors needed to boost the volt-amperes
-(VA) in the inductor, which was limited to \SI{150}{\volt} across any single
-capacitor. To find
+The allowable reactance of the inductor was limited by the voltage across the
+series tuning capacitors, which boost the volt-amperes (VA) in the inductor and
+were limited to \SI{150}{\volt} across any single capacitor. To find
 acceptable tuning values, an optimisation model was developed using the Solver
 add-in in Microsoft Excel, which made it possible to check quickly whether a
 given inductance was feasible or would cause the capacitor voltage to exceed its
@@ -652,6 +651,8 @@ the heat passing into the coolant and $\Rpack = \SI{0.242}{\celsius\per\watt}$
 is the package resistance calibrated on the turbulent water tests. The same
 definition is applied to the experimental and simulated results, so that both
 are compared with the model on an equal basis (\cref{fig:galinstan_rcp_cfd}).
+The uncertainty of the inferred values is propagated from the instrument
+accuracies in \cref{app:uncertainty}.
 
 \paragraph{Experimental values.} $Q$ is the heat reaching the plate,
 $\Qplate$, obtained by subtracting the loss to ambient through $\Rmisc$ from the
@@ -703,7 +704,8 @@ until the system reached steady state, taken as a change of less than
 \SI{0.5}{\celsius} over 30 minutes. The thermocouple readings at the resistor,
 the cold-plate inlet and the cold-plate outlet were then recorded, together with
 the flow rate and the heat load. At shutdown, the resistors were switched off
-before the pump was ramped down.
+before the pump was ramped down. Every test, with its date, data file and the
+time it took to reach steady state, is listed in \cref{app:test-log}.
 
 The planned tests are given in \cref{tab:flow-rates}. The full-flow tests
 evaluate the maximum heat transfer of the current systems, and the low-flow
@@ -746,8 +748,8 @@ driven at its rated current of \SI{12}{\ampere} rms by an inverter and the
 resonant tuning network of \cref{sec:capacitor-tuning}, giving an estimated heat
 load of \SI{42.76}{\watt} (\cref{sec:model-validation}). The Galinstan was
 operated at full flow, and the inductor temperatures were recorded with the
-thermal camera. Any change in flow when the inductor was energised was captured
-by the flow sensor.
+thermal camera. The flow sensor was monitored for any change in flow when the
+inductor was energised.
 
 The eddy-current loss induced by the leakage field was measured separately with
 an Agilent E4980A LCR meter at an excitation current of about \SI{5}{\milli\ampere},
@@ -763,8 +765,9 @@ Because Galinstan and the cold plate are linear and non-magnetic, the added loss
 at any current is $\Delta R_{\mathrm{ac}} I_{\mathrm{rms}}^{2}$, so the change in
 resistance is a measure of the eddy-current loss. Finally, with the cold
 plate removed, the vial was moved progressively further away from the inductor,
-from \SIrange{1}{5}{\centi\metre}, to show how the loss in the coolant falls
-with distance.
+from \SI{1}{\centi\metre} to \SI{5}{\centi\metre}, to show how the loss in the coolant falls
+with distance. The design sweep and all AC resistance measurements are given in
+\cref{app:inductor-data}.
 
 \begin{figure}[htbp]
   \centering

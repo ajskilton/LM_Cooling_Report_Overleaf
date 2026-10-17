@@ -61,11 +61,13 @@ across the plate.
 Dividing the resistor temperature rise by the heat reaching the cold plate,
 $\Qplate$, gives the total thermal resistance from the resistor to the coolant
 inlet, $(\Tres - \Tin)/\Qplate = \Rpack + \Rcp$. With Galinstan, the total
-resistance was \SI{0.488}{\celsius\per\watt} at full flow and
-\SI{0.799}{\celsius\per\watt} at low flow, compared with
-\SIrange{0.257}{0.267}{\celsius\per\watt} for water. At the flow rates achieved,
-Galinstan therefore cooled the resistors less effectively than water, with a
-total resistance 1.8 to 3.1 times higher.
+resistance was $\SI{0.488}{} \pm \SI{0.054}{\celsius\per\watt}$ at full flow and
+$\SI{0.799}{} \pm \SI{0.108}{\celsius\per\watt}$ at low flow, compared with
+\SIrange{0.257}{0.267}{\celsius\per\watt} ($\pm\SI{0.05}{\celsius\per\watt}$)
+for water, where the uncertainties are propagated from the instrument accuracies
+(\cref{app:uncertainty}). At the flow rates achieved, Galinstan therefore cooled
+the resistors less effectively than water, with a total resistance 1.8 to 3.1
+times higher, a difference well outside the combined uncertainty.
 
 \begin{table}[htbp]
   \centering
@@ -80,16 +82,17 @@ total resistance 1.8 to 3.1 times higher.
      & (\si{\milli\litre\per\second}) & (\si{\watt}) & (\si{\celsius})
       & (\si{\celsius}) & (\si{\celsius\per\watt}) & \\
     \midrule
-    Galinstan & 1.45\tnote{a} & 60.4 & 17.83   & 29.5 & 0.488 & 34.8 \\
-    Galinstan & 0.77\tnote{a} & 30.8 & 17.10   & 24.6 & 0.799 & 64.8 \\
-    Water     & 58.3 & 62.6 & 0.40    & 16.1 & 0.257 & 0.35 \\
-    Water     & 29.2 & 62.8 & 0.70    & 16.6 & 0.264 & 0.35 \\
-    Water     & 12.2 & 62.3 & $-0.27$ & 16.4 & 0.264 & 0.31 \\
-    Water     & 8.3  & 62.2 & $-0.03$ & 16.6 & 0.267 & 0.39 \\
+    Galinstan & 1.45\tnote{a} & 60.4 & 17.83   & 29.5 & $0.488 \pm 0.054$ & 34.8 \\
+    Galinstan & 0.77\tnote{a} & 30.8 & 17.10   & 24.6 & $0.799 \pm 0.108$ & 64.8 \\
+    Water     & 58.3 & 62.6 & 0.40    & 16.1 & $0.257 \pm 0.050$ & 0.35 \\
+    Water     & 29.2 & 62.8 & 0.70    & 16.6 & $0.264 \pm 0.050$ & 0.35 \\
+    Water     & 12.2 & 62.3 & $-0.27$ & 16.4 & $0.264 \pm 0.051$ & 0.31 \\
+    Water     & 8.3  & 62.2 & $-0.03$ & 16.6 & $0.267 \pm 0.051$ & 0.39 \\
     \bottomrule
   \end{tabular}
   \floatnote{\tnote{a}From the energy balance. NTU from the $\varepsilon$--NTU
-    model.}
+    model. Uncertainties from \cref{app:uncertainty}; data files in
+    \cref{app:test-log}.}
 \end{table}
 
 \subsection{Comparison with the Thermal Network}
@@ -99,10 +102,12 @@ total resistance 1.8 to 3.1 times higher.
 with the predictions of the thermal network of \cref{eq:network}, using
 $\Rpack = \SI{0.242}{\celsius\per\watt}$ in every test. The two turbulent water
 tests were used to calibrate $\Rpack$. The Galinstan flow, measured with the EMF
-sensor, agreed with the energy balance to within \SI{4}{\percent}. For
+sensor, agreed with the energy balance to within about \SI{6}{\percent}
+(\cref{app:uncertainty}). For
 Galinstan, the model predicts the resistor temperature exactly at low flow and
 \SI{2.5}{\celsius} high at full flow, close to the $\pm\SI{2.2}{\celsius}$
-thermocouple accuracy. The two laminar water tests are over-predicted by
+thermocouple accuracy. The two water tests completed below
+\SI{1}{\litre\per\minute} are over-predicted by
 \SI{3.0}{\celsius} and \SI{3.6}{\celsius}.
 
 \begin{table}[htbp]
@@ -132,17 +137,23 @@ thermocouple accuracy. The two laminar water tests are over-predicted by
 
 \Cref{fig:galinstan_rcp,fig:water_rcp} present the measured cold-plate
 resistance, inferred with \cref{eq:rcp-inferred}, against flow rate, together
-with the $\varepsilon$--NTU model. Because $\Rpack$ is common to every
-test, the difference between the coolants lies in the cold plate. Galinstan's
-measured $\Rcp$ (\SIrange{0.25}{0.56}{\celsius\per\watt}) was between about 10
-and 37 times that of water (\SIrange{0.015}{0.025}{\celsius\per\watt}). The
-low-flow Galinstan point lies on the model curve, while the full-flow point lies
-about \SI{0.05}{\celsius\per\watt} below it. For water, the two turbulent points
-follow the datasheet trend. The two low-flow points, however, lie well below the
-laminar $\varepsilon$--NTU prediction of \SIrange{0.074}{0.088}{\celsius\per\watt},
-close to an extrapolation of the turbulent datasheet trend. In other words, the
-measured resistor temperature barely changed as the water flow fell from
-\SI{58.3}{\milli\litre\per\second} to \SI{8.3}{\milli\litre\per\second}.
+with the $\varepsilon$--NTU model. The error bars show the propagated
+measurement uncertainty (\cref{app:uncertainty}). Because $\Rpack$ is common to
+every test, the difference between the coolants lies in the cold plate.
+Galinstan's measured $\Rcp$ (\SIrange{0.25}{0.56}{\celsius\per\watt}) was
+between about 10 and 37 times that of water
+(\SIrange{0.015}{0.025}{\celsius\per\watt}). The low-flow Galinstan point lies
+on the model curve, while the full-flow point lies about
+\SI{0.05}{\celsius\per\watt} below it, at the edge of its uncertainty. For
+water, the uncertainty of about $\pm\SI{0.05}{\celsius\per\watt}$ is larger than
+$\Rcp$ itself, because $\Rcp$ is a small difference between two larger
+resistances, so only the trend with flow is resolved. The two turbulent points
+follow the datasheet trend. The two low-flow points, however, lie below the
+laminar $\varepsilon$--NTU prediction of \SIrange{0.074}{0.088}{\celsius\per\watt}
+by slightly more than their uncertainty, close to an extrapolation of the
+turbulent datasheet trend. In other words, the measured resistor temperature
+barely changed as the water flow fell from \SI{58.3}{\milli\litre\per\second} to
+\SI{8.3}{\milli\litre\per\second}.
 
 These results differ from those of Hodes \emph{et al.}, whose model of
 geometrically optimised heat sinks for direct die cooling found that Galinstan
@@ -166,17 +177,21 @@ area of about \SI{150}{\centi\metre\squared} and \SI{8}{\milli\metre} tubes
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=0.75\linewidth]{galinstan_rcp}
+  \input{figures/galinstan_rcp}
   \caption{Galinstan cold-plate resistance against flow rate.}
   \label{fig:galinstan_rcp}
+  \floatnote{Flow from the energy balance. Error bars: propagated measurement
+    uncertainty (\cref{app:uncertainty}).}
 \end{figure}
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=0.75\linewidth]{water_rcp}
+  \input{figures/water_rcp}
   \caption{Water cold-plate resistance against flow rate.}
   \label{fig:water_rcp}
-  \floatnote{Shaded: transitional range, where no estimate is made.}
+  \floatnote{Shaded: transitional range, where no estimate is made. Dotted: lower
+    limit of the flow meter's range. Error bars: propagated measurement
+    uncertainty (\cref{app:uncertainty}), cut off at zero.}
 \end{figure}
 
 \subsection{Pumping Power}
@@ -282,10 +297,12 @@ pattern expected from the asymmetric cooling described in
 upper core relies on convection to the surrounding air and on conduction across
 the gap to the lower core. The temperature difference between the upper and
 lower cores in \cref{fig:inductor-cam-a} therefore shows the cooling effect of
-the Galinstan cold plate over natural convection. The EMF reading of the flow rate
-indicated a decrease in flow as current was increased in the inductor. 
-However, this measurement is in the \SI{}{\micro\volt} range and is very sensitive to noise. 
-If the inductor losses were better estimated, the flow rate could be verified using the energy balance.
+the Galinstan cold plate over natural convection. The EMF flow reading indicated
+that the flow decreased as the inductor current was increased. However, this
+signal is in the microvolt range and very sensitive to noise, so whether the
+flow changed when the inductor was energised is inconclusive. With a better
+estimate of the inductor loss, the flow could be checked with the energy
+balance.
 
 \begin{figure}[htbp]
   \centering
@@ -323,7 +340,10 @@ Galinstan vial beside the inductor, the increase rose to \SI{22.0}{\milli\ohm},
 
 In relative terms, the empty cold plate increased $R_{\mathrm{ac}}$ by about
 \SI{15}{\percent} of its nominal value, and the Galinstan within it added about
-\SI{1}{\percent} more. Gao \emph{et al.}\ measured a larger effect for a planar
+\SI{1}{\percent} more. This \SI{1.0}{\milli\ohm} is within the
+$\pm\SI{1.5}{\milli\ohm}$ repeatability of the LCR meter, so the loss added by
+the coolant could not be resolved, whereas the increases due to the plate and
+the vial lie well outside it (\cref{app:inductor-data}). Gao \emph{et al.}\ measured a larger effect for a planar
 inductor mounted on a liquid-cooled aluminium cold plate: its AC resistance rose
 from \SI{35.4}{\milli\ohm} when passively cooled to \SI{47.5}{\milli\ohm} on the
 cold plate, an increase of \SI{34}{\percent} at about \SI{250}{\kilo\hertz},
@@ -376,6 +396,14 @@ of Galinstan was moved progressively further away from the inductor, with the
 cold plate removed. The increase fell from \SI{9.0}{\milli\ohm} at
 \SI{1}{\centi\metre} to \SI{2.15}{\milli\ohm} at \SI{4}{\centi\metre}, and did
 not change between \SI{4}{\centi\metre} and \SI{5}{\centi\metre}.
+\issue{\Cref{fig:rac_distance} measures the increase from \SI{80.0}{\milli\ohm},
+the nominal of the cold-plate session, but in \texttt{inductor Rac.xlsx} the
+distance test has its own same-session nominal of \SI{82.15}{\milli\ohm}. Against
+that nominal, the increase is 6.85, 3.85, 0.85, 0 and \SI{0}{\milli\ohm} at
+1--\SI{5}{\centi\metre} (\cref{tab:app-rac-distance}), falling to within the LCR
+repeatability from \SI{3}{\centi\metre}. The text above says each configuration is
+compared with the nominal of its own session, so the figure and these two
+sentences should probably use the 82.15 values.}
 
 \begin{figure}[htbp]
     \centering
@@ -432,7 +460,8 @@ thermocouple accuracy.
 \Cref{fig:galinstan_rcp_cfd} compares the Galinstan cold-plate resistance from
 the simulations with the $\varepsilon$--NTU model and the measured values, all
 obtained with \cref{eq:rcp-inferred} (\cref{sec:rcp-calc}). At the two tested
-flows, the simulated resistance lies between the model and the measurements.
+flows, the simulated resistance lies between the model and the measurements,
+within the measurement uncertainty.
 At \SI{2.8}{\milli\litre\per\second} and \SI{5}{\milli\litre\per\second},
 beyond the flows the rig could reach, the simulated values lie a steady
 \SIrange{0.035}{0.036}{\celsius\per\watt} below the model, but follow its
@@ -442,9 +471,10 @@ to the flow rate.
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=0.75\linewidth]{galinstan_rcp_cfd}
+  \input{figures/galinstan_rcp_cfd}
   \caption{Galinstan cold-plate resistance: model, simulation and measurement.}
   \label{fig:galinstan_rcp_cfd}
   \floatnote{Simulated and measured $\Rcp$ from \cref{eq:rcp-inferred}; CHT at
-    \num{427e3} cells, final iteration.}
+    \num{427e3} cells, final iteration. Error bars: measurement uncertainty
+    (\cref{app:uncertainty}).}
 \end{figure}

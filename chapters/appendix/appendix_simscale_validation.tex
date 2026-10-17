@@ -66,7 +66,9 @@ error is negligible against the measurement uncertainty.
 \end{figure}
 
 \Cref{fig:mesh_independence_water} shows the corresponding study for
-the turbulent water model at \SI{60}{\milli\litre\per\second}. The pattern is the
+the turbulent water model at \SI{60}{\milli\litre\per\second}
+(\SI{3.6}{\litre\per\minute}), the flow set in SimScale for the full-flow water
+test, which was measured at \SI{58.3}{\milli\litre\per\second}. The pattern is the
 same: the inlet and outlet vary by less than \SI{0.03}{\celsius}, and the
 resistor temperatures are under-predicted on the coarsest meshes, by up to
 \SI{2.5}{\celsius} at \num{73e3} cells. The fine meshes settle more slowly than
@@ -90,18 +92,14 @@ negligible in the way it is for Galinstan.
 
 \begin{figure}[htbp]
   \centering
-  \figureorplaceholder[width=\linewidth]{mesh_independence_water.pdf}
+  \includegraphics[width=\linewidth]{mesh_independence_water}
   \caption{Mesh independence study for water at
     \SI{60}{\milli\litre\per\second}.}
   \label{fig:mesh_independence_water}
   \floatnote{$k$--$\omega$ SST. (a)~Final probe temperatures; (b)~change
-    relative to the \num{1.5e6}-cell mesh, on the scale of
-    \cref{fig:mesh_independence}.}
+    relative to the \num{1.5e6}-cell mesh. From \num{427e3} cells, all probes are
+    within \SI{0.6}{\celsius} of the finest mesh.}
 \end{figure}
-\issue{The measured full water flow is \SI{58.3}{\milli\litre\per\second} in
-the main text, but this appendix gives \SI{60}{\milli\litre\per\second}
-(\SI{3.6}{\litre\per\minute}) for the water simulations. Keep it if that is the
-flow set in SimScale; otherwise change it to \SI{58.3}{\milli\litre\per\second}.}
 
 \section{Iterative Convergence}
 
@@ -120,8 +118,8 @@ over the final 1000 iterations.
 The fully converged resistor temperatures would therefore be slightly lower
 than those reported. This drift is small relative to the measurement tolerance,
 but it is not zero, and its direction matters for the comparison below: it would
-move the right resistor towards the measured value and the left resistor
-slightly further below it. The water model converges much faster
+move the right resistor, which is over-predicted, towards its measured value. The
+water model converges much faster
 (\cref{fig:simscale_water}). After an initial transient, every probe is
 within \SI{0.01}{\celsius} of its final value by about 1000 iterations, and at
 every mesh density no probe changes by more than \SI{0.001}{\celsius} over the
@@ -139,8 +137,9 @@ final 1000 iterations. Iterative error is therefore negligible for water.
   \vspace{0.6em}
   \begin{subfigure}{\linewidth}
     \centering
-    \figureorplaceholder[width=0.9\linewidth]{simscale_convergence_water.pdf}
-    \caption{Water, \SI{60}{\milli\litre\per\second}, \SI{72}{\watt}}
+    \includegraphics[width=0.9\linewidth]{simscale_convergence_water}
+    \caption{Water, \SI{60}{\milli\litre\per\second}, \SI{72}{\watt},
+      \num{427e3} cells}
     \label{fig:simscale_water}
   \end{subfigure}
   \caption{Convergence of the CHT model against experiment.}
@@ -159,18 +158,15 @@ the boundary condition was set correctly, rather than validating the model, and
 the outlet agreement mainly confirms that the heat input and flow rate are
 consistent with the energy balance. The resistor temperatures are the stronger
 test, because they depend on the conduction path through the package and cold
-plate and on the wall heat transfer coefficient the model predicts. The left
-resistor is under-predicted by about \SI{0.5}{\celsius} and the right resistor
-over-predicted by about \SI{1.4}{\celsius}. The model also predicts the right
-resistor to be roughly \SI{2}{\celsius} warmer than the left, whereas the
-measured temperatures are almost identical. This asymmetry lies within the
-combined uncertainty, so the present instrumentation can neither confirm nor
-rule it out.
-\issue{The full-flow Galinstan data (\cref{fig:galinstan_transient}(a)) show the
-right resistor at about \SI{60.1}{\celsius} and the left at about
-\SI{58.6}{\celsius}, so the measured asymmetry is about \SI{1.5}{\celsius}, not
-``almost identical''. The model's \SI{2}{\celsius} asymmetry is then close to
-the measured one; reword this paragraph to match.}
+plate and on the wall heat transfer coefficient the model predicts. Against the
+measured mean of the two resistors, the left resistor is under-predicted by about
+\SI{0.5}{\celsius} and the right resistor over-predicted by about
+\SI{1.4}{\celsius}. The model predicts the right resistor to be roughly
+\SI{2}{\celsius} warmer than the left, close to the measured difference of about
+\SI{1.5}{\celsius} (\cref{fig:galinstan_transient}(a)), so when each resistor is
+compared with its own thermocouple, both agree to within about
+\SI{0.7}{\celsius}. The model therefore also reproduces the asymmetry between the
+two resistors.
 
 The water model agrees less well (\cref{fig:simscale_water}). The
 simulated inlet and outlet lie within \SI{0.15}{\celsius} of the measurements,

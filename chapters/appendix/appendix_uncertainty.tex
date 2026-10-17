@@ -1,0 +1,170 @@
+% =====================================================================
+% Appendix: Measurement uncertainty of the steady-state results
+% Calculation: figures/data/make_rcp_data.py (also writes the plotted data)
+% =====================================================================
+\chapter{Measurement Uncertainty}
+\label{app:uncertainty}
+
+This appendix derives the uncertainties quoted in \cref{tab:measured-performance}
+and shown as error bars in \cref{fig:galinstan_rcp,fig:water_rcp,fig:galinstan_rcp_cfd}.
+The instrument accuracies are propagated through the thermal network of
+\cref{eq:network} to the heat reaching the plate, the total resistance and the
+inferred cold-plate resistance of \cref{eq:rcp-inferred}. The calculation is
+scripted in \texttt{figures/data/make\_rcp\_data.py}, which also writes the data
+files plotted in those figures.
+
+\section{Instrument Accuracy}
+
+\Cref{tab:app-instruments} lists the accuracy assumed for each measured
+quantity. The thermocouple accuracy dominates, because every resistance is
+obtained from a temperature difference of only \SIrange{16}{30}{\celsius}.
+
+\begin{table}[htbp]
+  \centering
+  \caption{Accuracy of the measured quantities.}
+  \label{tab:app-instruments}
+  \small
+  \begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{3.3cm}
+      >{\raggedright\arraybackslash}p{4.2cm} L@{}}
+    \toprule
+    Quantity & Instrument & Uncertainty \\
+    \midrule
+    Steady-state temperature & K-type thermocouples
+      & $\pm\SI{2.2}{\celsius}$ per reading~\cite{loh_project_2025} \\
+    Heater power, $\Qin$ & GW Instek GPE-3323 readback
+      & $\pm\SI{2}{\percent}$ (assumed) \\
+    Resistance to ambient, $\Rmisc$ & No-flow tests at \SI{12}{\watt}
+      & $\pm\SI{8}{\percent}$ (Galinstan), $\pm\SI{9}{\percent}$ (water),
+        propagated \\
+    Galinstan flow & Energy balance; EMF sensor as a check
+      & $\pm\SI{18}{\percent}$ (energy balance, propagated) \\
+    Water flow & Sea Zhongjiang digital flow meter
+      & Not specified; out of range below \SI{1}{\litre\per\minute} \\
+    AC resistance & Agilent E4980A LCR meter
+      & $\pm\SI{1.5}{\milli\ohm}$ (repeatability band) \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+\section{Propagation}
+
+The errors of the individual readings are treated as independent and combined
+by root-sum-square, which is a conservative choice for a temperature
+difference (\cref{sec:app-unc-interpretation}). Any difference between two
+thermocouple readings therefore has an uncertainty of
+\begin{equation}
+  u(\Delta T) = \sqrt{2}\,u_T = \sqrt{2} \times \SI{2.2}{\celsius}
+    = \SI{3.1}{\celsius}.
+\end{equation}
+The resistance to ambient, $\Rmisc = (\Tres - T_{\mathrm{A}})/Q_0$, was measured
+at $Q_0 = \SI{12}{\watt}$ with a temperature rise of about \SI{40}{\celsius}
+(Galinstan) and \SI{35}{\celsius} (water), giving the relative uncertainties in
+\cref{tab:app-instruments}. The heat lost to ambient during a test,
+$Q_{\mathrm{misc}} = (\Tres - T_{\mathrm{A}})/\Rmisc$, and the heat reaching the
+plate then have uncertainties
+\begin{equation}
+  \frac{u(Q_{\mathrm{misc}})}{Q_{\mathrm{misc}}}
+    = \sqrt{\left(\frac{u(\Delta T)}{\Tres - T_{\mathrm{A}}}\right)^{2}
+      + \left(\frac{u(\Rmisc)}{\Rmisc}\right)^{2}},
+  \qquad
+  u(\Qplate) = \sqrt{u(\Qin)^{2} + u(Q_{\mathrm{misc}})^{2}}.
+\end{equation}
+The total resistance $R = (\Tres - \Tin)/\Qplate$ and the inferred cold-plate
+resistance $\Rcp = R - \Rpack$ have the same absolute uncertainty,
+\begin{equation}
+  u(\Rcp) = u(R) = R\,\sqrt{\left(\frac{u(\Delta T)}{\Tres - \Tin}\right)^{2}
+      + \left(\frac{u(\Qplate)}{\Qplate}\right)^{2}},
+  \label{eq:app-u-r}
+\end{equation}
+with $\Rpack$ treated as exact. Its own calibration uncertainty, about
+$\pm\SI{0.05}{\celsius\per\watt}$ from the same expression, would shift every
+inferred $\Rcp$ by the same amount and does not change the comparison between
+tests. The Galinstan flow from the energy balance,
+$\Vdot = \Qplate/[\rho\cp(\Tout - \Tin)]$, has a relative uncertainty of
+$\sqrt{(u(\Qplate)/\Qplate)^{2} + (u(\Delta T)/(\Tout - \Tin))^{2}}$, about
+\SI{18}{\percent} for a \SIrange{17}{18}{\celsius} coolant temperature rise. The
+water flow meter has no stated accuracy, so no flow uncertainty is propagated for
+water.
+
+\section{Results}
+
+\Cref{tab:app-uncertainty} gives the propagated uncertainty for each
+steady-state test. The total resistance is known to about \SI{11}{\percent} for
+full-flow Galinstan, \SI{14}{\percent} for low-flow Galinstan and
+\SI{20}{\percent} for water, so the difference between the two coolants is far
+larger than its uncertainty. For water, however, the uncertainty of
+$\pm\SI{0.05}{\celsius\per\watt}$ exceeds the inferred $\Rcp$ of
+\SIrange{0.015}{0.025}{\celsius\per\watt}, because $\Rcp$ is a small difference
+between two resistances of about \SI{0.25}{\celsius\per\watt}.
+
+\begin{table}[htbp]
+  \centering
+  \caption{Propagated uncertainty of the steady-state results.}
+  \label{tab:app-uncertainty}
+  \small
+  \begin{tabular}{@{}lcccc@{}}
+    \toprule
+    Coolant & $\Vdot$ & $\Qplate$ & $(\Tres - \Tin)/\Qplate$ & $\Rcp$ \\
+     & (\si{\milli\litre\per\second}) & (\si{\watt}) & (\si{\celsius\per\watt})
+      & (\si{\celsius\per\watt}) \\
+    \midrule
+    Galinstan & $1.45 \pm 0.26$ & $60.4 \pm 2.0$ & $0.488 \pm 0.054$ & $0.246 \pm 0.054$ \\
+    Galinstan & $0.77 \pm 0.15$ & $30.8 \pm 1.4$ & $0.799 \pm 0.108$ & $0.557 \pm 0.108$ \\
+    Water     & 58.3            & $62.6 \pm 2.0$ & $0.257 \pm 0.050$ & $0.015 \pm 0.050$ \\
+    Water     & 29.2            & $62.8 \pm 2.0$ & $0.264 \pm 0.050$ & $0.022 \pm 0.050$ \\
+    Water     & 12.2\tnote{a}   & $62.3 \pm 2.0$ & $0.264 \pm 0.051$ & $0.022 \pm 0.051$ \\
+    Water     & 8.3\tnote{a}    & $62.2 \pm 2.0$ & $0.267 \pm 0.051$ & $0.025 \pm 0.051$ \\
+    \bottomrule
+  \end{tabular}
+  \floatnote{Galinstan flow from the energy balance. \tnote{a}Below the flow
+    meter's range.}
+\end{table}
+
+\section{Galinstan Flow Sensor}
+
+The EMF flow sensor gives an independent check of the Galinstan flow.
+\Cref{tab:app-emf} lists its readings against pump current, converted with
+$\Vdot = Eh/B$~\cite{kwon_project_2025}, together with the pump power measured
+across its terminals. At \SI{18}{\ampere} and \SI{9}{\ampere} the sensor gives
+1.37 and \SI{0.74}{\milli\litre\per\second}, which the report rounds to 1.4 and
+\SI{0.75}{\milli\litre\per\second}. The energy balance gives 1.45 and
+\SI{0.77}{\milli\litre\per\second}, \SIrange{4}{6}{\percent} higher, well within
+its own uncertainty. The flow rises almost linearly with current, as
+\cref{eq:mhd-pressure} predicts for a pump working against a laminar loop.
+
+\begin{table}[htbp]
+  \centering
+  \caption{EMF flow-sensor readings and pump power against pump current.}
+  \label{tab:app-emf}
+  \small
+  \begin{tabular}{@{}cccc@{}}
+    \toprule
+    Pump current & Sensor EMF & Flow & Pump power \\
+    (\si{\ampere}) & (\si{\micro\volt}) & (\si{\milli\litre\per\second}) & (\si{\watt}) \\
+    \midrule
+    9.0  & 80.5  & 0.74 & 0.21 \\
+    12.0 & 103.3 & 0.95 & 0.37 \\
+    18.0 & 149.0 & 1.37 & 0.83 \\
+    18.2 & 150.5 & 1.39 & 0.85 \\
+    \bottomrule
+  \end{tabular}
+  \floatnote{Room temperature, with the sensor magnets used in this work. Source:
+    project calculation sheet.}
+\end{table}
+
+\section{Interpretation}
+\label{sec:app-unc-interpretation}
+
+The $\pm\SI{2.2}{\celsius}$ accuracy of a thermocouple is mainly a fixed
+calibration offset rather than random noise. Treating the readings as
+independent therefore gives an upper bound on the uncertainty of any single
+result. Because the same resistors and thermocouples, and the same calibrated
+$\Rpack$, are used in every test, much of this offset is common to all tests, so
+differences between tests are resolved better than the error bars suggest. The
+water results support this: the measured resistor temperature rise varied by only
+\SI{0.5}{\celsius} (\SIrange{16.1}{16.6}{\celsius}) across a seven-fold change in
+flow. The repeatability of the tests themselves could not be assessed, because no
+test was repeated (\cref{sec:disc-limitations}). The CHT results have a numerical
+uncertainty of about \SI{0.25}{\celsius} from the mesh
+(\cref{app:cht_validation}), or about $\pm\SI{0.004}{\celsius\per\watt}$ in
+$\Rcp$, which is smaller than the plotted markers.

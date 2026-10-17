@@ -124,15 +124,15 @@ turbulent boundary layers develop within a few diameters.
 is reliable here, so no value of $\Rcp$ is estimated in this range.
 
 \paragraph{Turbulent liquid metal.} Gnielinski's correlation is not valid for
-$\mathrm{Pr} < 0.5$. Where turbulent Galinstan is shown in the discussion
-figures (above about \SI{9.5}{\milli\litre\per\second}), the Seban--Shimazaki
+$\mathrm{Pr} < 0.5$. For turbulent Galinstan, which in this tube would require
+more than about \SI{9.5}{\milli\litre\per\second}, the Seban--Shimazaki
 correlation for a liquid metal at constant wall
-temperature~\cite{bergman_fundamentals_2017} is used instead:
+temperature~\cite{bergman_fundamentals_2017} would apply instead:
 \begin{equation}
   \mathrm{Nu} = 5.0 + 0.025\,\mathrm{Pe}^{0.8}.
   \label{eq:app-seban}
 \end{equation}
-No Galinstan test reached this regime.
+No Galinstan test or simulation reached this regime.
 
 \paragraph{Note on the plotted curves.} The three branches of
 \cref{eq:app-shah} do not meet exactly: Nu jumps by about 0.5 at $x^* = 0.005$
@@ -292,8 +292,13 @@ therefore unchanged, and the number of transfer units scales directly with $f$:
   \label{eq:app-area}
 \end{equation}
 where $A_0 = \SI{0.0153}{\metre\squared}$ is the tested heated area and $hA_0$
-is calculated as in \cref{eq:app-nu,eq:app-shah,eq:app-gnielinski,eq:app-seban}.
-\Cref{tab:app-area} lists the inputs for the three cases plotted.
+is calculated as in \cref{eq:app-nu,eq:app-shah,eq:app-gnielinski}.
+\Cref{tab:app-area} lists the inputs for the three cases plotted. Water at
+\SI{30}{\milli\litre\per\second} represents the low-flow turbulent water test
+(\SI{29.2}{\milli\litre\per\second}), and Galinstan at
+\SI{1.5}{\milli\litre\per\second} the full-flow Galinstan test; using the exact
+measured flows changes the resistances by less than \SI{4}{\percent} and does
+not change the conclusions.
 
 \begin{table}[htbp]
   \centering
@@ -314,12 +319,7 @@ is calculated as in \cref{eq:app-nu,eq:app-shah,eq:app-gnielinski,eq:app-seban}.
   \end{tabular}
   \floatnote{Plotted in \cref{fig:area-scaling}.}
 \end{table}
-\issue{\Cref{tab:app-area} and \cref{fig:area-scaling} use
-\SI{30}{\milli\litre\per\second} for the low-flow water test, which was measured
-at \SI{29.2}{\milli\litre\per\second}. At \SI{29.2}{\milli\litre\per\second} the
-water row becomes $hA_0 = 42.8$, $\mdot\,\cp = 122.0$, $\Rcp = 0.028$, 0.121 and
-0.472; the conclusions are unchanged. Regenerate the figure if you want an exact
-match, or call the case ``about \SI{30}{\milli\litre\per\second}''.}
+
 
 \paragraph{Interpretation.} The two coolants respond differently because they
 start in different regimes.
@@ -360,7 +360,7 @@ boundary cannot.
   \item Pressure drop and pumping power are not considered; the flow rate is
     simply held constant.
   \item The coolant temperature rise $\Qplate/(\mdot\,\cp)$ is unchanged by $f$,
-    so for Galinstan at low flow it remains 17--\SI{18}{\celsius}.
+    so for Galinstan at low flow it remains \SIrange{17}{18}{\celsius}.
 \end{itemize}
 The results are therefore indicative of trends, not predictions for a specific
 design. A minichannel or reduced-area design would need to be assessed with the

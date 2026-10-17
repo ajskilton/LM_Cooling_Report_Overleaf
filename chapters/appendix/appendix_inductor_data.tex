@@ -1,0 +1,185 @@
+% =====================================================================
+% Appendix: Inductor design and eddy-current measurement data
+% Sources: Excel Models/Ansys to Loss.xlsx, Water and LM models.xlsx
+% (Comparison sheet), inductor Rac.xlsx, Experimental Measurement.xlsx
+% (Galinstan - Inductor, LCR Measurements)
+% =====================================================================
+\chapter{Inductor and Eddy-Current Data}
+\label{app:inductor-data}
+
+This appendix gives the data behind Experiment~2: the inductor's design values
+and measured parameters, the material properties that govern eddy-current loss
+at \SI{85}{\kilo\hertz}, all AC resistance measurements, and the flow and coolant
+temperatures recorded while the inductor was energised.
+
+\section{Inductor Parameters}
+
+\Cref{tab:app-inductor} compares the final design with the built inductor. The
+winding loss estimated in the design spreadsheet, which assumed that the AC
+resistance of the 800-strand Litz wire is twice its DC resistance, agrees with the
+loss calculated from the measured AC resistance. The ANSYS sweeps over air-gap
+length and number of turns, from which the design was chosen, are held in the
+project file \texttt{Ansys to Loss.xlsx}.
+
+\begin{table}[htbp]
+  \centering
+  \caption{Design and measured parameters of the inductor.}
+  \label{tab:app-inductor}
+  \small
+  \begin{tabular}{@{}lcc@{}}
+    \toprule
+    Parameter & Design (ANSYS) & Measured \\
+    \midrule
+    Turns, air gap & 8, \SI{0.6}{\milli\metre} & -- \\
+    Inductance (\si{\micro\henry}) & 92.5 & 92.1 \\
+    Core loss at \SI{12}{\ampere} rms (\si{\watt}) & 30.81 & -- \\
+    Winding AC resistance (\si{\milli\ohm}) & -- & 83 \\
+    Winding loss at \SI{12}{\ampere} rms (\si{\watt}) & 11.93 & 11.95 \\
+    Total loss (\si{\watt}) & 42.74 & 42.76\tnote{a} \\
+    \bottomrule
+  \end{tabular}
+  \floatnote{Core at \SI{65}{\celsius}; AC resistance at \SI{85}{\kilo\hertz}
+    and low excitation. \tnote{a}Design core loss plus measured winding loss.}
+\end{table}
+
+\section{Skin Depth and Eddy-Current Loss of the Materials}
+
+\Cref{tab:app-skin} gives the skin depth $\delta = 1/\sqrt{\pi f \mu_0 \sigma}$
+of the materials near the inductor at \SI{85}{\kilo\hertz}, and the eddy-current
+loss each develops as a plate in the same alternating field, from the initial
+ANSYS simulation described in \cref{sec:inductor-design}. Galinstan's lower
+conductivity gives a skin depth about three to four times that of aluminium or
+copper. In a plate thicker than its skin depth, the loss falls as the
+conductivity rises, so Galinstan dissipates 3.2 times as much as aluminium and
+3.9 times as much as copper. Water, by contrast, is effectively transparent to
+the field.
+
+\begin{table}[htbp]
+  \centering
+  \caption{Skin depth and simulated eddy-current loss at \SI{85}{\kilo\hertz}.}
+  \label{tab:app-skin}
+  \small
+  \begin{tabular}{@{}lccc@{}}
+    \toprule
+    Material & $\sigma$ & $\delta$ & Plate loss relative \\
+             & (\si{\siemens\per\metre}) & (\si{\milli\metre}) & to copper \\
+    \midrule
+    Copper    & \num{5.96e7} & 0.22 & 1.0 \\
+    Aluminium & \num{3.77e7} & 0.28 & 1.2 \\
+    Galinstan & \num{3.46e6} & 0.93 & 3.9 \\
+    Water     & \num{8e-4}   & \num{6.1e4} & -- \\
+    \bottomrule
+  \end{tabular}
+  \floatnote{Plate losses from an ANSYS Maxwell tutorial geometry, used only to
+    compare the materials.}
+\end{table}
+
+\section{AC Resistance Measurements}
+
+All AC resistances were measured with the Agilent E4980A LCR meter at
+\SI{85}{\kilo\hertz}. Repeated readings varied within about
+$\pm\SI{1.5}{\milli\ohm}$, and the absolute resistance drifted between sessions,
+so each change is taken from the nominal resistance of the inductor alone
+measured in the same session. \Cref{tab:app-rac-plate} gives the cold-plate
+measurements of \cref{fig:rac_configurations}. Of the three changes, only the
+\SI{1.0}{\milli\ohm} added by the Galinstan inside the plate lies within the
+repeatability band.
+
+\begin{table}[htbp]
+  \centering
+  \caption{AC resistance of the inductor on the cold plate.}
+  \label{tab:app-rac-plate}
+  \small
+  \begin{tabular}{@{}lccc@{}}
+    \toprule
+    Configuration & $R_{\mathrm{ac}}$ & Change from & Change from \\
+                  & (\si{\milli\ohm}) & inductor alone (\si{\milli\ohm})
+      & empty plate (\si{\milli\ohm}) \\
+    \midrule
+    Inductor alone (nominal)  & 80.0  & --   & --   \\
+    On empty cold plate       & 91.7  & 11.7 & --   \\
+    On plate with Galinstan   & 92.7  & 12.7 & 1.0  \\
+    On plate, vial beside     & 102.0 & 22.0 & 10.3 \\
+    \bottomrule
+  \end{tabular}
+  \floatnote{Repeatability $\pm\SI{1.5}{\milli\ohm}$.}
+\end{table}
+
+\Cref{tab:app-rac-distance} gives the measurements with the vial of Galinstan
+alone, without the cold plate, in a session whose nominal resistance was
+\SI{82.15}{\milli\ohm}. The loss depends strongly on where the vial sits: it is
+largest beside the ferrite core and not measurable beside the winding. Moving the vial away
+from the side of the ferrite, the increase falls to within the repeatability band
+by \SI{3}{\centi\metre}.
+
+\begin{table}[htbp]
+  \centering
+  \caption{AC resistance with the Galinstan vial at different positions.}
+  \label{tab:app-rac-distance}
+  \small
+  \begin{tabular}{@{}lcc@{}}
+    \toprule
+    Vial position & $R_{\mathrm{ac}}$ (\si{\milli\ohm}) & Change (\si{\milli\ohm}) \\
+    \midrule
+    None (nominal)              & 82.15 & --    \\
+    Beside the winding          & 82.15 & 0     \\
+    On top of the inductor      & 89.0  & 6.85  \\
+    Beside the ferrite, right   & 99.0  & 16.85 \\
+    Beside the ferrite, left    & 101.0 & 18.85 \\
+    \addlinespace
+    \SI{1}{\centi\metre} from the ferrite & 89.0  & 6.85 \\
+    \SI{2}{\centi\metre} from the ferrite & 86.0  & 3.85 \\
+    \SI{3}{\centi\metre} from the ferrite & 83.0  & 0.85 \\
+    \SI{4}{\centi\metre} from the ferrite & 82.15 & 0    \\
+    \SI{5}{\centi\metre} from the ferrite & 82.15 & 0    \\
+    \bottomrule
+  \end{tabular}
+  \floatnote{No cold plate. Distances from the right side of the ferrite.
+    Repeatability $\pm\SI{1.5}{\milli\ohm}$.}
+\end{table}
+
+\section{Flow and Coolant Temperatures with the Inductor Energised}
+
+\Cref{tab:app-inductor-emf} lists the flow-sensor EMF as the inductor current was
+raised in steps, with the pump held at \SI{18}{\ampere}. Without a filter, the
+EMF fell by about \SI{3}{\percent}, from 151 to \SI{146.5}{\micro\volt}, as the
+current rose to \SI{11.8}{\ampere} rms. With a filter on the sensor leads, the
+readings were lower and rose irregularly, from 123 to as much as
+\SI{151}{\micro\volt}, with no consistent trend. The change is therefore within the noise of the measurement, and whether
+the field changes the flow is inconclusive (\cref{sec:results-inductor-thermal}).
+
+\begin{table}[htbp]
+  \centering
+  \caption{Flow-sensor EMF against inductor current.}
+  \label{tab:app-inductor-emf}
+  \small
+  \begin{tabular}{@{}cccc@{}}
+    \toprule
+    Inductor current & \multicolumn{2}{c}{Sensor EMF (\si{\micro\volt})}
+      & Flow, no filter \\
+    \cmidrule(lr){2-3}
+    (\si{\ampere} rms) & No filter & With filter & (\si{\milli\litre\per\second}) \\
+    \midrule
+    0    & 151.0 & 123 & 1.39 \\
+    2.0  & 150.0 & 123 & 1.38 \\
+    4.0  & 151.0 & 125 & 1.39 \\
+    5.9  & 152.0 & 126 & 1.40 \\
+    7.9  & 150.0 & 137 & 1.38 \\
+    9.9  & 148.5 & 151 & 1.37 \\
+    11.8 & 146.5 & 136 & 1.35 \\
+    \bottomrule
+  \end{tabular}
+  \floatnote{Pump at \SI{18}{\ampere}; flow from the calibration of
+    \cref{tab:app-emf}.}
+\end{table}
+
+At steady state in the thermal test, the thermocouples read \SI{26.5}{\celsius}
+at the cold-plate inlet and \SI{33.1}{\celsius} at the outlet, with the plate
+surface at \SI{32.2}{\celsius} and ambient at \SI{21.8}{\celsius}. At
+\SI{1.39}{\milli\litre\per\second}, the \SI{6.6}{\celsius} coolant temperature
+rise corresponds to about \SI{21}{\watt} carried away by the Galinstan, roughly
+half of the estimated \SI{42.76}{\watt} loss, with the rest lost from the upper
+core and winding by natural convection. Because the temperature rise is only
+about twice the $\pm\SI{3.1}{\celsius}$ uncertainty of a thermocouple difference
+(\cref{app:uncertainty}), this estimate is indicative only, to about
+$\pm\SI{10}{\watt}$.
