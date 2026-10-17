@@ -59,14 +59,13 @@ temperature swing, rather than the peak temperature, limits component lifetime
 (\cref{sec:reliability}).
 
 RQ1 also asks how the pumping power of the two loops compares. At full flow, the
-MHD pump drew \SI{0.85}{\watt}, about \SI{7}{\percent} of the \SI{11.5}{\watt}
-drawn by the water pump, giving a maximum COP of 200 against 47.6 for water
+MHD pump drew \SI{0.85}{\watt} giving a maximum COP of 200 against 47.6 for water
 (\cref{tab:pumps}). The low power draw does not, however, reflect an efficient
 pump: its maximum mechanical efficiency of \SI{0.56}{\percent} is an order of
 magnitude below the \SIrange{6}{10}{\percent} reported for DC conduction
 pumps~\cite{an_liquid_2024,hodes_potential_2014}. The pump was also already at
 the \SI{18}{\ampere} limit of its supply at full flow, so higher flows would
-require a redesigned pump. Fan \emph{et al.}\ show what is achievable: by
+require a redesigned pump, or a more powerful supply. Fan \emph{et al.}\ show what is achievable: by
 reducing the pressure drop of their loops to about one sixth, their MHD pumps
 reached flows of up to about \SI{10}{\milli\litre\per\second} for less than
 \SI{0.1}{\watt}~\cite{fan_liquid_2021,fan_high_2023} (\cref{tab:fan-comparison}).
@@ -79,10 +78,11 @@ The analytical thermal network is only accurate close to the conditions it was
 calibrated against. It reproduced the turbulent water tests used to calibrate
 $\Rpack$, and predicted the Galinstan resistor temperatures within
 \SI{2.5}{\celsius}, but over-predicted the two low-flow water tests by
-\SIrange{3.0}{3.6}{\celsius} (\cref{tab:tn_results}). Away from its calibration
-point, its assumptions weaken: the isothermal plate does not hold with an
-\SI{18}{\celsius} coolant temperature rise, and the low-flow water tests are
-likely transitional rather than laminar.
+\SIrange{3.0}{3.6}{\celsius} (\cref{tab:tn_results}). Close placement of the pump 
+and flow restrictor likely caused turbulence that remained in the cold plate since
+laminar flow could not fully develop during low-flow testing. 
+Additionally, the for assumption of an isothermal plate does not hold with an
+\SI{18}{\celsius} coolant temperature rise seen in the Galinstan plates.
 
 A conjugate heat transfer model was therefore created in SimScale to capture the
 performance more fully, by resolving the temperature field in the plate and
@@ -90,10 +90,8 @@ coolant (\cref{sec:cht}). It was more consistent across the tests than the
 analytical model, reproducing all four probe temperatures within
 \SI{1.4}{\celsius} for both Galinstan tests and under-predicting the water
 resistor temperatures by only about \SI{2.3}{\celsius}
-(\cref{app:cht_validation}). It is therefore slightly pessimistic for Galinstan
-and optimistic for water, so any advantage it shows for Galinstan is, if
-anything, understated. After
-validation, it was used to extend the Galinstan flow to
+(\cref{app:cht_validation}). There was also a lack of good data for validation, so only two tests were used to fit the model.
+Despite this, the CHT model was used to extend the Galinstan flow to
 \SI{5}{\milli\litre\per\second}, the upper bound of laminar flow in the tube
 ($\mathrm{Re} \approx 2110$). Turbulent Galinstan flow was not assessed, as no
 data were available to validate the accuracy of the turbulence model for a
@@ -117,7 +115,7 @@ flow of the existing pump.
 \section{Effect of Heated Area}
 \label{sec:disc-area}
 
-The analytical model can also show how the coolants compare when the heated area
+The analytical model can be extended somewhat to show how the coolants compare when the heated area
 is reduced (\cref{fig:area-scaling}). The heated area is scaled by a factor $f$
 while the flow rate and heat transfer coefficient are held at their values for
 the tested cold plate, so that $\NTU = f\,\NTU_0$ and
@@ -126,7 +124,7 @@ $\Rcp = 1/[\mdot\,\cp\,(1 - e^{-f\,\NTU_0})]$ (\cref{app:area-scaling}). Water a
 rises almost in proportion to $1/f$. Galinstan starts at $\NTU_0 = 34$ at
 \SI{1.5}{\milli\litre\per\second} and 11 at \SI{5}{\milli\litre\per\second}, so
 its resistance remains close to the caloric limit until $f\,\NTU_0$ falls to
-about 3. Galinstan therefore overtakes water once the heated area is reduced
+about 3. Galinstan therefore is shown to outperform water once the heated area is reduced
 below about \SI{7}{\percent} of the tested plate, about \SI{11}{\centi\metre\squared},
 at \SI{1.5}{\milli\litre\per\second}, and below about \SI{26}{\percent}, about
 \SI{40}{\centi\metre\squared}, at \SI{5}{\milli\litre\per\second}.
@@ -160,7 +158,7 @@ cooling (\cref{sec:analytical-design}), with a maximum surface temperature of
 about \SI{83}{\celsius}. The upper core, which relies on natural convection, ran
 markedly hotter than the lower core on the cold plate
 (\cref{fig:inductor-cam-a}). This supports the first part of H2, that the loop
-cools the inductor beyond natural convection. Filling the cold plate with
+was demonstrated to cool the inductor beyond the performance of natural convection. Filling the cold plate with
 Galinstan added only \SI{1.0}{\milli\ohm} to the winding resistance, against
 \SI{11.7}{\milli\ohm} for the plate itself and \SI{10.3}{\milli\ohm} for
 unshielded Galinstan beside the inductor (\cref{sec:results-eddy}). The metal of
@@ -169,10 +167,12 @@ shields the coolant from the leakage field, which supports the second part of
 H2. Unshielded Galinstan, with a skin depth of about \SI{0.9}{\milli\metre} at
 this frequency, is far more exposed, although its effect fell from
 \SI{9.0}{\milli\ohm} at \SI{1}{\centi\metre} to \SI{2.15}{\milli\ohm} beyond
-\SI{4}{\centi\metre} (\cref{fig:rac_distance}). The final part of H2, that the
+\SI{4}{\centi\metre} (\cref{fig:rac_distance}). This supports that a Galinstan 
+coolant could be used in PECs where the loss of a cold plate is already accepted, like that 
+in Gao \emph{et al.}'s inductor design~\cite{gao_modeling_2022}.  The final part of H2, that the
 field does not change the flow, could not be confirmed: the EMF reading
 suggested that the flow fell as the inductor current rose, but the signal is in
-the microvolt range and sensitive to noise.
+the microvolt range and sensitive to noise, so it is possible the flow did not change.
 
 Together with the area analysis, these results indicate where Galinstan cooling
 is likely to be most useful in an IPT system (\cref{tab:disc-suitability}). It
@@ -198,18 +198,14 @@ only about \SI{55}{\percent} of the heat that water does
     Rectifier and inverter modules (silicon switches)
       & High flux, small area & Good
       & Small footprints favour Galinstan (\cref{fig:area-scaling}); weak AC
-        fields away from the coupler \\
+        fields away from the coupler so there is minimal eddy-loss in coolant \\
     Compact magnetics (high-power-density magnetics)
       & High flux, small volume & Possible
-      & Cooling demonstrated; coolant loss small if shielded by the cold plate \\
+      & Cooling was demonstrated; coolant loss is acceptable if shielded by the cold plate \\
     Coupler coils and ferrite pads
       & Low flux, large area & Limited
       & Large area favours water; strongest AC field, so the coolant must be
         shielded \\
-    Resonant tank capacitors
-      & Moderate flux & Limited
-      & Benefit only near their temperature limit; close to high voltage and AC
-        fields \\
     Large high-power converter systems
       & High total load, large area & Poor
       & Caloric-limited at practical flows; 6.4 times the coolant mass of water,
@@ -228,11 +224,10 @@ experimental data. Only two Galinstan and four water steady-state tests were
 run, each once, so the repeatability of the measurements is unknown and no
 statistical uncertainty can be placed on the measured resistances. The models
 were calibrated and checked against these same few points: $\Rpack$ was fitted
-to two water tests, and the CHT model was validated at only one flow per
-coolant. The agreement between model and measurement is therefore encouraging
+to two water tests. The agreement between model and measurement is therefore encouraging
 but not conclusive, and more experiments, repeated and spread across a wider
 range of flows and heat loads, would be required to be confident in the models,
-particularly where they are extrapolated to \SI{5}{\milli\litre\per\second} and
+particularly where they are extrapolated to faster flows \SI{5}{\milli\litre\per\second} and
 to smaller heated areas.
 
 \paragraph{Flow measurement.} No accuracy specification could be found for the
@@ -250,7 +245,7 @@ checked independently.
 
 \paragraph{Models.} $\Rpack$ was calibrated on water, where the plate is close
 to isothermal, whereas Galinstan's \SIrange{17}{18}{\celsius} coolant
-temperature rise violates this assumption. The CHT model was run only for
+temperature rise does not seem to follow this assumption. The CHT model was run only for
 laminar Galinstan flow, as there were no data to validate a turbulence model for
 a liquid metal. The area analysis holds $h$ fixed and ignores spreading in the
 plate and pressure drop, so it is indicative only.
