@@ -347,7 +347,7 @@
 
 % Signed Statement of Contribution (student + supervisor). Replace
 % frontmatter/Declaration.pdf with the signed copy.
-% \includepdf[pagecommand=\thispagestyle{front}]{frontmatter/Declaration}
+% \includepdf[pagecommand=\thispagestyle{front}]{frontmatter/Declaration PAT SIGNED}
 % \tableofcontents
 % \listoffigures
 % \listoftables
@@ -369,18 +369,18 @@
 \include{chapters/02_literature_review}
 \include{chapters/03_experimental_design}
 \include{chapters/04_Results}
-\include{chapters/05_discussion_thermal}
+%\include{chapters/05_discussion_thermal}
 
-\backmatter
-\printbibliography[heading=bibintoc,title={References}]
+%\backmatter
+%\printbibliography[heading=bibintoc,title={References}]
 
-\appendix
+%\appendix
 % cleveref does not detect \appendix here, so appendix chapters were cited as
 % "Chapter A". Label them (and their sections) as appendices explicitly; the
 % names are set with the other \crefname commands in the preamble.
-\crefalias{chapter}{appendix}
-\crefalias{section}{subappendix}
-\input{chapters/appendix/appendix_simscale_validation}
-\input{chapters/appendix/appendix_thermal_models}
+%\crefalias{chapter}{appendix}
+%\crefalias{section}{subappendix}
+%\input{chapters/appendix/appendix_simscale_validation}
+%\input{chapters/appendix/appendix_thermal_models}
 
 \end{document}

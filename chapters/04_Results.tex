@@ -303,8 +303,10 @@ pattern expected from the asymmetric cooling described in
 upper core relies on convection to the surrounding air and on conduction across
 the gap to the lower core. The temperature difference between the upper and
 lower cores in \cref{fig:inductor-cam-a} therefore shows the cooling effect of
-the Galinstan cold plate over natural convection. The flow rate did not change
-measurably when the inductor was energised.
+the Galinstan cold plate over natural convection. The EMF reading of the flow rate
+indicated a decrease in flow as current was increased in the inductor. 
+However, this measurement is in the \SI{}{\micro\volt} range and is very sensitive to noise. 
+If the inductor losses were better estimated, the flow rate could be verified using the energy balance.
 
 \begin{figure}[htbp]
     \centering
@@ -446,9 +448,7 @@ on the \num{427e3}-cell mesh. Its mesh independence, iterative convergence and
 detailed comparison with the measured probe temperatures are given in
 \cref{app:cht_validation}. For both Galinstan tests, the simulated probe
 temperatures agree with the measurements within the $\pm\SI{2.2}{\celsius}$
-thermocouple accuracy. For the full-flow water test, the simulated inlet and
-outlet temperatures also agree, but the resistor temperatures are under-predicted
-by \SIrange{2.3}{2.4}{\celsius}, just outside the thermocouple accuracy.
+thermocouple accuracy.
 
 \Cref{fig:galinstan_rcp_cfd} compares the Galinstan cold-plate resistance from
 the simulations with the $\varepsilon$--NTU model and the measured values, all

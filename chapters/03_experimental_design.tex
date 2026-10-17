@@ -30,7 +30,7 @@ Two cooling loops were used in this project, one circulating Galinstan and the
 other water. Both follow the arrangement shown in \cref{fig:cooling-loop}. A
 pump drives the coolant through a cold plate that interfaces with the heat
 source, and then through a fan-cooled radiator, where the heat is rejected to
-the environment. A flow sensor in the hot line measures the coolant flow rate.
+the environment. A flow sensor measures the coolant flow rate.
 
 \begin{figure}[htbp]
   \centering
@@ -69,7 +69,7 @@ integrated reservoir, whose speed is set by the duty cycle of its drive signal,
 and the flow rate is read directly from a Sea Zhongjiang digital flow meter. A
 valve was later added to the water loop to reduce the flow below the
 controllable range of the pump. The two loops therefore share the heat source
-and the cold-plate geometry, but differ in the pump, the achievable flow range
+and the cold-plate geometry, but differ in the pump, the achievable flow range,
 and the method of flow measurement.
 
 \subsection{Heat Sources}
@@ -259,10 +259,12 @@ of the simulation model, although this measurement included the effect of long
 leads, which would be expected to increase it. The AC resistance
 $R_{\mathrm{ac}}$, which determines the winding loss, was measured with an LCR
 meter at low excitation as \SI{83}{\milli\ohm}, giving a winding loss of
-\SI{11.95}{\watt} at \SI{12}{\ampere} rms.
+\SI{11.95}{\watt} at \SI{12}{\ampere} rms. 
+Though it should be noted, the resistance of the winding would increase with 
+the operating temperature of the windings.
 
 For a heat transfer investigation in which temperatures are continuously
-monitored, some uncertainty in the loss estimate is acceptable. For the later
+monitored, the uncertainty in the loss estimate is acceptable. For the later
 experiments, the total inductor loss is therefore taken as \SI{42.76}{\watt}
 (\SI{30.81}{\watt} core loss plus \SI{11.95}{\watt} winding loss).
 
@@ -781,7 +783,7 @@ between two configurations isolates the loss of the conductor that was added.
 The measurements were taken at the \SI{85}{\kilo\hertz} operating frequency.
 Because Galinstan and the cold plate are linear and non-magnetic, the added loss
 at any current is $\Delta R_{\mathrm{ac}} I_{\mathrm{rms}}^{2}$, so the change in
-resistance is a direct measure of the eddy-current loss. Finally, with the cold
+resistance is a measure of the eddy-current loss. Finally, with the cold
 plate removed, the vial was moved progressively further away from the inductor,
 from \SIrange{1}{5}{\centi\metre}, to show how the loss in the coolant falls
 with distance.
