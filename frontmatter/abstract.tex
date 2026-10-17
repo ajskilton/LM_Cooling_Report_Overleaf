@@ -25,7 +25,37 @@
 \end{center}
 
 % Write your abstract here
-[Abstract to be written.]
+As power electronic converters become more power-dense, removing their losses
+from a smaller volume increasingly limits their design. Galinstan, a
+room-temperature liquid metal with about 28 times the thermal conductivity of
+water, can be driven by a magnetohydrodynamic (MHD) pump with no moving parts,
+but its low volumetric heat capacity and high electrical conductivity bring
+trade-offs that few studies have tested against water at converter scale. This
+project evaluated MHD-pumped Galinstan as a coolant for high-power-density
+converters and identified where in an inductive power transfer (IPT) system it
+is most useful. A Galinstan loop and a water loop were compared on the same
+commercial cold plate under resistive heat loads, the results were interpreted
+with an $\varepsilon$--NTU thermal network and extended with a validated
+conjugate heat transfer simulation, and the Galinstan loop was used to cool a
+power-dense \SI{85}{\kilo\hertz} planar inductor.
+
+At the flows each pump could deliver, water outperformed Galinstan, with a total
+thermal resistance of \SIrange{0.257}{0.267}{\celsius\per\watt} against
+\SIrange{0.488}{0.799}{\celsius\per\watt}. At
+\SIrange{0.75}{1.45}{\milli\litre\per\second}, the Galinstan cold plate was
+caloric-limited: its high conductivity made the convective resistance
+negligible, and its low heat capacity set the performance. The MHD pump drew
+\SI{0.85}{\watt}, against \SI{11.5}{\watt} for the water pump, but with a
+mechanical efficiency of only \SI{0.56}{\percent}. The simulation shows that at
+\SI{5}{\milli\litre\per\second} Galinstan would come within \SI{14}{\percent} of
+water, and the model predicts that it would outperform water once the heated
+area falls below about \SI{40}{\centi\metre\squared}. The Galinstan loop cooled
+the inductor at more than twice the loss its core can dissipate without active
+cooling, while the coolant added only \SI{1.0}{\milli\ohm} to the winding AC
+resistance, as the cold plate shields it from the leakage field. Galinstan is
+therefore best suited to small, high-flux components, such as the inverter,
+rectifier and shielded compact magnetics of an IPT system, provided that more
+efficient, higher-flow pumps are developed.
 % end of Abstract
 
 \endgroup

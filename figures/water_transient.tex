@@ -51,7 +51,7 @@
     ]
     % -------- (a) Test 17 --------
     \nextgroupplot[
-      title={(a) \SI{58.3}{\milli\litre\per\second} (\SI{3.50}{\litre\per\minute})},
+      title={(a) \SI{58.3}{\milli\litre\per\second}, \SI{72}{\watt}},
       legend columns=4,
       legend style={at={(1.033,1.21)}, anchor=south, draw=none, fill=none,
                     font=\small, /tikz/every even column/.append style={column sep=10pt}},
@@ -64,31 +64,29 @@
     \legend{Left resistor, Right resistor, Cold-plate inlet, Cold-plate outlet}
 
     % -------- (b) Test 19 --------
-    \nextgroupplot[title={(b) \SI{29.2}{\milli\litre\per\second} (\SI{1.75}{\litre\per\minute})}]
+    \nextgroupplot[title={(b) \SI{29.2}{\milli\litre\per\second}, \SI{72}{\watt}}]
     \addplot[wtL] table[x=t, y=TL]   {\wtdatadir/water_test19.dat};
     \addplot[wtR] table[x=t, y=TR]   {\wtdatadir/water_test19.dat};
     \addplot[wtI] table[x=t, y=Tin]  {\wtdatadir/water_test19.dat};
     \addplot[wtO] table[x=t, y=Tout] {\wtdatadir/water_test19.dat};
 
     % -------- (c) Test 24 --------
-    \nextgroupplot[title={(c) \SI{12.2}{\milli\litre\per\second} (\SI{0.73}{\litre\per\minute})}]
+    \nextgroupplot[title={(c) \SI{12.2}{\milli\litre\per\second}, \SI{72}{\watt}}]
     \addplot[wtL] table[x=t, y=TL]   {\wtdatadir/water_test24.dat};
     \addplot[wtR] table[x=t, y=TR]   {\wtdatadir/water_test24.dat};
     \addplot[wtI] table[x=t, y=Tin]  {\wtdatadir/water_test24.dat};
     \addplot[wtO] table[x=t, y=Tout] {\wtdatadir/water_test24.dat};
 
     % -------- (d) Test 25 --------
-    \nextgroupplot[title={(d) \SI{8.3}{\milli\litre\per\second} (\SI{0.50}{\litre\per\minute})}]
+    \nextgroupplot[title={(d) \SI{8.3}{\milli\litre\per\second}, \SI{72}{\watt}}]
     \addplot[wtL] table[x=t, y=TL]   {\wtdatadir/water_test25.dat};
     \addplot[wtR] table[x=t, y=TR]   {\wtdatadir/water_test25.dat};
     \addplot[wtI] table[x=t, y=Tin]  {\wtdatadir/water_test25.dat};
     \addplot[wtO] table[x=t, y=Tout] {\wtdatadir/water_test25.dat};
     \end{groupplot}
   \end{tikzpicture}
-  \caption{Measured left and right resistor temperatures and cold-plate inlet
-    and outlet water temperatures over each water test, at flow rates of
-    (a)~\SI{58.3}{}, (b)~\SI{29.2}{}, (c)~\SI{12.2}{} and
-    (d)~\SI{8.3}{\milli\litre\per\second}. Traces are a \SI{15}{\second}
-    moving average of the logged data.}
+  \caption{Measured temperatures during the water tests.}
   \label{fig:water_transient}
+  \floatnote{\SI{15}{\second} moving average of the logged data.}
+
 \end{figure}

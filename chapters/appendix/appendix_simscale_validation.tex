@@ -15,7 +15,7 @@ thermocouples. Numerical errors well inside this band can be neglected, so any
 remaining disagreement with experiment can be attributed to the modelling
 assumptions or to the measurements themselves.
 
-\subsubsection{Flow Regime and Mesh Independence}
+\section{Flow Regime and Mesh Independence}
 
 Turbulent cases were solved with the $k$--$\omega$ SST turbulence model, and a
 laminar model was used for runs with an estimated $\mathrm{Re} \leq 2110$.
@@ -34,14 +34,14 @@ temperature field. The same sequence of five meshes, from \num{73e3} to
 \num{1.5e6} cells, was used in every study.
 % NOTE: your earlier paragraph said "three" meshes; the figure shows five.
 
-Figure~\ref{fig:mesh_independence} shows the study for Galinstan at
+\Cref{fig:mesh_independence} shows the study for Galinstan at
 \SI{1.4}{\milli\litre\per\second}. The inlet and outlet temperatures vary by
 less than \SI{0.1}{\celsius} across the full range. The inlet is fixed by the
 boundary condition and the outlet is set largely by the bulk energy balance, so
 neither depends strongly on near-wall resolution. The resistor temperatures are
 the sensitive quantities, because they depend on resolving conduction through
 the cold plate and the temperature gradient at the wall. The two coarsest
-meshes underpredict them by up to \SI{2.75}{\celsius} relative to the finest
+meshes under-predict them by up to \SI{2.75}{\celsius} relative to the finest
 mesh, which exceeds the thermocouple tolerance. From \num{427e3} cells upward,
 every probe lies within \SI{0.25}{\celsius} of the \num{1.5e6}-cell result.
 Convergence is not strictly monotonic: the \num{427e3}- and \num{655e3}-cell
@@ -56,20 +56,19 @@ error is negligible against the measurement uncertainty.
 % CHECK: confirm 427k is the mesh actually used for the reported runs.
 
 \begin{figure}[htbp]
-    \centering
-    \includegraphics[width=\textwidth]{mesh_independence.pdf}
-    \caption{Mesh independence study for Galinstan at
-        \SI{1.4}{\milli\litre\per\second}: (a) final probe temperatures and
-        (b) change relative to the \num{1.5e6}-cell mesh. All probes change by
-        less than \SI{0.25}{\celsius} between \num{427e3} and
-        \num{1.5e6} cells.}
-    \label{fig:mesh_independence}
+  \centering
+  \includegraphics[width=\linewidth]{mesh_independence}
+  \caption{Mesh independence study for Galinstan at
+    \SI{1.4}{\milli\litre\per\second}.}
+  \label{fig:mesh_independence}
+  \floatnote{(a)~Final probe temperatures; (b)~change relative to the
+    \num{1.5e6}-cell mesh.}
 \end{figure}
 
-Figure~\ref{fig:mesh_independence_water} shows the corresponding study for
-the turbulent water model at \SI{3.6}{\litre\per\minute}. The pattern is the
+\Cref{fig:mesh_independence_water} shows the corresponding study for
+the turbulent water model at \SI{60}{\milli\litre\per\second}. The pattern is the
 same: the inlet and outlet vary by less than \SI{0.03}{\celsius}, and the
-resistor temperatures are underpredicted on the coarsest meshes, by up to
+resistor temperatures are under-predicted on the coarsest meshes, by up to
 \SI{2.5}{\celsius} at \num{73e3} cells. The fine meshes settle more slowly than
 they do for Galinstan, however. At \num{427e3} cells the resistors still differ
 from the \num{1.5e6}-cell result by up to \SI{0.58}{\celsius}, and at
@@ -90,28 +89,25 @@ negligible in the way it is for Galinstan.
 % was also run, it needs its own figure or a sentence here.
 
 \begin{figure}[htbp]
-    \centering
-    \figureorplaceholder[width=\textwidth]{mesh_independence_water.pdf}
-    \caption{Mesh independence study for water at
-        \SI{3.6}{\litre\per\minute} ($k$--$\omega$ SST): (a) final probe
-        temperatures and (b) change relative to the \num{1.5e6}-cell mesh,
-        plotted on the same scale as Figure~\ref{fig:mesh_independence}. The
-        inlet and outlet differ by only \SI{0.26}{\celsius} and overlap in (a).
-        The resistor temperatures change by up to \SI{0.58}{\celsius} between
-        \num{427e3} and \num{1.5e6} cells.}
-    \label{fig:mesh_independence_water}
+  \centering
+  \figureorplaceholder[width=\linewidth]{mesh_independence_water.pdf}
+  \caption{Mesh independence study for water at
+    \SI{60}{\milli\litre\per\second}.}
+  \label{fig:mesh_independence_water}
+  \floatnote{$k$--$\omega$ SST. (a)~Final probe temperatures; (b)~change
+    relative to the \num{1.5e6}-cell mesh, on the scale of
+    \cref{fig:mesh_independence}.}
 \end{figure}
-\issue{The measured full water flow is now \SI{3.5}{\litre\per\minute}
-(\SI{58.3}{\milli\litre\per\second}) in the main text. This appendix still says
-the water simulations ran at \SI{3.6}{\litre\per\minute}. If that is the flow
-set in SimScale, keep it and say so; otherwise change it to
-\SI{3.5}{\litre\per\minute}.}
+\issue{The measured full water flow is \SI{58.3}{\milli\litre\per\second} in
+the main text, but this appendix gives \SI{60}{\milli\litre\per\second}
+(\SI{3.6}{\litre\per\minute}) for the water simulations. Keep it if that is the
+flow set in SimScale; otherwise change it to \SI{58.3}{\milli\litre\per\second}.}
 
-\subsubsection{Iterative Convergence}
+\section{Iterative Convergence}
 
 The model was solved as a steady-state problem, and convergence was judged by
 monitoring the probe temperatures, since these are the quantities compared
-against experiment (Figure~\ref{fig:simscale_full}). The inlet temperature
+against experiment (\cref{fig:simscale_full}). The inlet temperature
 settles within about 150 iterations because it is fixed by the boundary
 condition. The outlet and resistor temperatures relax far more slowly, decaying
 over several thousand iterations after an initial overshoot. This behaviour is
@@ -126,77 +122,72 @@ than those reported. This drift is small relative to the measurement tolerance,
 but it is not zero, and its direction matters for the comparison below: it would
 move the right resistor towards the measured value and the left resistor
 slightly further below it. The water model converges much faster
-(Figure~\ref{fig:simscale_water}). After an initial transient, every probe is
+(\cref{fig:simscale_water}). After an initial transient, every probe is
 within \SI{0.01}{\celsius} of its final value by about 1000 iterations, and at
 every mesh density no probe changes by more than \SI{0.001}{\celsius} over the
 final 1000 iterations. Iterative error is therefore negligible for water.
 
 \begin{figure}[htbp]
+  \centering
+  \begin{subfigure}{\linewidth}
     \centering
-    \begin{subfigure}{\textwidth}
-        \centering
-        \includegraphics[width=0.9\textwidth]{simscale_convergence_full.pdf}
-        \caption{Galinstan, \SI{1.4}{\milli\litre\per\second} (\SI{72}{\watt})}
-        \label{fig:simscale_full}
-    \end{subfigure}
+    \includegraphics[width=0.9\linewidth]{simscale_convergence_full}
+    \caption{Galinstan, \SI{1.4}{\milli\litre\per\second}, \SI{72}{\watt}}
+    \label{fig:simscale_full}
+  \end{subfigure}
 
-    \vspace{0.6em}
-    \begin{subfigure}{\textwidth}
-        \centering
-        \figureorplaceholder[width=0.9\textwidth]{simscale_convergence_water.pdf}
-        \caption{Water, \SI{3.6}{\litre\per\minute} (\SI{72}{\watt}),
-            \num{427e3} cells}
-        \label{fig:simscale_water}
-    \end{subfigure}
-    \caption{Convergence of the SimScale conjugate heat transfer model against
-        experiment. Solid lines show the simulated probe temperatures at each
-        iteration; dotted lines show the measured values, with shaded bands for
-        the $\pm\SI{2.2}{\celsius}$ thermocouple uncertainty. The measured
-        resistor value is the mean of the two resistors. For Galinstan all
-        probes lie within the measurement uncertainty at the final iteration;
-        for water the resistors converge about \SI{2.4}{\celsius} below the
-        measured value, just outside it.}
-    \label{fig:simscale_convergence_both}
+  \vspace{0.6em}
+  \begin{subfigure}{\linewidth}
+    \centering
+    \figureorplaceholder[width=0.9\linewidth]{simscale_convergence_water.pdf}
+    \caption{Water, \SI{60}{\milli\litre\per\second}, \SI{72}{\watt}}
+    \label{fig:simscale_water}
+  \end{subfigure}
+  \caption{Convergence of the CHT model against experiment.}
+  \label{fig:simscale_convergence_both}
+  \floatnote{Solid: simulated probe temperatures; dotted: measured values;
+    shaded: $\pm\SI{2.2}{\celsius}$ thermocouple uncertainty. Measured
+    resistor value is the mean of the two resistors.}
 \end{figure}
 
-\subsubsection{Comparison with Experiment}
+\section{Comparison with Experiment}
 
 For Galinstan, all four probes lie within the thermocouple tolerance of the
-measured values at the final iteration (Figure~\ref{fig:simscale_full}). The inlet and outlet
+measured values at the final iteration (\cref{fig:simscale_full}). The inlet and outlet
 agree to within about \SI{0.2}{\celsius}. The inlet agreement confirms that
 the boundary condition was set correctly, rather than validating the model, and
 the outlet agreement mainly confirms that the heat input and flow rate are
 consistent with the energy balance. The resistor temperatures are the stronger
 test, because they depend on the conduction path through the package and cold
 plate and on the wall heat transfer coefficient the model predicts. The left
-resistor is underpredicted by about \SI{0.5}{\celsius} and the right resistor
-overpredicted by about \SI{1.4}{\celsius}. The model also predicts the right
+resistor is under-predicted by about \SI{0.5}{\celsius} and the right resistor
+over-predicted by about \SI{1.4}{\celsius}. The model also predicts the right
 resistor to be roughly \SI{2}{\celsius} warmer than the left, whereas the
 measured temperatures are almost identical. This asymmetry lies within the
 combined uncertainty, so the present instrumentation can neither confirm nor
 rule it out.
-\issue{The full-flow Galinstan data (\cref{fig:galinstan_transient}a) show the
+\issue{The full-flow Galinstan data (\cref{fig:galinstan_transient}(a)) show the
 right resistor at about \SI{60.1}{\celsius} and the left at about
 \SI{58.6}{\celsius}, so the measured asymmetry is about \SI{1.5}{\celsius}, not
 ``almost identical''. The model's \SI{2}{\celsius} asymmetry is then close to
 the measured one; reword this paragraph to match.}
 
-The water model agrees less well (Figure~\ref{fig:simscale_water}). The
+The water model agrees less well (\cref{fig:simscale_water}). The
 simulated inlet and outlet lie within \SI{0.15}{\celsius} of the measurements,
 but this says little: the measured outlet rise is only \SI{0.4}{\celsius},
 far below the sensor tolerance, so for water the outlet provides no useful
 validation constraint. The resistors converge to \SI{46.9}{\celsius} and
 \SI{46.8}{\celsius} against a measured mean of \SI{49.2}{\celsius}. They are
-underpredicted by \SI{2.3}{\celsius} and \SI{2.4}{\celsius}, just outside the
-tolerance band, and the resistor rise above the inlet is underpredicted by
+under-predicted by \SI{2.3}{\celsius} and \SI{2.4}{\celsius}, just outside the
+tolerance band, and the resistor rise above the inlet is under-predicted by
 about \SI{15}{\percent}. This gap is not a discretisation error. Refining the
 mesh lowers the resistor temperatures further
-(Figure~\ref{fig:mesh_independence_water}), so on the \num{1.5e6}-cell mesh the
-underprediction grows to about \SI{2.9}{\celsius}. The discrepancy therefore
+(\cref{fig:mesh_independence_water}), so on the \num{1.5e6}-cell mesh the
+under-prediction grows to about \SI{2.9}{\celsius}. The discrepancy therefore
 lies in the model itself. The cold plate, resistor package and their contact
 are modelled identically for both coolants, and the Galinstan case shows no
-comparable underprediction, which points towards the coolant side. The most
-likely source is that the turbulent model overpredicts the wall heat transfer
+comparable under-prediction, which points towards the coolant side. The most
+likely source is that the turbulent model over-predicts the wall heat transfer
 coefficient for water. An error in the solid-side contact resistances that
 happens to be masked in the Galinstan case cannot be excluded with only one
 operating point per coolant.
