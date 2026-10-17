@@ -347,7 +347,7 @@
 % ---------------------------------------------------------------------
 %  Report details (edit here)
 % ---------------------------------------------------------------------
-\newcommand{\reporttitle}{Liquid Metal Cooling for High-Power-Density Power Electronic Converters}
+\newcommand{\reporttitle}{Feasibility of Liquid Metal Coolants for Increasing Power Density in Inductive Power Transfer Systems}
 \newcommand{\reportauthor}{Alex Skilton}
 \newcommand{\reporttype}{Final Report}
 \newcommand{\reportdate}{\number\day\ \ifcase\month\or January\or February\or March\or April\or May\or June\or July\or August\or September\or October\or November\or December\fi\ \number\year}
@@ -363,22 +363,22 @@
 \frontheadings
 \frontplainstyle
 \pagestyle{empty}
-%\input{frontmatter/titlepage}
+\input{frontmatter/titlepage}
 
 \pagestyle{front}
-%\input{frontmatter/abstract}
+\input{frontmatter/abstract}
 
 % Signed Statement of Contribution (student + supervisor). Replace
 % frontmatter/Declaration.pdf with the signed copy.
-% \includepdf[pagecommand=\thispagestyle{front}]{frontmatter/Declaration PAT SIGNED}
-% \tableofcontents
-% \listoffigures
-% \listoftables
-% \input{frontmatter/acknowledgements}
-% \input{frontmatter/glossary}
-% \input{frontmatter/abbreviations}
-% \input{frontmatter/nomenclature}
-% \printnomenclature
+\includepdf[pagecommand=\thispagestyle{front}]{frontmatter/Declaration PAT SIGNED}
+\tableofcontents
+\listoffigures
+\listoftables
+\input{frontmatter/acknowledgements}
+\input{frontmatter/glossary}
+\input{frontmatter/abbreviations}
+\input{frontmatter/nomenclature}
+\printnomenclature
 % \ifreview
 %   \listoftodos[Review Notes]
 % \fi
@@ -395,20 +395,20 @@
 \include{chapters/05_discussion_thermal}
 \include{chapters/06_conclusion}
 
-%\backmatter
-%\printbibliography[heading=bibintoc,title={References}]
+\backmatter
+\printbibliography[heading=bibintoc,title={References}]
 
-%\appendix
+\appendix
 % cleveref does not detect \appendix here, so appendix chapters were cited as
 % "Chapter A". Label them (and their sections) as appendices explicitly; the
 % names are set with the other \crefname commands in the preamble.
-%\crefalias{chapter}{appendix}
-%\crefalias{section}{subappendix}
-%\input{chapters/appendix/appendix_simscale_validation}
-%\input{chapters/appendix/appendix_thermal_models}
-%\input{chapters/appendix/appendix_uncertainty}
-%\input{chapters/appendix/appendix_test_log}
-%\input{chapters/appendix/appendix_inductor_data}
-%\input{chapters/appendix/appendix_femm_pump}
+\crefalias{chapter}{appendix}
+\crefalias{section}{subappendix}
+\input{chapters/appendix/appendix_simscale_validation}
+\input{chapters/appendix/appendix_thermal_models}
+\input{chapters/appendix/appendix_uncertainty}
+\input{chapters/appendix/appendix_test_log}
+\input{chapters/appendix/appendix_inductor_data}
+\input{chapters/appendix/appendix_femm_pump}
 
 \end{document}
