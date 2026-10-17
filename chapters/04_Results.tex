@@ -353,13 +353,14 @@ heat directly to the coolant, so it does not compromise the thermal design, and
 that structures near the air gap must be kept clear of its fringing field.
 
 \begin{figure}[htbp]
+  \begin{minipage}[t]{0.48\linewidth}
     \centering
     \begin{tikzpicture}
         \begin{axis}[
             ybar,
-            width=0.75\linewidth,
-            height=6.5cm,
-            bar width=28pt,
+            width=\linewidth,
+            height=5.5cm,
+            bar width=20pt,
             ymin=0, ymax=26,
             ylabel={Increase in $R_{\mathrm{ac}}$ (m$\Omega$)},
             symbolic x coords={Plate, Galinstan, Vial},
@@ -369,10 +370,12 @@ that structures near the air gap must be kept clear of its fringing field.
                 {Plate with\\Galinstan},
                 {Plate with\\vial}
             },
-            xticklabel style={align=center, font=\small},
-            enlarge x limits=0.18,
+            xticklabel style={align=center, font=\footnotesize},
+            yticklabel style={font=\footnotesize},
+            label style={font=\small},
+            enlarge x limits=0.22,
             nodes near coords,
-            nodes near coords style={font=\small},
+            nodes near coords style={font=\footnotesize},
             every node near coord/.append style={/pgf/number format/fixed, /pgf/number format/fixed zerofill, /pgf/number format/precision=1},
             ymajorgrids=true,
             grid style={dashed, gray!30},
@@ -389,6 +392,48 @@ that structures near the air gap must be kept clear of its fringing field.
     \caption{Increase in winding AC resistance for each configuration.}
     \label{fig:rac_configurations}
     \floatnote{Relative to the inductor alone, measured in the same session.}
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.48\linewidth}
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+            width=\linewidth,
+            height=5.5cm,
+            xlabel={Inductor-to-vial distance (cm)},
+            ylabel={Increase in $R_{\mathrm{ac}}$ (m$\Omega$)},
+            xmin=0.5, xmax=5.5,
+            ymin=0, ymax=11,
+            xtick={1,2,3,4,5},
+            ytick={0,2,...,10},
+            tick label style={font=\footnotesize},
+            label style={font=\small},
+            ymajorgrids=true,
+            xmajorgrids=true,
+            grid style={dashed, gray!30},
+            axis x line*=bottom,
+            axis y line*=left,
+        ]
+            \addplot[
+                color=blue!70!black,
+                thick,
+                mark=*,
+                mark options={fill=blue!45},
+                nodes near coords,
+                nodes near coords style={font=\footnotesize, text=black, anchor=south west, xshift=-2pt},
+                point meta=explicit symbolic,
+            ] coordinates {
+                (1, 9.00) [9.00]
+                (2, 6.00) [6.00]
+                (3, 3.00) [3.00]
+                (4, 2.15) [2.15]
+                (5, 2.15) [2.15]
+            };
+        \end{axis}
+    \end{tikzpicture}
+    \caption{Increase in winding AC resistance against vial distance.}
+    \label{fig:rac_distance}
+    \floatnote{Relative to the inductor alone; cold plate removed.}
+  \end{minipage}
 \end{figure}
 
 \Cref{fig:rac_distance} presents the increase in $R_{\mathrm{ac}}$ as the vial
@@ -405,45 +450,6 @@ repeatability from \SI{3}{\centi\metre}. The text above says each configuration 
 compared with the nominal of its own session, so the figure and these two
 sentences should probably use the 82.15 values.}
 
-\begin{figure}[htbp]
-    \centering
-    \begin{tikzpicture}
-        \begin{axis}[
-            width=0.75\linewidth,
-            height=6.5cm,
-            xlabel={Inductor-to-vial distance (cm)},
-            ylabel={Increase in $R_{\mathrm{ac}}$ (m$\Omega$)},
-            xmin=0.5, xmax=5.5,
-            ymin=0, ymax=11,
-            xtick={1,2,3,4,5},
-            ytick={0,2,...,10},
-            ymajorgrids=true,
-            xmajorgrids=true,
-            grid style={dashed, gray!30},
-            axis x line*=bottom,
-            axis y line*=left,
-        ]
-            \addplot[
-                color=blue!70!black,
-                thick,
-                mark=*,
-                mark options={fill=blue!45},
-                nodes near coords,
-                nodes near coords style={font=\small, text=black, anchor=south west, xshift=-2pt},
-                point meta=explicit symbolic,
-            ] coordinates {
-                (1, 9.00) [9.00]
-                (2, 6.00) [6.00]
-                (3, 3.00) [3.00]
-                (4, 2.15) [2.15]
-                (5, 2.15) [2.15]
-            };
-        \end{axis}
-    \end{tikzpicture}
-    \caption{Increase in winding AC resistance against vial distance.}
-    \label{fig:rac_distance}
-    \floatnote{Relative to the inductor alone; cold plate removed.}
-\end{figure}
 
 % ---------------------------------------------------------------------
 \FloatBarrier
@@ -467,7 +473,35 @@ beyond the flows the rig could reach, the simulated values lie a steady
 \SIrange{0.035}{0.036}{\celsius\per\watt} below the model, but follow its
 dependence on flow. Over the whole range, the simulation therefore confirms that
 the Galinstan cold plate is caloric-limited, with $\Rcp$ inversely proportional
-to the flow rate.
+to the flow rate. \Cref{tab:cht-rcp} lists the simulated resistances. At
+\SI{5}{\milli\litre\per\second}, the simulated total resistance from the resistor
+to the inlet falls to \SI{0.292}{\celsius\per\watt}, against
+\SI{0.524}{\celsius\per\watt} at \SI{1.4}{\milli\litre\per\second}.
+
+\begin{table}[htbp]
+  \centering
+  \caption{Galinstan cold-plate resistance from the CHT simulations.}
+  \label{tab:cht-rcp}
+  \small
+  \begin{tabular}{@{}cccccc@{}}
+    \toprule
+    $\Vdot$ & Re & \multicolumn{3}{c}{$\Rcp$ (\si{\celsius\per\watt})}
+      & $\Rpack + \Rcp$, CHT \\
+    \cmidrule(lr){3-5}
+    (\si{\milli\litre\per\second}) & & CHT & $\varepsilon$--NTU model & Measured
+      & (\si{\celsius\per\watt}) \\
+    \midrule
+    0.75 & 317  & 0.562 & 0.572 & $0.557 \pm 0.108$\tnote{a} & 0.804 \\
+    1.4  & 591  & 0.282 & 0.306 & $0.246 \pm 0.054$\tnote{a} & 0.524 \\
+    2.8  & 1183 & 0.118 & 0.153 & --                         & 0.360 \\
+    5.0  & 2112 & 0.050 & 0.086 & --                         & 0.292 \\
+    \bottomrule
+  \end{tabular}
+  \floatnote{CHT values from \cref{eq:rcp-inferred} at the final iteration,
+    \num{427e3} cells; $\Rpack = \SI{0.242}{\celsius\per\watt}$.
+    \tnote{a}At 0.77 and \SI{1.45}{\milli\litre\per\second}, from the energy
+    balance.}
+\end{table}
 
 \begin{figure}[htbp]
   \centering
