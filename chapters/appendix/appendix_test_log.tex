@@ -1,0 +1,85 @@
+% =====================================================================
+% Appendix: Test log
+% Sources: LM-cooling/Experimental Data/Experimental Measurement.xlsx and
+% Thermistor_data/2 DegC values (CSV numbers as in Thermistor_data/TOC.txt)
+% =====================================================================
+\chapter{Test Log}
+\label{app:test-log}
+
+\Cref{tab:app-test-log} lists every thermal test run on the two loops in
+chronological order, with the data file that holds its temperature record and
+where its results are used in this report. The two loops were usually run side
+by side, starting together, so the Galinstan and water tests of one day share an
+ambient temperature. The thermistor logger recorded every temperature
+continuously, about once every \SI{0.5}{\second}; the steady-state values in
+\cref{tab:measured-performance,tab:tn_results} are the K-type thermocouple
+readings recorded near the end of each heated period, together with the heater
+power, flow and pump power, in \texttt{Experimental Measurement.xlsx}.
+
+\begin{table}[htbp]
+  \centering
+  \caption{Log of the thermal tests.}
+  \label{tab:app-test-log}
+  \footnotesize
+  \setlength{\tabcolsep}{3pt}
+  \begin{tabularx}{\linewidth}{@{}l c >{\raggedright\arraybackslash}p{3.6cm}
+      c c c c c L@{}}
+    \toprule
+    Date & CSV & Test & $\Vdot$ & $\Qin$ & $T_{\mathrm{A}}$ & Logged & Steady
+      & Used in \\
+         &     &      & (\si{\milli\litre\per\second}) & (\si{\watt})
+      & (\si{\celsius}) & (\si{\minute}) & (\si{\minute}) & \\
+    \midrule
+    2026-07-28 & 6      & Water, power sweep        & 59--62 & 10--90 & 22.3 & 283 & --  & Preliminary \\
+    2026-07-31 & 7      & Water, steady state       & 29.2   & 72     & 22.3 & 122 & --  & Preliminary \\
+    2026-07-31 & 9      & Water, step to \SI{110}{\watt} & 30.8 & 70--110 & 22.7 & 96 & -- & Water pump COP\tnote{a} \\
+    2026-08-02 & 10     & Galinstan, no flow        & 0      & 12     & 21.2 & 207 & 171 & $\Rmisc$ \\
+    2026-08-02 & 11     & Water, no flow            & 0      & 12     & 21.2 & 207 & 169 & $\Rmisc$ \\
+    2026-08-02 & 12--15 & Both, propagation and cool-down & --  & --  & 21.2 & --  & --  & Not used \\
+    2026-08-05 & 16     & Galinstan, full flow (\SI{18}{\ampere}) & 1.45 & 72 & 20.4 & 161 & 50 & \Cref{tab:measured-performance,tab:tn_results}; \cref{fig:galinstan_transient}(a) \\
+    2026-08-05 & 17     & Water, full flow (\SI{100}{\percent} duty) & 58.3 & 72 & 20.4 & 160 & 61 & \Cref{tab:measured-performance,tab:tn_results}; \cref{fig:water_transient}(a) \\
+    2026-08-06 & 18     & Galinstan, low flow (\SI{9}{\ampere}) & 0.75 & 72 & 20.3 & 64 & -- & Stopped at the \SI{70}{\celsius} pump limit \\
+    2026-08-06 & 19     & Water, low flow (\SI{20}{\percent} duty) & 29.2 & 72 & 20.3 & 184 & 77 & \Cref{tab:measured-performance,tab:tn_results}; \cref{fig:water_transient}(b) \\
+    2026-08-10 & 20     & Galinstan, low flow (\SI{9}{\ampere}) & 0.77 & 40 & 21.9 & 105 & 52 & \Cref{tab:measured-performance,tab:tn_results}; \cref{fig:galinstan_transient}(b) \\
+    2026-08-10 & 21     & Water, low flow (\SI{20}{\percent} duty) & 29.2 & 40 & 21.9 & 105 & -- & Not used \\
+    2026-09-07 & 24     & Water, restricted (\SI{0.73}{\litre\per\minute}) & 12.2 & 72 & 22.8 & 103 & 48 & \Cref{tab:measured-performance,tab:tn_results}; \cref{fig:water_transient}(c) \\
+    2026-09-08 & 25     & Water, restricted (\SI{0.5}{\litre\per\minute}) & 8.3 & 72 & 21.7 & 170 & 94 & \Cref{tab:measured-performance,tab:tn_results}; \cref{fig:water_transient}(d) \\
+    2026-09-15 & 29     & Resistors, no cooling system & --  & 12  & 22.6 & 239 & --  & Not used \\
+    2026-09-16 & 31     & Resistors, no cooling system & --  & 12  & 22.5 & 254 & --  & Not used \\
+    2026-09-24 & 34, 35 & Both, small resistor      & 8.3, 1.37 & 25 & 21.3 & 108 & -- & Not used \\
+    2026-10-05 & 36     & Galinstan, inductor (\SI{18}{\ampere}) & 1.4 & 42.8\tnote{b} & 21.8 & 231 & 143 & Experiment~2; \cref{fig:inductor-cam} \\
+    \bottomrule
+  \end{tabularx}
+  \floatnote{CSV: file number in \texttt{Thermistor\_data/2 DegC values}.
+    Logged: length of the record. Steady: time after which the resistor (or
+    inductor) temperature, as a \SI{2}{\minute} moving average, stayed within
+    \SI{0.5}{\celsius} of its final value until the heat was switched off.
+    \tnote{a}\Cref{tab:pumps}. \tnote{b}Estimated loss
+    (\cref{sec:model-validation}).}
+\end{table}
+\issue{Confirm that CSV~9 (step from \SI{70}{\watt} to \SI{110}{\watt}) is the
+additional \SI{110}{\watt} test behind the water COP of 47.6 in \cref{tab:pumps}.}
+
+Each steady-state test reached steady state within \SIrange{48}{94}{\minute} of
+the heat being switched on, and was held there for a further
+\SIrange{37}{94}{\minute} before the heat was switched off. The no-flow tests
+took about \SI{170}{\minute}, because without flow the whole apparatus heats
+slowly by conduction. The inductor test took about \SI{140}{\minute}, as the
+upper core, which is cooled mainly by natural convection, has a long thermal time
+constant.
+
+The project files that hold these results are:
+\begin{itemize}
+  \item \texttt{Experimental Data/Experimental Measurement.xlsx}: thermocouple
+    readings, heater power, flow and pump power at steady state for each test,
+    and the Galinstan pump and inductor measurements;
+  \item \texttt{Experimental Data/Thermistor\_data/2 DegC values}: the
+    temperature records of \cref{tab:app-test-log}, with a table of contents in
+    \texttt{Thermistor\_data/TOC.txt};
+  \item \texttt{Experimental Data/Inductor}: the thermal camera images and scope
+    captures of Experiment~2; and
+  \item \texttt{Final Report/Model Appendix/Thermal\_Network\_Model.xlsx}: the
+    thermal network of \cref{sec:thermal-network}, the $\varepsilon$--NTU
+    calculations of \cref{app:convection} and the predictions of
+    \cref{tab:tn_results}.
+\end{itemize}

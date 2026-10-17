@@ -22,9 +22,10 @@ recommendations for further work.
 In the experiments, water outperformed Galinstan across the whole operating
 range. The total resistance from the resistor to the coolant inlet was
 \SIrange{0.488}{0.799}{\celsius\per\watt} with Galinstan, against
-\SIrange{0.257}{0.267}{\celsius\per\watt} with water, 1.8 to 3.1 times lower
-(\cref{tab:measured-performance}). The Galinstan tests, however, ran at
-\SIrange{0.75}{1.4}{\milli\litre\per\second}, one to two orders of magnitude
+\SIrange{0.257}{0.267}{\celsius\per\watt} with water, so the Galinstan loop's
+resistance was 1.8 to 3.1 times higher (\cref{tab:measured-performance}). The
+Galinstan tests, however, ran at
+\SIrange{0.77}{1.45}{\milli\litre\per\second}, one to two orders of magnitude
 below the water tests (\SIrange{8.3}{58.3}{\milli\litre\per\second}). The
 comparison therefore reflects the flow the MHD pump could deliver rather than a
 general disadvantage of Galinstan as a coolant.
@@ -47,7 +48,7 @@ caloric resistance large enough to make the total resistance of the Galinstan
 loop higher than that of the water loop.
 
 The two regimes also respond very differently to flow. Increasing the water flow
-had only a minimal effect: the total resistance changed only from 0.267 to
+had only a minimal effect: the total resistance fell from 0.267 to
 \SI{0.257}{\celsius\per\watt} over a seven-fold increase in flow. Small changes
 in the Galinstan flow, in contrast, had a significant impact, with the total
 resistance falling from 0.799 to \SI{0.488}{\celsius\per\watt} as the flow
@@ -161,7 +162,8 @@ about \SI{83}{\celsius}. The upper core, which relies on natural convection, ran
 markedly hotter than the lower core on the cold plate
 (\cref{fig:inductor-cam-a}). This supports the first part of H2, that the loop
 cools the inductor beyond natural convection. Filling the cold plate with
-Galinstan added only \SI{1.0}{\milli\ohm} to the winding resistance, against
+Galinstan added only \SI{1.0}{\milli\ohm} to the winding resistance, within the
+$\pm\SI{1.5}{\milli\ohm}$ repeatability of the LCR meter, against
 \SI{11.7}{\milli\ohm} for the plate itself and \SI{10.3}{\milli\ohm} for
 unshielded Galinstan beside the inductor (\cref{sec:results-eddy}). The metal of
 the cold plate, several skin depths thick at \SI{85}{\kilo\hertz}, therefore
@@ -225,8 +227,9 @@ only about \SI{55}{\percent} of the heat that water does
 
 \paragraph{Amount of data.} The main limitation is the small amount of
 experimental data. Only two Galinstan and four water steady-state tests were
-run, each once, so the repeatability of the measurements is unknown and no
-statistical uncertainty can be placed on the measured resistances. The models
+run, each once (\cref{app:test-log}), so the repeatability of the measurements
+is unknown, and only the instrument accuracies could be propagated into the
+measured resistances (\cref{app:uncertainty}). The models
 were calibrated and checked against these same few points: $\Rpack$ was fitted
 to two water tests, and the CHT model was validated at only one flow per
 coolant. The agreement between model and measurement is therefore encouraging
@@ -244,7 +247,7 @@ numbers and inferred $\Rcp$ are uncertain, which may explain why they lie close
 to the turbulent trend rather than the laminar prediction
 (\cref{fig:water_rcp}). The Galinstan flow relies on an EMF in the microvolt
 range, which is sensitive to noise, although it agreed with the energy balance
-to within \SI{4}{\percent}. The water temperature rise across the plate was also
+to within about \SI{6}{\percent} (\cref{app:uncertainty}). The water temperature rise across the plate was also
 below the thermocouple accuracy, so the water energy balance could not be
 checked independently.
 
@@ -259,26 +262,30 @@ plate and pressure drop, so it is indicative only.
 coolants were compared at the flow each pump could deliver rather than at equal
 pumping power. The inductor test was run at a single operating point, with a
 heat load estimated from the core-loss model rather than measured, so the
-thermal performance of the loop around the inductor could not be quantified.
+thermal performance of the loop around the inductor could only be estimated
+roughly: the coolant carried about half of the estimated loss
+(\cref{app:inductor-data}).
 
 % ---------------------------------------------------------------------
 \section{Recommendations for Further Work}
 \label{sec:disc-further-work}
 
-Further work should:
+Three directions are recommended for further work:
 \begin{enumerate}
-  \item characterise and optimise the MHD pump, measuring its pressure--flow
-    curve and efficiency and reducing the loop pressure drop, to reach flows of
-    at least \SI{5}{\milli\litre\per\second}. A FEMM current-flow model of the
-    pump was started in this project to guide its redesign, but it was not
-    completed or validated, so it is not presented in the body of the report.
-    The work to date, which suggests that longer electrodes and lower connection
-    resistance would raise the pump efficiency considerably, is summarised in
-    \cref{app:femm};
-  \item integrate the power electronics into the pump design, to give a more
-    accurate picture of the true pump size and total efficiency, including the
-    power conversion needed to supply its high current at low voltage; and
-  \item build a reduced-size cold plate with an improved geometry, with a heated
-    area below about \SI{40}{\centi\metre\squared}, to test the advantage
-    predicted in \cref{sec:disc-area}.
+  \item \textbf{Pump characterisation and optimisation.} The MHD pump's
+    pressure--flow curve and efficiency should be measured, and the loop pressure
+    drop reduced, to reach flows of at least \SI{5}{\milli\litre\per\second}. A
+    FEMM current-flow model of the pump was started in this project to guide its
+    redesign, but it was not completed or validated, so it is not presented in
+    the body of the report. The work to date, which suggests that longer
+    electrodes, larger magnets and lower connection resistance would raise the
+    pump efficiency
+    considerably, is summarised in \cref{app:femm}.
+  \item \textbf{Integrated power electronics.} The power electronics should be
+    integrated into the pump design, to give a more accurate picture of the true
+    pump size and total efficiency, including the power conversion needed to
+    supply its high current at low voltage.
+  \item \textbf{Reduced-size cold plate.} A smaller cold plate with an improved
+    geometry, and a heated area below about \SI{40}{\centi\metre\squared},
+    should be built to test the advantage predicted in \cref{sec:disc-area}.
 \end{enumerate}

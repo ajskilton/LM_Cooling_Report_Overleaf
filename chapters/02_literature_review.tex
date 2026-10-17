@@ -11,10 +11,10 @@ regrouped to match, with an added row for loss in magnetics.}
 This chapter reviews the literature on cooling power electronic converters
 (PECs) with liquid metal. It opens with the sources of loss in inductive power
 transfer (IPT) systems, the application that motivates this work
-(\cref{sec:ipt-losses}). It then presents the current trend that the power
-density of PECs is increasing (\cref{sec:motivation}), and that their thermal management must meet reliability,
-form-factor and efficiency requirements. It then discusses that these requirements
-point to liquid metal cooling as a potential solution
+(\cref{sec:ipt-losses}). It then presents the rising power density of PECs
+(\cref{sec:motivation}) and the reliability, form-factor and efficiency
+requirements their thermal management must meet, and shows how these
+requirements point to liquid metal cooling as a potential solution
 (\cref{sec:thermal-management}). \Cref{sec:liquid-metal} evaluates this
 proposal, and \cref{sec:research-gap} identifies the research gap and states
 the research questions of this project.
@@ -206,8 +206,8 @@ significant mainly above about \SI{200}{\celsius}~\cite{kalay_systematic_2025}.
 Magnetics and other components of PECs also fail under thermal
 stress~\cite{biela_cooling_2007,mengesha_advanced_2025,li_review_2022,lawton_power_2024, rahman_emerging_2024}.
 For reliability, the cooling system must therefore hold the maximum temperature
-of both semiconductors, magnetics, and other components below their operating limits, and suppress
-the temperature swing.
+of semiconductors, magnetics and other components below their operating limits,
+and suppress the temperature swing.
 
 Single-phase cooling meets both requirements to a degree. Natural convection,
 the simplest scheme, is limited by the low heat transfer coefficient of
@@ -307,9 +307,9 @@ A Galinstan loop offers single-phase cooling, with no boiling limit to design ar
 remove a higher heat flux than water~\cite{hodes_potential_2014, zhang_experimental_2019}.
 
 These benefits come with significant trade-offs (\cref{tab:galinstan-properties}).
-High density and viscosity raise pumping power and system weight and because the
-volumetric heat capacity is low, more than twice the flow of water is needed
-for the same coolant temperature rise. Electrical conductivity rules out direct
+High density and viscosity raise pumping power and system weight, and because the
+volumetric heat capacity is low, almost twice the flow of water is needed for
+the same coolant temperature rise. Electrical conductivity rules out direct
 contact with live parts and exposes the coolant to induction heating. 
 The material cost of Galinstan is high; Kwon~\cite{kwon_project_2025}
 therefore concluded that liquid metal may suit specialised applications where
@@ -365,7 +365,7 @@ flow rate is
   \label{eq:flow-requirement}
 \end{equation}
 where $\rho$ is the coolant density and $\cp$ its specific heat capacity.
-Galinstan therefore needs about 2.2 times the flow of water
+Galinstan therefore needs about 1.8 times the flow of water
 (\cref{tab:galinstan-properties}), which is identified as the primary
 bottleneck for liquid metal heat sinks~\cite{hodes_potential_2014,an_liquid_2024}.
 Its high thermal conductivity partly offsets this, because it sustains high heat
@@ -431,7 +431,7 @@ Electrically, the coolant is a conductor, so a leak onto
 energised circuitry is a direct short~\cite{hodes_potential_2014}. The loop also
 galvanically connects every wetted part, so the EM pump supply can energise the
 radiator and cold plate~\cite{kwon_project_2025}. There is also potential for nearby
-magnetics to induce eddy currents in the coolant, though this has not been strictly explored in the literature
+magnetics to induce eddy currents in the coolant, although this has not been explored in detail in the literature
 (\cref{sec:thermal-management})~\cite{an_liquid_2024, fan_ultra-efficient_2026}.
 As a result, low-cost plastic piping suits low-field regions. 
 Near magnetics, it may be preferable to shield the coolant with a more conductive material to reduce eddy losses.
@@ -447,8 +447,10 @@ The first is the lack of comparisons between water and liquid metal at the scale
 of a converter's cooling loop. Most existing comparisons are made for micro- and
 mini-channel heat
 sinks~\cite{hodes_potential_2014,zhang_water-based_2015,zhang_experimental_2019,an_liquid_2024},
-or lie at the scale of nuclear reactors~\cite{rowinski_small_2015}. Though some have been completed for PECs~\cite{fan_ultra-efficient_2026}, 
-these do not explore which application may see the largest performance advantage from utilising a liquid metal coolant.
+or lie at the scale of nuclear reactors~\cite{rowinski_small_2015}. Some
+comparisons have been made for PECs~\cite{fan_ultra-efficient_2026}, but these
+do not explore which applications would benefit most from a liquid metal
+coolant.
 This study aims to quantify the trade-offs of the Galinstan system (as designed
 in~\cite{kwon_project_2025,loh_project_2025}) relative to a comparable water-cooling
 system.
@@ -494,10 +496,10 @@ These gaps lead to two research questions.
     \item[RQ2] Can the Galinstan loop cool a power-dense inductor while adding
     minimal loss to the existing aluminium cold plate, and how large is the
     eddy-current loss induced in the coolant?
-    \item[H2] The Galinstan loop will have a cooling effect on the inductor above that of natural convection. 
-    The increase in loss due to eddy-current loss induced in the coolant will be
-    small compared to the loss of introducing the cold plate.
-    The metal of the cold plate between the inductor and the coolant is
-    several skin depths thick at \SI{85}{\kilo\hertz}. Additionally, the high-frequency field will not change the coolant flow
-    measurably. 
+    \item[H2] The Galinstan loop will cool the inductor beyond what natural
+    convection achieves. The eddy-current loss induced in the coolant will be
+    small compared with the loss added by the cold plate itself, because the
+    metal of the cold plate between the inductor and the coolant is several skin
+    depths thick at \SI{85}{\kilo\hertz}. The high-frequency field will also not
+    change the coolant flow measurably.
 \end{description}
