@@ -44,7 +44,7 @@ induces eddy currents. The inverter and rectifier dissipate about
   \begin{tikzpicture}
     \begin{axis}[
       xbar stacked,
-      width=0.78\linewidth, height=5.6cm,
+      width=0.75\linewidth, height=5.6cm,
       bar width=8pt,
       xmin=0, xmax=300,
       xlabel={Power loss (\si{\watt})},
@@ -74,12 +74,11 @@ induces eddy currents. The inverter and rectifier dissipate about
       \legend{Litz wire, Ferrite, Capacitors, Aluminium, Other components}
     \end{axis}
   \end{tikzpicture}
-  \caption{Power loss distribution across a \SI{10}{\kilo\watt},
-    \SI{85}{\kilo\hertz} IPT system with DD pads at an ambient temperature of
-    \SI{50}{\celsius}, recreated from Kim \emph{et al.}~\cite{kim_thermal_2022}
-    (values read from the original figure). $L_{\mathrm{si}}$ and $C_{\mathrm{pi}}$
-    are components of the compensation network.}
+  \caption{Loss distribution of a \SI{10}{\kilo\watt}, \SI{85}{\kilo\hertz} IPT
+    system.}
   \label{fig:kim-losses}
+  \floatnote{Recreated from~\cite{kim_thermal_2022}; ambient \SI{50}{\celsius}.
+    $L_{\mathrm{si}}$ and $C_{\mathrm{pi}}$ are compensation-network components.}
 \end{figure}
 
 These losses differ in character. The pad losses are spread over about
@@ -151,10 +150,7 @@ requirements~\cite{liu_thermal_2025,rahman_emerging_2024,laloya_heat_2016,mudawa
 
 \begin{table}[htbp]
   \centering
-  \caption[Thermal management requirements and established cooling strategies]{Summary
-    of how established cooling strategies meet the requirements for PEC thermal
-    management. COP: coefficient of performance, the ratio of heat removed to
-    cooling power consumed.}
+  \caption{Established cooling strategies against the requirements.}
   \label{tab:cooling-strategies}
   \small
   \begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{3.0cm} L L@{}}
@@ -185,6 +181,7 @@ requirements~\cite{liu_thermal_2025,rahman_emerging_2024,laloya_heat_2016,mudawa
         conductive cooling hardware in a leakage field incurs eddy-current loss} \\
     \bottomrule
   \end{tabularx}
+  \floatnote{COP: coefficient of performance, heat removed per unit cooling power.}
 \end{table}
 
 \subsection{Reliability Requirement}
@@ -192,7 +189,7 @@ requirements~\cite{liu_thermal_2025,rahman_emerging_2024,laloya_heat_2016,mudawa
 
 Thermal management is required, above all, to keep increasingly power-dense
 PECs reliable. Thermal stress causes over \SI{50}{\percent} of electronic
-equipment failures~\cite{rahman_emerging_2024}, and power semiconductors, 
+equipment failures~\cite{rahman_emerging_2024}, and power semiconductors
 dominate the overall reliability of power converters~\cite{kalay_systematic_2025}. The
 Coffin--Manson model relates the number of thermal cycles to failure of a
 semiconductor device to its junction temperature
@@ -229,15 +226,13 @@ temperature rises uncontrollably. CHF is difficult to predict, so the safety
 margin it demands erodes this advantage~\cite{mudawar_assessment_2001}, and
 passive phase-change schemes offer no control over the temperature swing.
 
-\begin{figure}[tbp]
+\begin{figure}[htbp]
   \centering
   \includegraphics[width=0.75\linewidth]{gao_inductor_prototype}
-  \caption[Planar inductor prototype of Gao \emph{et al.}]{Planar inductor
-    prototype of Gao \emph{et al.} with an engineered conduction path to the
-    cold plate: (a)~PCB top view; (b)~view used for thermal imaging;
-    (c)~side view of the assembled inductor. Adapted
-    from~\cite{gao_modeling_2022}.}
+  \caption{Planar inductor of Gao \emph{et al.}\ with a conduction path to the
+    cold plate.}
   \label{fig:gao-inductor}
+  \floatnote{Adapted from~\cite{gao_modeling_2022}.}
 \end{figure}
 
 \subsection{Form Factor Requirement}
@@ -318,14 +313,13 @@ for the same coolant temperature rise. Electrical conductivity rules out direct
 contact with live parts and exposes the coolant to induction heating. 
 The material cost of Galinstan is high; Kwon~\cite{kwon_project_2025}
 therefore concluded that liquid metal may suit specialised applications where
-efficiency, compactness and reliability justify its cost. Though later studies suggest at the
-system level, water and Galinstan are comparable~\cite{fan_ultra-efficient_2026}. 
+efficiency, compactness and reliability justify its cost, although later work
+suggests that the two are comparable at the system
+level~\cite{fan_ultra-efficient_2026}.
 
 \begin{table}[htbp]
   \centering
-  \caption{Selected properties and cost of the Galinstan used in this work
-    (Rich Metals grade EU-10C, 68.5Ga--21.5In--10Sn by
-    weight~\cite{noauthor_gainsn_nodate}) relative to water.}
+  \caption{Properties and cost of Galinstan relative to water.}
   \label{tab:galinstan-properties}
   \small
   \begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{3.2cm}
@@ -335,21 +329,23 @@ system level, water and Galinstan are comparable~\cite{fan_ultra-efficient_2026}
     \midrule
     Thermal conductivity & \SI{16.5}{\watt\per\metre\per\kelvin} & About 28 times higher & \cite{noauthor_gainsn_nodate} \\
     Density & \SI{6370}{\kilogram\per\metre\cubed} & More than six times denser & \cite{noauthor_gainsn_nodate} \\
-    Dynamic viscosity & \SI{2}{\milli\pascal\second} & About 2 times thicker & \cite{noauthor_gainsn_nodate} \\
-    Specific heat capacity & \SI{366}{\joule\per\kilogram\per\kelvin} & About one-fourteenth capacity & \cite{zhang_experimental_2019} \\
-    Volumetric heat capacity & \SI{2.3}{\mega\joule\per\metre\cubed\per\kelvin} & 0.45 times & \cite{noauthor_gainsn_nodate} \\
+    Dynamic viscosity & \SI{2.4}{\milli\pascal\second} & About 2.4 times thicker & \cite{kwon_project_2025} \\
+    Specific heat capacity & \SI{366}{\joule\per\kilogram\per\kelvin} & About one-eleventh capacity & \cite{zhang_experimental_2019} \\
+    Volumetric heat capacity & \SI{2.3}{\mega\joule\per\metre\cubed\per\kelvin} & About 0.55 times & \cite{noauthor_gainsn_nodate} \\
     Electrical conductivity & \SI{3.46e6}{\siemens\per\metre} & Orders of magnitude more conductive (deionised water: \SI{5.5e-6}{\siemens\per\metre}) & \cite{noauthor_gainsn_nodate} \\
     Melting and boiling points & \SI{10}{\celsius} and above \SI{1300}{\celsius} & 13 times higher boiling point & \cite{noauthor_gainsn_nodate,hodes_potential_2014} \\
     Material cost & US\$200--2000/kg & Orders of magnitude more expensive & \cite{an_liquid_2024} \\
     \bottomrule
   \end{tabularx}
+  \floatnote{Rich Metals grade EU-10C (68.5Ga--21.5In--10Sn by weight), as used in
+    this work~\cite{noauthor_gainsn_nodate}.}
 \end{table}
 
 Much of the reviewed work on Galinstan and other Ga-based coolants focuses on
 micro- and mini-channel heat sinks for electronics. These studies typically use heat loads
 from watts to hundreds of watts. It is unclear from the literature whether such
-systems can be scaled up to the channel sizes and temperatures more typical of the thermal management of an entire
-PECs, reducing the need for heat exchangers. For example, EV-charging PECs have power classes on the order of tens of
+systems can be scaled up to the channel sizes and temperatures needed to cool an
+entire PEC, which would reduce the need for separate heat exchangers. For example, EV-charging PECs have power classes on the order of tens of
 kilowatts for light-duty vehicles and are being standardised up to
 \SI{1}{\mega\watt} for heavy-duty vehicles~\cite{lawton_power_2024,liu_thermal_2025,abb_e-mobility_mcs1200_nodate}. Future \SI{1}{\mega\watt} PECs could have losses on the order of kilowatts.
 Large liquid metal systems have been realised for nuclear reactors~\cite{rowinski_small_2015},
@@ -397,7 +393,7 @@ favoured. The cost is operation at high current and low voltage
 (\SIrange{1}{100}{\ampere}, \SIrange{0.01}{0.5}{\volt},
 \SIrange{0.1}{50}{\watt}), with efficiencies of only about
 \SIrange{6}{10}{\percent}~\cite{an_liquid_2024,hodes_potential_2014}. Even
-so, a EM conduction pump typically draws less power than a mechanical water pump
+so, an EM conduction pump typically draws less power than a mechanical water pump
 for the same cooling performance~\cite{an_liquid_2024, fan_liquid_2021, fan_high_2023, fan_ultra-efficient_2026}.
 
 Induction pumps instead induce current in the coolant through an alternating or

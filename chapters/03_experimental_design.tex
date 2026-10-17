@@ -34,13 +34,11 @@ the environment. A flow sensor measures the coolant flow rate.
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=0.85\linewidth]{figures/cooling_loop.pdf}
-  \caption{Cooling loop arrangement shared by the Galinstan and water systems.
-    The coolant is pumped through the heat source (resistor test load or
-    inductor), past the flow sensor and through the radiator before returning
-    to the pump. The water loop uses a pump with an integrated reservoir; the
-    Galinstan loop uses an electromagnetic pump.}
+  \includegraphics[width=0.85\linewidth]{cooling_loop}
+  \caption{Cooling loop arrangement of the Galinstan and water systems.}
   \label{fig:cooling-loop}
+  \floatnote{The water loop uses a pump with an integrated reservoir; the
+    Galinstan loop uses an electromagnetic pump.}
 \end{figure}
 
 The Galinstan loop is the apparatus constructed by the 2025 Part~IV Project~\#51
@@ -215,16 +213,16 @@ chosen design, are given in \cref{tab:inductor-design}.
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=0.72\linewidth]{inductor_flux_density}
-  \caption{Magnetic flux density in the selected inductor design ($N = 8$,
-    $l_{\mathrm{g}} = \SI{0.6}{\milli\metre}$).}
+  \caption{Simulated magnetic flux density in the final inductor design.}
   \label{fig:flux-density}
+  \floatnote{$N = 8$, $l_{\mathrm{g}} = \SI{0.6}{\milli\metre}$.}
 \end{figure}
 
 \begin{table}[htbp]
   \centering
-  \caption{Final inductor parameters from the ANSYS model at the rated current
-    of \SI{12}{\ampere} rms.}
+  \caption{Final inductor design parameters.}
   \label{tab:inductor-design}
+  \small
   \begin{tabular}{@{}lll@{}}
     \toprule
     Parameter & Value & Unit \\
@@ -237,6 +235,7 @@ chosen design, are given in \cref{tab:inductor-design}.
     Core loss      & 30.81 & \si{\watt} \\
     \bottomrule
   \end{tabular}
+  \floatnote{Inductance and core loss from the ANSYS model at \SI{12}{\ampere} rms.}
 \end{table}
 
 \subsection{Model Validation}
@@ -326,9 +325,7 @@ highest row voltage is about \SI{146}{\volt}, within the \SI{150}{\volt} limit.
 
 \begin{table}[htbp]
   \centering
-  \caption{Final arrangement of the series tuning capacitors from the
-    optimisation model. The four rows are connected in series; row voltages are
-    at \SI{12}{\ampere} rms and \SI{85}{\kilo\hertz}.}
+  \caption{Final arrangement of the series tuning capacitors.}
   \label{tab:capacitor-opt}
   \small
   \begin{tabular}{@{}lcccc@{}}
@@ -346,6 +343,8 @@ highest row voltage is about \SI{146}{\volt}, within the \SI{150}{\volt} limit.
     \multicolumn{3}{@{}l}{Error}                & 0.89 (\SI{2.12}{\percent}) & \\
     \bottomrule
   \end{tabular}
+  \floatnote{Rows connected in series; voltages at \SI{12}{\ampere} rms and
+    \SI{85}{\kilo\hertz}.}
 \end{table}
 
 % ---------------------------------------------------------------------
@@ -391,16 +390,14 @@ $\Rmisc = \SI{2.95}{\celsius\per\watt}$. With these values, between
 \SI{9}{\watt} and \SI{12}{\watt} of the heat load is lost to the environment in
 each test (\cref{tab:measured-performance}). This network was used in all the
 following models.
-\issue{\Cref{fig:thermal-network} still labels the resistor node
-$T_{\mathrm{M}}$; update the image to $T_{\mathrm{resistor}}$.}
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=0.85\linewidth]{thermal_network}
-  \caption{Thermal network as an electrical analogue (temperature $\equiv$
-    potential, heat flow $\equiv$ current); $T_{\mathrm{A}}$ and $\Tin$ are fixed
-    boundary conditions.}
+  \input{figures/thermal_network}
+  \caption{Thermal network of the resistor and cold plate.}
   \label{fig:thermal-network}
+  \floatnote{Electrical analogue: temperature $\equiv$ potential, heat flow
+    $\equiv$ current. $T_{\mathrm{A}}$ and $\Tin$ are fixed.}
 \end{figure}
 
 \subsection{\texorpdfstring{$\varepsilon$--NTU}{epsilon-NTU} Analysis of the Cold Plate}
@@ -471,10 +468,9 @@ value for all flows and both coolants.
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=0.85\linewidth]{coldplate_heat_flow}
-  \caption{Heat-flow directions in the cold plate: in-plane spreading (plate),
-    through-thickness conduction (part of $\Rpack$), axial flow and radial
-    convection ($R_{\mathrm{conv}}$).}
+  \caption{Heat-flow paths in the cold plate.}
   \label{fig:coldplate-heatflow}
+  \floatnote{Through-thickness conduction forms part of $\Rpack$.}
 \end{figure}
 
 \subsection{Convection Correlations and Test Conditions}
@@ -500,76 +496,60 @@ water tests, however, the cold-plate resistance given in the ATS-TCP-1001
 datasheet~\cite{advanced_thermal_solutions_inc_tubed_2021} was later found to
 fit the measured data better, so the temperature predictions for these tests
 use the datasheet values, fitted as
-$\Rcp = 0.0274\,\Vdot^{-0.415}$~\si{\kelvin\per\watt} ($\Vdot$ in
-\si{\litre\per\minute}). The Galinstan and laminar water tests use the
+$\Rcp = 0.0881\,\Vdot^{-0.415}$~\si{\celsius\per\watt} ($\Vdot$ in
+\si{\milli\litre\per\second}). The Galinstan and laminar water tests use the
 $\varepsilon$--NTU model.
 \Cref{tab:coolant-properties,tab:tests} summarise the cold-plate geometry, the
 coolant properties and the test conditions.
 
 \begin{table}[htbp]
   \centering
-  \caption{Cold-plate geometry (ATS-TCP-1001) and coolant properties.}
+  \caption{Cold-plate geometry and coolant properties.}
   \label{tab:coolant-properties}
   \small
-  \begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{4.3cm}ll L@{}}
+  \begin{tabular}{@{}lcc@{}}
     \toprule
-    Quantity & Galinstan & Water & Note \\
+    Quantity & Galinstan & Water \\
     \midrule
-    Tube bore / heated length per pass & \SI{8}{\milli\metre} / \SI{152}{\milli\metre}
-      & \SI{8}{\milli\metre} / \SI{152}{\milli\metre}
-      & Bore measured; plate length and 4 passes
-        from~\cite{advanced_thermal_solutions_inc_tubed_2021};
-        $A = \SI{0.0153}{\metre\squared}$ \\
-    $\rho$ (\si{\kilogram\per\metre\cubed}) / $\cp$ (\si{\joule\per\kilogram\per\kelvin})
-      & 6370 / 366 & 1000 / 4182
-      & Galinstan $\rho$~\cite{kwon_project_2025}, $\cp$~\cite{zhang_experimental_2019} \\
-    $k$ (\si{\watt\per\metre\per\kelvin}) / $\mu$ (\si{\milli\pascal\second})
-      & 16.5 / 2.4 & 0.60 / 1.0 & \cite{kwon_project_2025} \\
+    Tube bore (\si{\milli\metre})                        & 8    & 8    \\
+    Heated length per pass (\si{\milli\metre})           & 152  & 152  \\
+    Heated area, $A$ (\si{\metre\squared})               & 0.0153 & 0.0153 \\
+    Density, $\rho$ (\si{\kilogram\per\metre\cubed})      & 6370 & 1000 \\
+    Specific heat, $\cp$ (\si{\joule\per\kilogram\per\kelvin}) & 366 & 4182 \\
+    Thermal conductivity, $k$ (\si{\watt\per\metre\per\kelvin}) & 16.5 & 0.60 \\
+    Viscosity, $\mu$ (\si{\milli\pascal\second})         & 2.4  & 1.0  \\
     \bottomrule
-  \end{tabularx}
+  \end{tabular}
+  \floatnote{ATS-TCP-1001, four passes~\cite{advanced_thermal_solutions_inc_tubed_2021};
+    bore measured. Galinstan properties from~\cite{kwon_project_2025}, except
+    $\cp$~\cite{zhang_experimental_2019}.}
 \end{table}
 
 \begin{table}[htbp]
   \centering
-  \caption{Steady-state tests, estimated coolant temperature rise and cold-plate
-    resistance used in the predictions.}
+  \caption{Steady-state test conditions and predicted cold-plate resistance.}
   \label{tab:tests}
   \small
-  \setlength{\tabcolsep}{4.5pt}
-  \begin{tabular}{@{}llrrlrr@{}}
+  \begin{tabular}{@{}lcccccc@{}}
     \toprule
-    Test & Flow & $\Qin$ (\si{\watt}) & Re & Regime &
-      $\Delta T_\mathrm{cool}$ (\si{\celsius}) & $R_\mathrm{cp}$ (\si{\celsius\per\watt}) \\
+    Coolant & $\Vdot$ & $\Qin$ & Re & Regime & $\Delta T_\mathrm{cool}$ & $\Rcp$ \\
+            & (\si{\milli\litre\per\second}) & (\si{\watt}) & & & (\si{\celsius})
+            & (\si{\celsius\per\watt}) \\
     \midrule
-    Galinstan, full (\SI{18}{\ampere}) & \SI{1.4}{\milli\litre\per\second}  & 72 & 591  & Laminar   & 17.8\textsuperscript{\textdagger} & 0.295 \\
-    Galinstan, low (\SI{9}{\ampere})   & \SI{0.75}{\milli\litre\per\second} & 40 & 317  & Laminar   & 17.1\textsuperscript{\textdagger} & 0.555 \\
-    Water & \SI{3.5}{\litre\per\minute}  & 72 & 9284 & Turbulent & 0.26 & 0.016\textsuperscript{\textdaggerdbl} \\
-    Water & \SI{1.75}{\litre\per\minute} & 72 & 4642 & Turbulent & 0.52 & 0.022\textsuperscript{\textdaggerdbl} \\
-    Water & \SI{0.73}{\litre\per\minute} & 72 & 1936 & Laminar   & 1.22 & 0.074 \\
-    Water & \SI{0.5}{\litre\per\minute}  & 72 & 1326 & Laminar   & 1.78 & 0.088 \\
+    Galinstan & 1.4  & 72 & 591  & Laminar   & 17.8\tnote{a} & 0.295 \\
+    Galinstan & 0.75 & 40 & 317  & Laminar   & 17.1\tnote{a} & 0.555 \\
+    Water     & 58.3 & 72 & 9284 & Turbulent & 0.26 & 0.016\tnote{b} \\
+    Water     & 29.2 & 72 & 4642 & Turbulent & 0.52 & 0.022\tnote{b} \\
+    Water     & 12.2 & 72 & 1936 & Laminar   & 1.22 & 0.074 \\
+    Water     & 8.3  & 72 & 1326 & Laminar   & 1.78 & 0.088 \\
     \bottomrule
-    \multicolumn{7}{@{}p{\linewidth}@{}}{\footnotesize
-      $\Delta T_\mathrm{cool} = Q_\mathrm{plate}/(\mdot\,\cp)$, where
-      $Q_\mathrm{plate}$ is $\Qin$ less the loss to ambient through
-      $R_\mathrm{misc}$. $R_\mathrm{cp}$ is from the $\varepsilon$--NTU model
-      unless marked.
-      \textsuperscript{\textdagger}\,Galinstan $\mdot\,\cp$ estimated from the
-      energy balance, so $\Delta T_\mathrm{cool}$ equals the measured
-      $T_\mathrm{out} - T_\mathrm{in}$; nominal flows are from the EMF
-      flow sensor.
-      \textsuperscript{\textdaggerdbl}\,ATS datasheet
-      fit~\cite{advanced_thermal_solutions_inc_tubed_2021};
-      \SI{1.75}{\litre\per\minute} is slightly extrapolated below the lowest
-      datasheet point (\SI{1.89}{\litre\per\minute}).}
   \end{tabular}
+  \floatnote{$\Delta T_\mathrm{cool} = \Qplate/(\mdot\,\cp)$; $\Rcp$ from the
+    $\varepsilon$--NTU model unless marked. \tnote{a}Galinstan $\mdot\,\cp$ from
+    the energy balance. \tnote{b}ATS datasheet
+    fit~\cite{advanced_thermal_solutions_inc_tubed_2021}, extrapolated below
+    \SI{31.5}{\milli\litre\per\second}.}
 \end{table}
-\edited{Turbulent water flows changed from 3.6 and \SI{1.8}{\litre\per\minute}
-to the measured 3.5 and \SI{1.75}{\litre\per\minute} (58.3 and
-\SI{29.2}{\milli\litre\per\second}) here and in later chapters. Re and
-$\Delta T_{\mathrm{cool}}$ were recalculated; $\Rcp$, NTU, $\Rpack$ and the
-predicted temperatures are unchanged at the precision shown (the datasheet
-$\Rcp$ changes by \SI{0.0002}{\celsius\per\watt}). Thermal\_Network\_Model.xlsx
-still uses 3.6 and \SI{1.8}{\litre\per\minute}.}
 
 \subsection{Conjugate Heat Transfer Simulation}
 \label{sec:cht}
@@ -596,11 +576,11 @@ simulation settings and boundary conditions are summarised in
 default values.
 
 \begin{figure}[htbp]
-    \centering
-    \includegraphics[width=\textwidth]{coldplate_figure.pdf}
-    \caption{Cold-plate model used for the CHT analysis.
-        (a)~Isometric view and (b)~cut showing the internal flow volume.}
-    \label{fig:cfd_setup}
+  \centering
+  \includegraphics[width=\linewidth]{coldplate_figure}
+  \caption{Cold-plate model for the CHT simulation.}
+  \label{fig:cfd_setup}
+  \floatnote{(a)~Isometric view; (b)~section through the internal flow volume.}
 \end{figure}
 
 The boundary conditions were chosen to match each test. The inlet was set as a
@@ -618,7 +598,7 @@ tests, about \SI{62.6}{\watt}.
 
 \begin{table}[htbp]
   \centering
-  \caption{CHT simulation settings and boundary conditions.}
+  \caption{CHT simulation settings.}
   \label{tab:simulation-setup}
   \small
   \begin{tabular}{@{}ll@{}}
@@ -731,7 +711,7 @@ tests provide data to inform and validate the thermal models. The no-flow tests,
 run at a reduced heat load of \SI{12}{\watt}, measure the heat leakage to the
 environment and give $\Rmisc$ (\cref{sec:thermal-network}). Two further tests
 at lower flow rates,
-\SI{0.73}{\litre\per\minute} and \SI{0.5}{\litre\per\minute}, were later
+\SI{12.2}{\milli\litre\per\second} and \SI{8.3}{\milli\litre\per\second}, were later
 conducted on the water loop, using the valve to reduce the flow below the
 controllable range of the pump. These give laminar water data, in the same flow
 regime as Galinstan. The low-flow Galinstan test was run at a reduced heat load
@@ -740,19 +720,17 @@ of \SI{40}{\watt}, so that the resistor and the pump housing stayed below the
 
 \begin{table}[htbp]
   \centering
-  \caption{Planned experimental flow rates.}
+  \caption{Planned test flow rates.}
   \label{tab:flow-rates}
   \small
   \begin{tabularx}{\linewidth}{@{}lccL@{}}
     \toprule
     Test & Water & Galinstan & Goal \\
+         & (\si{\milli\litre\per\second}) & (\si{\milli\litre\per\second}) & \\
     \midrule
-    Full flow & \SI{58.3}{\milli\litre\per\second} & \SI{1.4}{\milli\litre\per\second}
-      & Evaluate the maximum heat transfer of the current systems \\
-    Low flow  & \SI{29.2}{\milli\litre\per\second} & \SI{0.8}{\milli\litre\per\second}
-      & Provide data to inform and validate the thermal models \\
-    No flow   & \SI{0}{\milli\litre\per\second}    & \SI{0}{\milli\litre\per\second}
-      & Assess heat leakage to the environment \\
+    Full flow & 58.3 & 1.4  & Evaluate the maximum heat transfer of the current systems \\
+    Low flow  & 29.2 & 0.75 & Provide data to inform and validate the thermal models \\
+    No flow   & 0    & 0    & Assess heat leakage to the environment \\
     \bottomrule
   \end{tabularx}
 \end{table}
@@ -791,8 +769,7 @@ with distance.
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=0.6\linewidth]{inductor_vial_setup}
-  \caption{Inductor on the Galinstan cold plate, with the PVC vial of Galinstan
-    standing beside it, as used for configuration~(iv) of the eddy-current loss
-    measurement.}
+  \caption{Eddy-current measurement setup with the Galinstan vial.}
   \label{fig:vial-setup}
+  \floatnote{Configuration~(iv).}
 \end{figure}

@@ -1,0 +1,40 @@
+% Thermal network of the resistor and cold plate as an electrical analogue
+% (temperature = potential, heat flow = current), with IEC resistor symbols.
+% Requires in preamble: \usepackage[american]{circuitikz}
+% Include with: \input{figures/thermal_network}  (inside a figure environment)
+\begin{circuitikz}[line width=0.8pt, european resistors]
+  % Top annotations
+  \node[gray, font=\sffamily\small] at (2, 3.5) {loss to ambient};
+  \node[gray, font=\sffamily\small] at (6, 3.5) {package + TIM};
+  \node[gray, font=\sffamily\small] at (10, 3.5) {cold plate ($\varepsilon$--NTU)};
+
+  % Ambient source and loss to ambient
+  \draw (0,2.4) to[cvsource, l_=$T_{\mathrm{A}}$] (0,0);
+  \draw (0,2.4) to[R, l=$\Rmisc$] (4,2.4)
+    node[circle, fill, inner sep=1.5pt, label=above:$\Tres$]{};
+
+  % Heat input
+  \draw (4,0) to[isource, l=$\Qin$] (4,2.4);
+  \draw (4,0) node[ground]{};
+
+  % Package and cold plate
+  \draw (4,2.4) to[R, l=$\Rpack$] (8,2.4)
+    node[circle, fill, inner sep=1.5pt, label=above:$T_{\mathrm{P}}$]{};
+  \draw (8,2.4) to[R, l=$\Rcp$] (12,2.4)
+    node[circle, fill, inner sep=1.5pt]{};
+
+  % Coolant inlet source
+  \draw (12,2.4) to[cvsource, l=$\Tin$] (12,0);
+
+  % Reference
+  \draw (0,0) -- (12,0);
+
+  % Heat flows
+  \draw[<-] (1.5, 1.3) -- (2.5, 1.3);
+  \node at (2, 0.8) {$Q_{\mathrm{misc}}$};
+  \draw[->] (5.5, 1.3) -- (6.5, 1.3);
+  \node at (6, 0.8) {$\Qplate$};
+
+  % Cold-plate resistance
+  \node at (10, 1.2) {$\Rcp = 1/(\varepsilon\,\mdot\,\cp)$};
+\end{circuitikz}

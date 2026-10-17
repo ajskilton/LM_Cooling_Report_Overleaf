@@ -165,10 +165,10 @@ practical effect.
 
 \section{Worked Examples}
 
-\paragraph{Example 1: water, \SI{0.73}{\litre\per\minute} (laminar, entry
+\paragraph{Example 1: water, \SI{12.2}{\milli\litre\per\second} (laminar, entry
 region).}
 \begin{align*}
-  \Vdot &= \SI{0.73}{\litre\per\minute} = \SI{1.217e-5}{\metre\cubed\per\second}\\
+  \Vdot &= \SI{12.2}{\milli\litre\per\second} = \SI{1.217e-5}{\metre\cubed\per\second}\\
   \mathrm{Re} &= \frac{4(1000)(1.217\times10^{-5})}{\pi(0.008)(0.001)} = 1936
     \quad\text{(laminar)}\\
   \mathrm{Pr} &= \frac{(0.001)(4182)}{0.60} = 6.97,
@@ -191,7 +191,7 @@ the \SI{0.152}{\metre} pass. NTU is well below 1, so this test is
 convection-limited: the convective term $1/(hA) = \SI{0.064}{\celsius\per\watt}$
 makes up most of $\Rcp$.
 
-\paragraph{Example 2: water, \SI{3.5}{\litre\per\minute} (turbulent).}
+\paragraph{Example 2: water, \SI{58.3}{\milli\litre\per\second} (turbulent).}
 \begin{align*}
   \mathrm{Re} &= 9284 \quad\text{(turbulent)},
     \qquad \mathrm{Pr} = 6.97\\
@@ -252,11 +252,11 @@ this has a negligible effect on $\Rcp$.
   \label{tab:app-examples}
   \small
   \setlength{\tabcolsep}{5pt}
-  \begin{tabular}{@{}lrrr@{}}
+  \begin{tabular}{@{}lccc@{}}
     \toprule
     & \multicolumn{2}{c}{Water} & Galinstan \\
     \cmidrule(lr){2-3}\cmidrule(l){4-4}
-    & \SI{0.73}{\litre\per\minute} & \SI{3.5}{\litre\per\minute}
+    & \SI{12.2}{\milli\litre\per\second} & \SI{58.3}{\milli\litre\per\second}
       & \SI{1.4}{\milli\litre\per\second} \\
     \midrule
     Re / regime & 1936 / laminar & 9284 / turbulent & 591 / laminar \\
@@ -276,7 +276,7 @@ this has a negligible effect on $\Rcp$.
 \section{Effect of Heated Area}
 \label{app:area-scaling}
 
-\Cref{fig:disc-regimes}(b) estimates how $\Rcp$ would change if the same heat
+\Cref{fig:area-scaling} estimates how $\Rcp$ would change if the same heat
 were removed through a smaller heated area, for example a shorter heated length
 or a smaller component footprint. It uses the $\varepsilon$--NTU relation of
 \cref{sec:eps-ntu} with only the area changed.
@@ -297,24 +297,24 @@ is calculated as in \cref{eq:app-nu,eq:app-shah,eq:app-gnielinski,eq:app-seban}.
 
 \begin{table}[htbp]
   \centering
-  \caption{Inputs and results for the heated-area scaling of
-    \cref{fig:disc-regimes}(b).}
+  \caption{Inputs and results of the heated-area scaling.}
   \label{tab:app-area}
   \small
   \setlength{\tabcolsep}{5pt}
-  \begin{tabular}{@{}lrrrrrr@{}}
+  \begin{tabular}{@{}lcccccc@{}}
     \toprule
     Case & $hA_0$ & $\mdot\,\cp$ & $\NTU_0$ & \multicolumn{3}{c}{$\Rcp$ (\si{\celsius\per\watt})} \\
     \cmidrule(l){5-7}
      & (\si{\watt\per\kelvin}) & (\si{\watt\per\kelvin}) & & $f = 1$ & $f = 0.2$ & $f = 0.05$ \\
     \midrule
     Water, \SI{30}{\milli\litre\per\second}      & 44.0  & 125.5 & 0.35 & 0.027 & 0.118 & 0.458 \\
-    Galinstan, \SI{1.45}{\milli\litre\per\second} & 117.9 & 3.38  & 34.9 & 0.296 & 0.296 & 0.358 \\
-    Galinstan, \SI{10}{\milli\litre\per\second}   & 217.4 & 23.3  & 9.3  & 0.043 & 0.051 & 0.115 \\
+    Galinstan, \SI{1.5}{\milli\litre\per\second}  & 118.1 & 3.50  & 33.8 & 0.286 & 0.286 & 0.351 \\
+    Galinstan, \SI{5}{\milli\litre\per\second}    & 124.6 & 11.66 & 10.7 & 0.086 & 0.097 & 0.207 \\
     \bottomrule
   \end{tabular}
+  \floatnote{Plotted in \cref{fig:area-scaling}.}
 \end{table}
-\issue{\Cref{tab:app-area} and \cref{fig:disc-regimes}(b) use
+\issue{\Cref{tab:app-area} and \cref{fig:area-scaling} use
 \SI{30}{\milli\litre\per\second} for the low-flow water test, which was measured
 at \SI{29.2}{\milli\litre\per\second}. At \SI{29.2}{\milli\litre\per\second} the
 water row becomes $hA_0 = 42.8$, $\mdot\,\cp = 122.0$, $\Rcp = 0.028$, 0.121 and
@@ -334,10 +334,14 @@ start in different regimes.
     \begin{equation}
       f \approx \frac{3}{\NTU_0} = \frac{3\,\mdot\,\cp}{hA_0},
     \end{equation}
-    which is $f \approx 0.09$ at \SI{1.45}{\milli\litre\per\second} and
-    $f \approx 0.3$ at \SI{10}{\milli\litre\per\second}. Below this point the
+    which is $f \approx 0.09$ at \SI{1.5}{\milli\litre\per\second} and
+    $f \approx 0.28$ at \SI{5}{\milli\litre\per\second}. Below this point the
     excess convective capacity has been used up and $\Rcp$ begins to rise.
 \end{itemize}
+Galinstan's resistance falls below that of water at $f \approx 0.074$
+(\SI{11}{\centi\metre\squared}) at \SI{1.5}{\milli\litre\per\second} and at
+$f \approx 0.26$ (\SI{40}{\centi\metre\squared}) at
+\SI{5}{\milli\litre\per\second}.
 The comparison shows that a coolant with a large NTU can tolerate a large
 reduction in heated area, and hence a large increase in heat flux, before its
 cold-plate resistance increases, whereas a coolant near the convection-limited
