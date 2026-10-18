@@ -18,18 +18,22 @@ results is left to \cref{sec:discussion}.
 \label{sec:results-exp1}
 
 Six steady-state tests were completed: two with Galinstan and four with water.
+Water has lower resistor temperatures than Galinstan across all the measurements taken.
+
+\input{figures/water_transient}
+\input{figures/galinstan_transient}
 
 \subsection{Measured Temperatures}
 \label{sec:results-measured}
 
 \Cref{fig:water_transient} presents the left and right resistor temperatures and
-the cold-plate inlet and outlet temperatures over each water test, and
+the cold-plate inlet and outlet temperatures over each water test.
 \cref{fig:galinstan_transient} presents the same temperatures over the Galinstan
 tests. In each water test, the resistor temperature rose quickly over the first
-30 minutes and then levelled off as the whole loop warmed, with the inlet
-temperature rising from room temperature to about
+30 minutes and then levelled off as the whole loop warmed. The inlet
+temperature rose from room temperature to about
 \SIrange{32}{34}{\celsius}. Steady state was reached after about 60 to 90
-minutes, after which the heat load was switched off and the loop cooled back
+minutes, after which the heat load was switched off, and the loop cooled back
 towards ambient.
 
 The full-flow Galinstan test (\cref{fig:galinstan_transient}(a)) followed the same
@@ -38,13 +42,11 @@ about \SI{59}{\celsius} and the inlet at \SI{29.8}{\celsius}. Unlike in the
 water tests, the coolant left the plate about \SI{18}{\celsius} warmer than it
 entered, and the right-hand resistor ran about \SI{1.5}{\celsius} warmer than the
 left. The low-flow test at \SI{40}{\watt} (\cref{fig:galinstan_transient}(b))
-warmed more slowly and approached steady state after about 75 minutes, with the
-resistors at about \SI{51}{\celsius}, the inlet at \SI{26.5}{\celsius} and the
-coolant again rising by about \SI{17}{\celsius} across the plate. The right-hand
-resistor again ran slightly warmer than the left, by about \SI{1}{\celsius}.
-
-\input{figures/water_transient}
-\input{figures/galinstan_transient}
+warmed more slowly and approached steady state after about 75 minutes. The steady-state temperatures of the
+resistors were about \SI{51}{\celsius}, the inlet was \SI{26.5}{\celsius}.
+The coolant temperature rose again by about \SI{17}{\celsius} across the plate. 
+Additionally, the right-hand
+resistor ran slightly warmer than the left, by about \SI{1}{\celsius}.
 
 \Cref{tab:measured-performance} summarises the steady-state values. For water,
 the temperature rise of the resistor above the cold-plate inlet,
@@ -54,8 +56,8 @@ to \SI{8.3}{\milli\litre\per\second}. The temperature rise of the water itself,
 $\Tout - \Tin$, was below \SI{1}{\celsius} in every test. This is within the
 thermocouple accuracy, which is why two of the tests show a small negative
 value. For Galinstan, the resistor rose \SI{29.5}{\celsius} above the inlet at
-full flow (\SI{72}{\watt}) and \SI{24.6}{\celsius} at low flow (\SI{40}{\watt}),
-and the coolant itself rose by \SI{17.8}{\celsius} and \SI{17.1}{\celsius}
+full flow (\SI{72}{\watt}) and \SI{24.6}{\celsius} at low flow (\SI{40}{\watt}).
+The coolant itself rose by \SI{17.8}{\celsius} and \SI{17.1}{\celsius}
 across the plate.
 
 Dividing the resistor temperature rise by the heat reaching the cold plate,
@@ -64,7 +66,7 @@ inlet, $(\Tres - \Tin)/\Qplate = \Rpack + \Rcp$. With Galinstan, the total
 resistance was $\SI{0.488}{} \pm \SI{0.054}{\celsius\per\watt}$ at full flow and
 $\SI{0.799}{} \pm \SI{0.108}{\celsius\per\watt}$ at low flow, compared with
 \SIrange{0.257}{0.267}{\celsius\per\watt} ($\pm\SI{0.05}{\celsius\per\watt}$)
-for water, where the uncertainties are propagated from the instrument accuracies
+for water. The uncertainties presented are propagated from the instrument accuracies
 (\cref{app:uncertainty}). At the flow rates achieved, Galinstan therefore cooled
 the resistors less effectively than water, with a total resistance 1.8 to 3.1
 times higher, a difference well outside the combined uncertainty.
@@ -78,7 +80,7 @@ times higher, a difference well outside the combined uncertainty.
   \begin{tabular}{@{}lcccccc@{}}
     \toprule
     Coolant & $\Vdot$ & $\Qplate$ & $\Tout - \Tin$ & $\Tres - \Tin$
-      & $(\Tres - \Tin)/\Qplate$ & NTU \\
+      & $\Rpack + \Rcp$ & NTU \\
      & (\si{\milli\litre\per\second}) & (\si{\watt}) & (\si{\celsius})
       & (\si{\celsius}) & (\si{\celsius\per\watt}) & \\
     \midrule
@@ -104,8 +106,8 @@ $\Rpack = \SI{0.242}{\celsius\per\watt}$ in every test. The two turbulent water
 tests were used to calibrate $\Rpack$. The Galinstan flow, measured with the EMF
 sensor, agreed with the energy balance to within about \SI{6}{\percent}
 (\cref{app:uncertainty}). For
-Galinstan, the model predicts the resistor temperature exactly at low flow and
-\SI{2.5}{\celsius} high at full flow, close to the $\pm\SI{2.2}{\celsius}$
+Galinstan, the model predicts the resistor temperature almost exactly at low flow and
+has an error of \SI{2.5}{\celsius} at full flow, just outside the $\pm\SI{2.2}{\celsius}$
 thermocouple accuracy. The two water tests completed below
 \SI{1}{\litre\per\minute} are over-predicted by
 \SI{3.0}{\celsius} and \SI{3.6}{\celsius}.
@@ -130,8 +132,7 @@ thermocouple accuracy. The two water tests completed below
     Water     & 8.3               & 50.5 & 54.1 & 33.9 & 35.7 \\
     \bottomrule
   \end{tabular}
-  \floatnote{$\Rpack = \SI{0.242}{\celsius\per\watt}$; $\Rcp$ from the ATS
-    datasheet fit for turbulent water, otherwise the $\varepsilon$--NTU model.
+  \floatnote{
     \tnote{a}At \SI{40}{\watt}. \tnote{b}Calibration tests for $\Rpack$.}
 \end{table}
 
@@ -146,11 +147,9 @@ between about 10 and 37 times that of water
 on the model curve, while the full-flow point lies about
 \SI{0.05}{\celsius\per\watt} below it, at the edge of its uncertainty. For
 water, the uncertainty of about $\pm\SI{0.05}{\celsius\per\watt}$ is larger than
-$\Rcp$ itself, because $\Rcp$ is a small difference between two larger
-resistances, so only the trend with flow is resolved. The two turbulent points
+$\Rcp$ itself. The two turbulent points
 follow the datasheet trend. The two low-flow points, however, lie below the
-laminar $\varepsilon$--NTU prediction of \SIrange{0.074}{0.088}{\celsius\per\watt}
-by slightly more than their uncertainty, close to an extrapolation of the
+laminar $\varepsilon$--NTU prediction of \SIrange{0.074}{0.088}{\celsius\per\watt}, and much closer to an extrapolation of the
 turbulent datasheet trend. In other words, the measured resistor temperature
 barely changed as the water flow fell from \SI{58.3}{\milli\litre\per\second} to
 \SI{8.3}{\milli\litre\per\second}.
@@ -164,9 +163,9 @@ pumping power~\cite{hodes_potential_2014}. Their total resistance was
 with water. Importantly, their optimised Galinstan heat sink was far less
 caloric-limited than the cold plate tested here. Driven at a pressure drop of
 \SI{214}{\kilo\pascal} into turbulent flow, its caloric resistance made up about
-\SI{55}{\percent} of the total, whereas in this study, at laminar flows in a cold
+\SI{55}{\percent} of the total. In this study, at laminar flows in a cold
 plate designed for water, the caloric resistance makes up almost all of $\Rcp$
-(\cref{sec:disc-performance}), and the Galinstan total resistance was 1.8 to 3.1
+(\cref{sec:disc-performance}). We found the Galinstan total resistance was 1.8 to 3.1
 times that of water. The comparison is, however, limited by the very different
 scales of the two systems. Hodes \emph{et al.}\ modelled a
 \SI{1}{\centi\metre} by \SI{1}{\centi\metre} heat sink with channels
@@ -208,8 +207,8 @@ water pump; the pump volumes and efficiencies are detailed in Ekbote's
 report~\cite{ekbote_project_2026}. The coefficient of performance (COP), the
 ratio of the heat load to the pump power, reached 200 for the Galinstan loop at
 low flow (\SI{40}{\watt} at \SI{0.2}{\watt}), against 47.6 for the water loop,
-measured in an additional test at \SI{110}{\watt} using the same methodology as
-the other steady-state tests.
+measured in an additional test at \SI{110}{\watt} (\cref{tab:app-test-log}) using the same methodology as
+the other steady-state test.
 
 \begin{table}[htbp]
   \centering
@@ -236,7 +235,7 @@ the other steady-state tests.
 \Cref{tab:fan-comparison} compares these results with the liquid metal cooling
 systems of Fan \emph{et al.}, which used permanent-magnet MHD pumps to cool SiC
 converters~\cite{fan_liquid_2021,fan_high_2023,fan_ultra-efficient_2026}. Their
-pumps removed \SIrange{60}{280}{\watt} at gallium-alloy flows of up to about
+pumps removed \SIrange{60}{280}{\watt} using flows of up to about
 \SI{10}{\milli\litre\per\second} while drawing less than \SI{0.1}{\watt},
 whereas the pump of this study drew \SI{0.85}{\watt} to remove \SI{72}{\watt}
 at \SI{1.4}{\milli\litre\per\second}. Their pumps therefore moved several times
@@ -294,7 +293,7 @@ the top of the winding are the hottest regions, and the temperature falls
 towards the cold plate, which appears much cooler than the inductor. This is the
 pattern expected from the asymmetric cooling described in
 \cref{sec:inductor-thermal}: the lower core is cooled by the plate, while the
-upper core relies on convection to the surrounding air and on conduction across
+upper core relies mostly on convection to the surrounding air with some conduction across
 the gap to the lower core. The temperature difference between the upper and
 lower cores in \cref{fig:inductor-cam-a} therefore shows the cooling effect of
 the Galinstan cold plate over natural convection. The EMF flow reading indicated
@@ -341,8 +340,7 @@ Galinstan vial beside the inductor, the increase rose to \SI{22.0}{\milli\ohm},
 In relative terms, the empty cold plate increased $R_{\mathrm{ac}}$ by about
 \SI{15}{\percent} of its nominal value, and the Galinstan within it added about
 \SI{1}{\percent} more. This \SI{1.0}{\milli\ohm} is within the
-$\pm\SI{1.5}{\milli\ohm}$ repeatability of the LCR meter, so the loss added by
-the coolant could not be resolved, whereas the increases due to the plate and
+$\pm\SI{1.5}{\milli\ohm}$ repeatability of the LCR meter (Agilent E4980A), whereas the increases due to the plate and
 the vial lie well outside it (\cref{app:inductor-data}). Gao \emph{et al.}\ measured a larger effect for a planar
 inductor mounted on a liquid-cooled aluminium cold plate: its AC resistance rose
 from \SI{35.4}{\milli\ohm} when passively cooled to \SI{47.5}{\milli\ohm} on the
@@ -391,7 +389,6 @@ that structures near the air gap must be kept clear of its fringing field.
     \end{tikzpicture}
     \caption{Increase in winding AC resistance for each configuration.}
     \label{fig:rac_configurations}
-    \floatnote{Relative to the inductor alone, measured in the same session.}
   \end{minipage}\hfill
   \begin{minipage}[t]{0.48\linewidth}
     \centering
@@ -422,18 +419,18 @@ that structures near the air gap must be kept clear of its fringing field.
                 nodes near coords style={font=\footnotesize, text=black, anchor=south west, xshift=-2pt},
                 point meta=explicit symbolic,
             ] coordinates {
-                (1, 9.00) [9.00]
-                (2, 6.00) [6.00]
-                (3, 3.00) [3.00]
-                (4, 2.15) [2.15]
-                (5, 2.15) [2.15]
+                (1, 6.85) [6.85]
+                (2, 3.85) [3.85]
+                (3, 0.85) [0.85]
+                (4, 0) [$\sim0$]
+                (5, 0) [$\sim0$]
             };
         \end{axis}
     \end{tikzpicture}
     \caption{Increase in winding AC resistance against vial distance.}
     \label{fig:rac_distance}
-    \floatnote{Relative to the inductor alone; cold plate removed.}
   \end{minipage}
+  \floatnote{Relative to the inductor alone, measured in the same session.}
 \end{figure}
 
 \Cref{fig:rac_distance} presents the increase in $R_{\mathrm{ac}}$ as the vial
@@ -472,7 +469,7 @@ At \SI{2.8}{\milli\litre\per\second} and \SI{5}{\milli\litre\per\second},
 beyond the flows the rig could reach, the simulated values lie a steady
 \SIrange{0.035}{0.036}{\celsius\per\watt} below the model, but follow its
 dependence on flow. Over the whole range, the simulation therefore confirms that
-the Galinstan cold plate is caloric-limited, with $\Rcp$ inversely proportional
+the Galinstan cold plate is caloric-limited, with a $\Rcp$ demonstrated to be inversely proportional
 to the flow rate. \Cref{tab:cht-rcp} lists the simulated resistances. At
 \SI{5}{\milli\litre\per\second}, the simulated total resistance from the resistor
 to the inlet falls to \SI{0.292}{\celsius\per\watt}, against
@@ -499,8 +496,7 @@ to the inlet falls to \SI{0.292}{\celsius\per\watt}, against
   \end{tabular}
   \floatnote{CHT values from \cref{eq:rcp-inferred} at the final iteration,
     \num{427e3} cells; $\Rpack = \SI{0.242}{\celsius\per\watt}$.
-    \tnote{a}At 0.77 and \SI{1.45}{\milli\litre\per\second}, from the energy
-    balance.}
+    \tnote{a}At 0.77 and \SI{1.45}{\milli\litre\per\second}, from \cref{app:uncertainty}.}
 \end{table}
 
 \begin{figure}[htbp]

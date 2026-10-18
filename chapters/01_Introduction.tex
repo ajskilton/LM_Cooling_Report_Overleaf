@@ -10,35 +10,27 @@ Power electronic converters (PECs) enable this shift by electrifying
 transport~\cite{bosshard_multi-objective_2016} and energy
 systems~\cite{steimer_enabled_2010}. The power density of PECs has risen for decades,
 driven by cost, functionality and hard weight and space
-limits~\cite{steimer_enabled_2010,biela_cooling_2007}, and is projected to keep
-rising~\cite{morroni_understanding_2023}. As converters shrink, however, the
-same losses must be removed from a smaller volume, so thermal management
-increasingly limits how far power density can
-rise~\cite{biela_cooling_2007,morroni_understanding_2023}.
+limits~\cite{steimer_enabled_2010,biela_cooling_2007, morroni_understanding_2023}. As converters shrink, however, the
+same losses must be removed from a smaller volume. Thermal management, therefore,
+increasingly limits how power-dense converters can become~\cite{biela_cooling_2007,morroni_understanding_2023}.
 
-Inductive power transfer (IPT) chargers for electric vehicles illustrate this
-challenge. At the standard \SI{85}{\kilo\hertz}~\cite{society_of_automotive_engineers_r_2024},
-a \SI{10}{\kilo\watt} system dissipates several hundred watts, much of it in pads
+Inductive power transfer (IPT) chargers for electric vehicles are also facing thermal management challenges~\cite{liu_thermal_2025}. 
+A \SI{10}{\kilo\watt} system dissipates several hundred watts, much of it in pads
 that generate strong alternating magnetic fields~\cite{kim_thermal_2022}. Many
-commercial designs already actively cool the coils~\cite{lawton_power_2024}, and
-Liu \emph{et al.}\ call for new technologies to cool wireless
-chargers~\cite{liu_thermal_2025}. Water cooling, however, is limited by the low
-thermal conductivity of water~\cite{laloya_heat_2016}. Galinstan, a liquid metal
-with much higher thermal conductivity~\cite{noauthor_gainsn_nodate}, can instead
-be driven by a magnetohydrodynamic (MHD) pump with no moving
-parts~\cite{hodes_potential_2014}, but its low volumetric heat capacity and
-electrical conductivity bring trade-offs~\cite{hodes_potential_2014,an_liquid_2024}.
-The extent of its advantage therefore remains unclear, as few studies compare it
-with water at converter scale~\cite{fan_ultra-efficient_2026}.
+commercial IPT systems already actively cool the coils~\cite{lawton_power_2024}.
+The conventional approach is to cool power-dense PECs and IPT systems with water.
+Water cooling, however, is limited by its low thermal conductivity~\cite{laloya_heat_2016}. 
+Galinstan, a liquid metal with much higher thermal conductivity~\cite{noauthor_gainsn_nodate, hodes_potential_2014}, 
+but its low volumetric heat capacity and electrical conductivity bring some significant trade-offs that may limit its application~\cite{hodes_potential_2014,an_liquid_2024}.
+The extent of its advantage and the applications for which it is most suited, therefore, remain unclear.
 
 This project builds on the 2025 Part~IV Project~\#51, in which Kwon and Loh
-built an MHD-pumped Galinstan cooling loop and recommended comparing it with
-water cooling and testing it near magnetic
-components~\cite{kwon_project_2025,loh_project_2025}. Its aim is to evaluate
-MHD-pumped Galinstan as a coolant for high-power-density PECs, and to identify
+built an MHD-pumped Galinstan cooling loop (\cref{fig:setup_galinstan})~\cite{kwon_project_2025,loh_project_2025}. 
+This report compares that loop to a similar water cooling setup, with the aim of 
+evaluating MHD-pumped Galinstan as a coolant for high-power-density PECs, and to identify
 where in an IPT system it is most useful. The objectives are to (i)~compare the
-thermal resistance and pumping power of the Galinstan loop with those of a water
-loop using the same cold plate~\cite{ekbote_project_2026}; (ii)~explain and
+thermal resistance and pumping power of the Galinstan loop with those of a similar water
+loop (\cref{fig:setup_water}); (ii)~explain and
 extend the measurements with thermal models and a conjugate heat transfer
 simulation; and (iii)~use a power-dense \SI{85}{\kilo\hertz} inductor to
 demonstrate Galinstan cooling of magnetics and measure the eddy-current loss
@@ -47,3 +39,24 @@ in \cref{sec:research-questions}. \Cref{ch:literature} reviews the literature,
 \cref{ch:experimental} describes the methodology, \cref{ch:results} presents
 the results, \cref{sec:discussion} discusses them and \cref{ch:conclusion}
 concludes the report.
+
+\begin{figure}[htbp]
+    \centering
+    \begin{subfigure}{\textwidth}
+        \centering
+        \includegraphics[angle=90, width=0.75\linewidth]{figures/galinstan_loop.png}
+        \caption{Galinstan loop, driven by magnetohydrodynamic (MHD) pumps.}
+        \label{fig:setup_galinstan}
+    \end{subfigure}
+
+    \vspace{1em}
+
+    \begin{subfigure}{\textwidth}
+        \centering
+        \includegraphics[angle=90, width=0.75\linewidth]{figures/water_loop.png}
+        \caption{Water loop, driven by a centrifugal pump through a turbine flow meter.}
+        \label{fig:setup_water}
+    \end{subfigure}
+    \caption{Experimental cooling loops developed for this project.}
+    \label{fig:cooling_loops}
+\end{figure}

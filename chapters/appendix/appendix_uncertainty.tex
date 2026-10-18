@@ -132,6 +132,15 @@ across its terminals. At \SI{18}{\ampere} and \SI{9}{\ampere} the sensor gives
 its own uncertainty. The flow rises almost linearly with current, as
 \cref{eq:mhd-pressure} predicts for a pump working against a laminar loop.
 
+The conversion from EMF to flow assumes the flux density $B$ of the sensor
+magnets, so the sensor is only accurate for the magnets it was calibrated with.
+The magnets were replaced during the project, which changed the EMF at the same
+pump current by about \SI{10}{\percent} (from 135.5 to \SI{149}{\micro\volt} at
+\SI{18}{\ampere}), and the project's calculation sheets assume between
+\SI{0.38}{\tesla} and \SI{0.45}{\tesla}. If the magnets are swapped without
+recalibrating the sensor, the measured flow can therefore be in error by up to
+about \SI{18}{\percent}.
+
 \begin{table}[htbp]
   \centering
   \caption{EMF flow-sensor readings and pump power against pump current.}
@@ -148,8 +157,8 @@ its own uncertainty. The flow rises almost linearly with current, as
     18.2 & 150.5 & 1.39 & 0.85 \\
     \bottomrule
   \end{tabular}
-  \floatnote{Room temperature, with the sensor magnets used in this work. Source:
-    project calculation sheet.}
+    \floatnote{Room temperature, replacement sensor magnets, $B = \SI{0.38}{\tesla}$
+    assumed. Source: project calculation sheet.}
 \end{table}
 
 \section{Interpretation}

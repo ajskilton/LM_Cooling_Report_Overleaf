@@ -175,8 +175,7 @@ times as lossy as aluminium and almost 3.9 times as lossy as copper, and showed
 that \SI{1}{\milli\metre} of copper shielding reduced the total loss by over
 \SI{70}{\percent}. To measure this effect, a power-dense inductor that requires
 active cooling was built and placed on the Galinstan cold plate. It operates at
-\SI{85}{\kilo\hertz}~\cite{society_of_automotive_engineers_r_2024}, so that its
-leakage field is representative of IPT magnetics (\cref{sec:ipt-losses}), and
+\SI{85}{\kilo\hertz}~\cite{society_of_automotive_engineers_r_2024} and
 uses a planar geometry, which offers better thermal performance than
 alternatives such as pot cores. The final construction is shown in
 \cref{fig:inductor-photo}.
@@ -260,12 +259,12 @@ leads, which would be expected to increase it. The AC resistance
 $R_{\mathrm{ac}}$, which determines the winding loss, was measured with an LCR
 meter at low excitation as \SI{83}{\milli\ohm}, giving a winding loss of
 \SI{11.95}{\watt} at \SI{12}{\ampere} rms. This is a lower bound, because the
-winding resistance rises with its operating temperature.
+winding resistance rises with its operating temperature~\cite{kim_thermal_2022}.
 
 For a heat transfer investigation in which temperatures are continuously
 monitored, the uncertainty in the loss estimate is acceptable. For the later
-experiments, the total inductor loss is therefore taken as \SI{42.76}{\watt}
-(\SI{30.81}{\watt} core loss plus \SI{11.95}{\watt} winding loss).
+experiments, the total inductor loss is therefore taken as a rough estimate of 
+\SI{42.76}{\watt} (\SI{30.81}{\watt} core loss plus \SI{11.95}{\watt} winding loss).
 
 \subsection{Thermal Considerations and Cooling Strategy}
 \label{sec:inductor-thermal}
@@ -286,8 +285,8 @@ with an integrated heat-transfer path, such as the inductor of Gao
 \label{sec:capacitor-tuning}
 
 The allowable reactance of the inductor was limited by the voltage across the
-series tuning capacitors, which boost the volt-amperes (VA) in the inductor and
-were limited to \SI{150}{\volt} across any single capacitor. To find
+series tuning capacitors, which aim to boost the volt-amperes (VA) in the inductor.
+The voltage across any single capacitor was limited to \SI{150}{\volt}. To find
 acceptable tuning values, an optimisation model was developed using the Solver
 add-in in Microsoft Excel, which made it possible to check quickly whether a
 given inductance was feasible or would cause the capacitor voltage to exceed its
@@ -307,7 +306,7 @@ the primary magnetics, as given by
   \label{eq:x-res}
 \end{equation}
 where $I_{1}$ is the desired resonant current and $V_{\mathrm{DC}}$ is the DC bus
-voltage, here \SI{60}{\volt}. \Cref{eq:x-res} is valid only for a conduction
+voltage. Note that \Cref{eq:x-res} is valid only for a conduction
 angle of \SI{180}{\degree}. With the measured inductance of \SI{92.1}{\micro\henry} and a resonant current of
 \SI{12}{\ampere}, \cref{eq:c-target,eq:x-res} give a target capacitance of
 \SI{41.90}{\nano\farad}.
@@ -342,7 +341,7 @@ highest row voltage is about \SI{146}{\volt}, within the \SI{150}{\volt} limit.
     \multicolumn{3}{@{}l}{Error}                & 0.89 (\SI{2.12}{\percent}) & \\
     \bottomrule
   \end{tabular}
-  \floatnote{Rows connected in series; voltages at \SI{12}{\ampere} rms and
+  \floatnote{Rows connected in series; voltages calculated for \SI{12}{\ampere} rms and
     \SI{85}{\kilo\hertz}.}
 \end{table}
 
@@ -387,7 +386,7 @@ resistor temperature. For the Galinstan loop, $T_{\mathrm{A}} =
 loop, $T_{\mathrm{A}} = \SI{21.6}{\celsius}$ and
 $\Rmisc = \SI{2.95}{\celsius\per\watt}$. With these values, between
 \SI{9}{\watt} and \SI{12}{\watt} of the heat load is lost to the environment in
-each test (\cref{tab:measured-performance}). This network was used in all the
+each test (\cref{tab:measured-performance}). The network in ~\cref{fig:thermal-network} was used in all the
 following models.
 
 \begin{figure}[htbp]
@@ -396,14 +395,14 @@ following models.
   \caption{Thermal network of the resistor and cold plate.}
   \label{fig:thermal-network}
   \floatnote{Electrical analogue: temperature $\equiv$ potential, heat flow
-    $\equiv$ current. $T_{\mathrm{A}}$ and $\Tin$ are fixed.}
+    $\equiv$ current. $T_{\mathrm{A}}$ and $\Tin$ are set values.}
 \end{figure}
 
 \subsection{\texorpdfstring{$\varepsilon$--NTU}{epsilon-NTU} Analysis of the Cold Plate}
 \label{sec:eps-ntu}
 
 For this analysis, the plate is considered isothermal at $T_{\mathrm{P}}$, so
-coolant entering at $\Tin$ approaches the plate temperature exponentially. An
+coolant temperature $T_{\mathrm{f}}(x)$ entering at $\Tin$ ($x = 0$) approaches the plate temperature exponentially. An
 energy balance on a tube element of perimeter $P$ gives~\cite{bergman_fundamentals_2017}
 \begin{equation}
   \frac{T_{\mathrm{P}} - T_{\mathrm{f}}(x)}{T_{\mathrm{P}} - \Tin}
@@ -430,7 +429,7 @@ the effectiveness $\varepsilon$ as this fraction gives
 \end{equation}
 This is the effectiveness relation for one flow stream against an isothermal
 surface~\cite{bergman_fundamentals_2017}. Its limits show whether a coolant is
-limited by convection at the wall or by its ability to transport heat
+limited by convection at the wall and conduction into the fluid (convection-limited), or by its ability to transport heat
 (caloric-limited), as summarised in \cref{tab:ntu-regimes}.
 
 \begin{table}[htbp]
@@ -444,11 +443,11 @@ limited by convection at the wall or by its ability to transport heat
     Regime & NTU & $\varepsilon$ & $\Rcp$ & Lever to reduce $\Rcp$ \\
     \midrule
     Convection-limited & $\ll 1$ & $\approx \NTU$ &
-      $\approx 1/(hA) + 1/(2\mdot\,\cp)$ & Raise $hA$ (Nu, area) \\
+      $\approx 1/(hA) + 1/(2\mdot\,\cp)$ & Raise $hA$ \\
     Transitional & $\approx 1$ & $1 - e^{-\NTU}$ &
       $1/(\varepsilon\,\mdot\,\cp)$ & Both \\
     Caloric-limited & $\gg 1$ ($\gtrsim 3$) & $\to 1$ &
-      $\to 1/(\mdot\,\cp)$ & Raise $\mdot\,\cp$ (flow rate) \\
+      $\to 1/(\mdot\,\cp)$ & Raise $\mdot\,\cp$ \\
     \bottomrule
   \end{tabular}
 \end{table}
@@ -460,7 +459,7 @@ $\Delta T_{\mathrm{cool}} = \Qplate/(\mdot\,\cp)$, increases. The predicted rise
 is below \SI{2}{\celsius} for water but approximately
 \SIrange{17}{20}{\celsius} for Galinstan, so the model is expected to describe
 water better than Galinstan. For this reason, the package resistance $\Rpack$
-was calibrated on the two turbulent water tests, which give the most nearly
+was calibrated on the two turbulent water tests, which have the most
 isothermal plate, as \SI{0.242}{\celsius\per\watt}. It was then held at this
 value for all flows and both coolants.
 
@@ -556,9 +555,8 @@ coolant properties and the test conditions.
 The thermal network reproduces the measured resistor temperatures by lumping the
 cold plate into a single isothermal node. This is reasonable for water, but for
 Galinstan the plate is not isothermal. The network also cannot resolve how heat
-spreads from the discrete resistor footprints through the press-fit tube
-contact, nor capture flow redevelopment at the U-bends or the transitional flow
-suspected in the low-flow water tests. A conjugate heat transfer (CHT)
+spreads from the discrete resistor footprints through the cold plate,
+nor capture flow redevelopment at the U-bends. A conjugate heat transfer (CHT)
 simulation, which solves the coolant flow and the conduction through the solids
 together, was therefore completed in SimScale~\cite{simscale_gmbh_simscale_2021}.
 It resolves the temperature fields in the plate and coolant, and the local peak
@@ -567,8 +565,8 @@ temperatures that govern component and insulation limits.
 To reduce computation time, a simplified model of the cold plate was first
 created in Onshape~\cite{ptc_onshape_2015} and imported into SimScale
 (\cref{fig:cfd_setup}). An internal flow volume was then defined in the
-geometry. The solids were assigned SimScale's default material properties for
-aluminium and copper, and water used the default material. A custom Galinstan
+geometry. The solids (aluminium and copper) and water were assigned 
+SimScale's default material properties. A custom Galinstan
 material was created from the properties in \cref{tab:coolant-properties}. The
 simulation settings and boundary conditions are summarised in
 \cref{tab:simulation-setup}, and parameters not listed were left at their
@@ -583,16 +581,17 @@ default values.
 \end{figure}
 
 The boundary conditions were chosen to match each test. The inlet was set as a
-velocity inlet at the measured inlet temperature of the test (for example,
-\SI{29.8}{\celsius} for the full-flow Galinstan test), with the velocity
-adjusted to give the measured flow rate. The outlet was held at a pressure of
+velocity inlet at the measured inlet temperature of the test, with the velocity
+adjusted to give the measured flow rate (for example,
+\SI{29.8}{\celsius} and \SI{1.4}{\milli\litre\per\second} for the full-flow Galinstan test). 
+The outlet was held at a pressure of
 \SI{1}{atm}. The heat input was applied as a heat flux equal to the heat
 reaching the cold plate, $\Qplate$, rather than the full electrical input,
 because part of the input is lost to the environment
 (\cref{sec:thermal-network}). For the full-flow Galinstan test this was about
 \SI{60}{\watt} of the \SI{72}{\watt} input, and for the low-flow Galinstan test
 about \SI{30}{\watt} of the \SI{40}{\watt} input, estimated from the measured
-coolant temperature rise. The water run used the same $\Qplate$ as the water
+coolant temperature rise and $R_{misc}$, which generally aligned. The water run used the same $\Qplate$ as the water
 tests, about \SI{62.6}{\watt}.
 
 \begin{table}[htbp]
@@ -621,11 +620,7 @@ laminar model was used for the runs with an estimated $\mathrm{Re} \leq 2110$.
 Mesh independence was therefore assessed separately for each flow regime and
 each coolant. Each study was performed at the most demanding operating point,
 the highest flow rate, where the boundary layers are thinnest, so that the
-resulting mesh is conservative for all milder cases. Separate studies were
-needed for the two coolants because Galinstan develops a thermal boundary layer
-much thicker than its velocity boundary layer, whereas water has a thermal
-boundary layer thinner than its velocity boundary layer and therefore requires
-finer near-wall resolution for the temperature field. The same sequence of five
+resulting mesh is conservative for all milder cases. The same sequence of five
 meshes, from \num{73e3} to \num{1.5e6} cells, was used in every study, and the
 \num{427e3}-cell mesh was adopted. The mesh study, the iterative convergence and
 the comparison with experiment are given in \cref{app:cht_validation}. In
@@ -657,8 +652,8 @@ accuracies in \cref{app:uncertainty}.
 \paragraph{Experimental values.} $Q$ is the heat reaching the plate,
 $\Qplate$, obtained by subtracting the loss to ambient through $\Rmisc$ from the
 electrical input, as in \cref{eq:network}. The flow rate is taken from a
-combination of the EMF flow sensor and the energy balance,
-$\Vdot = \Qplate / [\rho\cp(\Tout - \Tin)]$, which agreed closely for the tests
+combination of the flow sensors and the energy balance,
+$\Vdot = \Qplate / [\rho\cp(\Tout - \Tin)]$, which generally agreed for the tests
 completed in this study.
 
 \paragraph{Simulated values.} The conjugate heat transfer results are taken at
@@ -722,7 +717,7 @@ of \SI{40}{\watt}, so that the resistor and the pump housing stayed below the
 
 \begin{table}[htbp]
   \centering
-  \caption{Planned test flow rates.}
+  \caption{Planned test flow rates and goals.}
   \label{tab:flow-rates}
   \small
   \begin{tabularx}{\linewidth}{@{}lccL@{}}
@@ -740,7 +735,7 @@ of \SI{40}{\watt}, so that the resistor and the pump housing stayed below the
 \subsection{Experiment 2: Inductor Cooling and Eddy-Current Loss}
 \label{sec:exp2}
 
-The second experiment demonstrates the ability of Galinstan to cool a
+The second experiment aims to demonstrate the ability of Galinstan to cool a
 power-dense inductor and assesses the interaction between its leakage field and
 the electrically conductive coolant. The thermal test follows the procedure of
 Experiment~1, except that the inductor replaces the resistors. The inductor was
@@ -752,8 +747,8 @@ thermal camera. The flow sensor was monitored for any change in flow when the
 inductor was energised.
 
 The eddy-current loss induced by the leakage field was measured separately with
-an Agilent E4980A LCR meter at an excitation current of about \SI{5}{\milli\ampere},
-by recording the AC resistance $R_{\mathrm{ac}}$ of the inductor winding in four
+an Agilent E4980A LCR meter at an excitation current of about \SI{5}{\milli\ampere}.
+The AC resistance $R_{\mathrm{ac}}$ of the inductor winding was recored in four
 configurations: (i)~the inductor alone, (ii)~the inductor on the
 empty cold plate, (iii)~the inductor on the cold plate filled with Galinstan, and
 (iv)~the inductor on the cold plate with a PVC vial of Galinstan standing beside
@@ -761,10 +756,7 @@ it, as shown in \cref{fig:vial-setup}. Any conductor in the leakage field adds
 to the series resistance seen at the winding, so the change in resistance
 between two configurations isolates the loss of the conductor that was added.
 The measurements were taken at the \SI{85}{\kilo\hertz} operating frequency.
-Because Galinstan and the cold plate are linear and non-magnetic, the added loss
-at any current is $\Delta R_{\mathrm{ac}} I_{\mathrm{rms}}^{2}$, so the change in
-resistance is a measure of the eddy-current loss. Finally, with the cold
-plate removed, the vial was moved progressively further away from the inductor,
+Finally, with the cold plate removed, the vial was moved progressively further away from the inductor,
 from \SI{1}{\centi\metre} to \SI{5}{\centi\metre}, to show how the loss in the coolant falls
 with distance. The design sweep and all AC resistance measurements are given in
 \cref{app:inductor-data}.

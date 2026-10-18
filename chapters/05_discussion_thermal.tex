@@ -24,9 +24,8 @@ range. The total resistance from the resistor to the coolant inlet was
 \SIrange{0.488}{0.799}{\celsius\per\watt} with Galinstan, against
 \SIrange{0.257}{0.267}{\celsius\per\watt} with water, so the Galinstan loop's
 resistance was 1.8 to 3.1 times higher (\cref{tab:measured-performance}). The
-Galinstan tests, however, ran at
-\SIrange{0.77}{1.45}{\milli\litre\per\second}, one to two orders of magnitude
-below the water tests (\SIrange{8.3}{58.3}{\milli\litre\per\second}). The
+Galinstan tests, however, ran at flow rates one to two orders of magnitude
+below the water tests. The
 comparison therefore reflects the flow the MHD pump could deliver rather than a
 general disadvantage of Galinstan as a coolant.
 
@@ -41,20 +40,19 @@ contrast, had an NTU of 0.3 to 0.4 at every tested flow, so its cold plate is
 convection-limited, and the water rose by less than \SI{1}{\celsius}. Galinstan's
 high thermal conductivity gives it a wall heat transfer coefficient about 7.5
 times that of laminar water (\cref{app:convection}), but this advantage is not
-used in the tested cold plate, as the convective term makes up less than
-\SI{3}{\percent} of its $\Rcp$. These results support H1: Galinstan lowers the
+realised in the tested cold plate, as the convective term makes up less than
+\SI{3}{\percent} of its $\Rcp$. Galinstan lowers the
 convective resistance, but its low volumetric heat capacity and low flow give a
 caloric resistance large enough to make the total resistance of the Galinstan
 loop higher than that of the water loop.
 
-The two regimes also respond very differently to flow. Increasing the water flow
+The two regimes also respond very differently to changes in flow. Increasing the water flow
 had only a minimal effect: the total resistance fell from 0.267 to
 \SI{0.257}{\celsius\per\watt} over a seven-fold increase in flow. Small changes
 in the Galinstan flow, in contrast, had a significant impact, with the total
 resistance falling from 0.799 to \SI{0.488}{\celsius\per\watt} as the flow
-roughly doubled from 0.77 to \SI{1.45}{\milli\litre\per\second}. Because the
-pressure of an MHD pump scales directly with its current
-(\cref{sec:em-pumping}), the Galinstan loop gives direct control of the component
+roughly doubled from 0.77 to \SI{1.45}{\milli\litre\per\second}. Because of this
+a Galinstan loop provides a larger range for direct control of the component
 temperature through the pump current. This is an advantage where the
 temperature swing, rather than the peak temperature, limits component lifetime
 (\cref{sec:reliability}).
@@ -78,10 +76,9 @@ reached flows of up to about \SI{10}{\milli\litre\per\second} for less than
 The analytical thermal network is only accurate close to the conditions it was
 calibrated against. It reproduced the turbulent water tests used to calibrate
 $\Rpack$, and predicted the Galinstan resistor temperatures within
-\SI{2.5}{\celsius}, but over-predicted the two low-flow water tests by
-\SIrange{3.0}{3.6}{\celsius} (\cref{tab:tn_results}). Close placement of the pump 
-and flow restrictor likely caused turbulence that remained in the cold plate since
-laminar flow could not fully develop during low-flow testing. 
+\SI{2.5}{\celsius}, but over-predicted the two water tests below \SI{1}{\litre\per\minute} by
+\SIrange{3.0}{3.6}{\celsius} (\cref{tab:tn_results}). The placement of the pump 
+and flow restrictor close to the cold plate likely caused turbulence that remained in the cold plate, improving overall heat transfer during these tests. 
 Additionally, the assumption of an isothermal plate does not hold with an
 \SI{18}{\celsius} coolant temperature rise seen in the Galinstan plates.
 
@@ -95,7 +92,7 @@ resistor temperatures by only about \SI{2.3}{\celsius}
 Despite this, the CHT model was used to extend the Galinstan flow to
 \SI{5}{\milli\litre\per\second}, the upper bound of laminar flow in the tube
 ($\mathrm{Re} \approx 2110$). Turbulent Galinstan flow was not assessed, as no
-data were available to validate the accuracy of the turbulence model for a
+data were available to validate the accuracy of a turbulent model for a
 liquid metal.
 
 The simulations show a significant improvement at \SI{5}{\milli\litre\per\second}
@@ -140,13 +137,13 @@ at \SI{1.5}{\milli\litre\per\second}, and below about \SI{26}{\percent}, about
 \end{figure}
 
 A coolant that starts with a large NTU can therefore absorb a large reduction in
-area, and hence a large increase in heat flux, before its performance suffers.
+area, and hence a large increase in heat flux density, before its performance suffers.
 This agrees with Hodes \emph{et al.}, whose advantage for Galinstan depended on
 small heat sinks optimised to exploit its high
 conductivity~\cite{hodes_potential_2014}. Because $h$ is held fixed, the plate is
 assumed isothermal and pressure drop is not considered, the result is indicative
 only, but it shows the type of application in which Galinstan becomes useful:
-small, high-flux footprints at flows a redesigned pump could deliver.
+small, high-flux footprints.
 
 % ---------------------------------------------------------------------
 \section{Applications in IPT Systems}
@@ -158,34 +155,30 @@ more than twice the \SI{17.88}{\watt} above which its core requires active
 cooling (\cref{sec:analytical-design}), with a maximum surface temperature of
 about \SI{83}{\celsius}. The upper core, which relies on natural convection, ran
 markedly hotter than the lower core on the cold plate
-(\cref{fig:inductor-cam-a}). This supports the first part of H2, that the loop
+(\cref{fig:inductor-cam-a}). This supports that the loop
 was demonstrated to cool the inductor beyond the performance of natural convection. Filling the cold plate with
 Galinstan added only \SI{1.0}{\milli\ohm} to the winding resistance, within the
 $\pm\SI{1.5}{\milli\ohm}$ repeatability of the LCR meter, against
 \SI{11.7}{\milli\ohm} for the plate itself and \SI{10.3}{\milli\ohm} for
 unshielded Galinstan beside the inductor (\cref{sec:results-eddy}). The metal of
 the cold plate, several skin depths thick at \SI{85}{\kilo\hertz}, therefore
-shields the coolant from the leakage field, which supports the second part of
-H2. Unshielded Galinstan, with a skin depth of about \SI{0.9}{\milli\metre} at
+shields the coolant from the leakage field, reducing its impact on loss. Unshielded Galinstan, with a skin depth of about \SI{0.9}{\milli\metre} at
 this frequency, is far more exposed, although its effect fell from
 \SI{9.0}{\milli\ohm} at \SI{1}{\centi\metre} to \SI{2.15}{\milli\ohm} beyond
 \SI{4}{\centi\metre} (\cref{fig:rac_distance}). This suggests that a Galinstan 
-coolant could be used in PECs where the loss of a cold plate is already accepted, like that 
-in Gao \emph{et al.}'s inductor design~\cite{gao_modeling_2022}.  The final part of H2, that the
-field does not change the flow, could not be confirmed: the EMF reading
+coolant could be used on magnetic components where the loss of a cold plate is already accepted, like that 
+in Gao \emph{et al.}'s inductor design~\cite{gao_modeling_2022}. Or in locations some distance away from sources of leakage field. 
+Whether the field changes the flow of the coolant could not be confirmed: the EMF reading
 suggested that the flow fell as the inductor current rose, but the signal is in
 the microvolt range and sensitive to noise, so it is possible the flow did not change.
 
 Together with the area analysis, these results indicate where Galinstan cooling
 is likely to be most useful in an IPT system (\cref{tab:disc-suitability}). It
 suits small, high-flux components where water would be convection-limited, such
-as the inverter and rectifier, which dissipate \SIrange{70}{80}{\watt} each in a
-small area away from the coupler~\cite{kim_thermal_2022}. It is less suited to
+as the inverter and rectifier. It is less suited to
 large, distributed heat loads such as the pads, spread over about
 \SI{0.5}{\metre\squared}~\cite{kim_thermal_2022}, where water is adequate and
-Galinstan's low volumetric heat capacity dominates: per unit volume, it carries
-only about \SI{55}{\percent} of the heat that water does
-(\cref{tab:coolant-properties}).
+Galinstan's low volumetric heat capacity would limit its effectiveness.
 
 \begin{table}[htbp]
   \centering
@@ -256,10 +249,9 @@ plate and pressure drop, so it is indicative only.
 \paragraph{Scope.} A single cold plate, designed for water, was tested, and the
 coolants were compared at the flow each pump could deliver rather than at equal
 pumping power. The inductor test was run at a single operating point, with a
-heat load estimated from the core-loss model rather than measured, so the
+heat load estimated rather than measured, so the
 thermal performance of the loop around the inductor could only be estimated
-roughly: the coolant carried about half of the estimated loss
-(\cref{app:inductor-data}).
+roughly.
 
 % ---------------------------------------------------------------------
 \section{Recommendations for Further Work}
