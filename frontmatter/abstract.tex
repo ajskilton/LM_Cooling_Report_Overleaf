@@ -26,43 +26,48 @@
 
 % Write your abstract here
 Inductive power transfer (IPT) chargers for electric vehicles must remove
-hundreds of watts of loss from compact power electronics and from magnetics that
-operate in strong \SI{85}{\kilo\hertz} fields. The industry is driving for more power-dense converters, but thermal management
-increasingly limits how far their power density can rise. Galinstan, a
-room-temperature liquid metal with about 28 times the thermal conductivity of
-water, offers a potential solution. Galinstan can be driven by a low-power 
-magnetohydrodynamic (MHD) pump that is completely silent and has no moving parts.
-However, its low volumetric heat capacity and high electrical conductivity bring
-trade-offs that few studies analysed to provide advice on where the coolant might be most effectively utilised. 
-This project assessed the feasibility of Galinstan cooling for IPT systems. A
-Galinstan loop and a water loop were compared on the same commercial cold plate
-under resistive heat loads; the results were interpreted with an
-$\varepsilon$--NTU thermal network and extended with a conjugate heat transfer
-(CHT) simulation, and the Galinstan loop was used to cool a power-dense
-\SI{85}{\kilo\hertz} inductor while the eddy-current loss in the coolant was
-measured.
+hundreds of watts of loss from compact power electronics, resonant circuits and
+large magnetic pads. As the industry
+pushes for more power-dense converters, thermal management increasingly limits
+how small they can become. Galinstan, a liquid metal at room temperature with
+about 28 times the thermal conductivity of water, offers a potential solution. It
+can be circulated by a silent, low-power magnetohydrodynamic (MHD) pump with no
+moving parts. However, its low volumetric heat capacity and high electrical
+conductivity bring trade-offs, and few studies have examined where in a converter
+it would be most effective.
 
-At the flows each pump could deliver, water outperformed Galinstan, with a total
-thermal resistance of \SIrange{0.257}{0.267}{\celsius\per\watt} against
-\SIrange{0.488}{0.799}{\celsius\per\watt}, a difference well beyond the
-measurement uncertainty. At \SIrange{0.77}{1.45}{\milli\litre\per\second}, the
-Galinstan cold plate was caloric-limited: its high conductivity made the
-convective resistance negligible, and its low heat capacity set the
-performance. The MHD pump drew only \SI{0.85}{\watt}, but with a mechanical
-efficiency of \SI{0.56}{\percent}. The CHT simulation shows that at
-\SI{5}{\milli\litre\per\second}, the limit of laminar flow, the Galinstan total
-resistance would fall to \SI{0.29}{\celsius\per\watt}, within \SI{14}{\percent}
-of water, and the $\varepsilon$--NTU model predicts that Galinstan outperforms
-water once the heated area falls below about \SI{40}{\centi\metre\squared}. The
-Galinstan loop cooled the inductor at more than twice the loss its core can
-dissipate without active cooling, while the Galinstan inside the cold plate added
-only \SI{1.0}{\milli\ohm} to the winding AC resistance, within the repeatability
-of the measurement, because the metal of the plate shields it from the leakage
-field. Galinstan is therefore best suited to small, high-flux components of an
-IPT system, such as the inverter and rectifier modules and compact magnetics,
-rather than the large, distributed losses of the pads. Realising this advantage
-will require a more efficient, higher-flow pump and a smaller cold plate designed
-for liquid metal.
+This project assessed the feasibility of Galinstan cooling for IPT systems. A
+Galinstan loop and a water loop were tested on the same commercial cold plate
+under resistive heat loads. The results were interpreted with an
+$\varepsilon$--NTU thermal network and extended to higher flows with a conjugate
+heat transfer (CHT) simulation. The Galinstan loop was also used to cool a
+power-dense \SI{85}{\kilo\hertz} inductor, and the eddy-current loss induced in
+the coolant was measured.
+
+At the flows each pump could deliver, water outperformed Galinstan. The total
+thermal resistance was \SIrange{0.257}{0.267}{\celsius\per\watt} with water
+against \SIrange{0.488}{0.799}{\celsius\per\watt} with Galinstan, a difference
+well beyond the measurement uncertainty. At
+\SIrange{0.77}{1.45}{\milli\litre\per\second}, Galinstan's high conductivity made
+convection negligible, but its low heat capacity limited how much heat the flow
+could carry away. The MHD pump drew only \SI{0.85}{\watt} and achieved a higher
+ratio of heat removed to pumping power than the water pump, a coefficient of
+performance of 200 against 47.6, although its mechanical efficiency was just
+\SI{0.56}{\percent}. The CHT simulation shows
+that at \SI{5}{\milli\litre\per\second}, the limit of laminar flow, the Galinstan
+total resistance would fall to \SI{0.29}{\celsius\per\watt}, within
+\SI{14}{\percent} of water. The $\varepsilon$--NTU model also indicates that
+Galinstan outperforms water once the heated area falls below about
+\SI{40}{\centi\metre\squared}. In the inductor test, the Galinstan loop cooled an
+inductor dissipating more than twice the loss its core can handle without active
+cooling, and the Galinstan inside the metal cold plate contributed only
+minimally to the inductor's loss.
+
+Galinstan is therefore best suited to small, high-flux components of an IPT
+system, such as the inverter and rectifier modules and compact magnetics, rather
+than the large, distributed losses of the pads. Realising this advantage will
+require a more efficient, higher-flow pump and a smaller cold plate designed for
+liquid metal.
 % end of Abstract
 
 \endgroup
