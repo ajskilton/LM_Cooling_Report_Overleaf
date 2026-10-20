@@ -1,7 +1,7 @@
 % =====================================================================
 %  Chapter 6 -- Conclusion
 % =====================================================================
-\chapter{Conclusion}
+\chapter{Conclusions and Further Work}
 \label{ch:conclusion}
 
 As PECs become more power-dense, removing their losses from a smaller volume
@@ -42,7 +42,7 @@ the cold plate therefore shields the coolant from the leakage field.
 Any effect of the AC magnetic field on the flow could not be confirmed.
 
 The main contribution of this work is to show when Galinstan is worth using.
-Its advantage lies not in its conductivity alone, but in applications where the
+Its high thermal conductivity provides an advantage in applications where the
 heated area is small and the heat flux high: at \SI{5}{\milli\litre\per\second},
 the model predicts that it outperforms water once the heated area falls below
 about \SI{40}{\centi\metre\squared}. In an IPT system, this points to the
@@ -52,3 +52,26 @@ number of tests on a single cold plate designed for water, and an indicative are
 analysis. Realising Galinstan's advantage will require a more
 efficient, higher-flow pump with integrated power electronics, and a smaller cold
 plate designed for liquid metal (\cref{sec:disc-further-work}).
+
+\section{Recommendations for Further Work}
+\label{sec:disc-further-work}
+
+Three directions are recommended for further work:
+\begin{enumerate}
+  \item \textbf{Pump characterisation and optimisation.} The MHD pump's
+    pressure--flow curve and efficiency should be measured, and the loop pressure
+    drop reduced, to reach flows of at least \SI{5}{\milli\litre\per\second}. A
+    FEMM current-flow model of the pump was started in this project to guide its
+    redesign, but it was not completed or validated, so it is not presented in
+    the body of the report. The work to date, which suggests that longer
+    electrodes, larger magnets and lower connection resistance would raise the
+    pump efficiency
+    considerably, is summarised in \cref{app:femm}.
+  \item \textbf{Integrated power electronics.} The power electronics should be
+    integrated into the pump design, to give a more accurate picture of the true
+    pump size and total efficiency, including the power conversion needed to
+    supply its high current at low voltage.
+  \item \textbf{Reduced-size cold plate.} A smaller cold plate with an improved
+    geometry, and a heated area below about \SI{40}{\centi\metre\squared},
+    should be built to test the advantage predicted in \cref{sec:disc-area}.
+\end{enumerate}
